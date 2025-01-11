@@ -1,6 +1,38 @@
 
 import { Input } from './ui/input'
 import DarkMode from './mode-toggle.jsx'
+import { Link } from 'react-router'
+
+const links = [
+    {
+        name: "Main",
+        href: "/"
+    },
+    {
+        name: "Matches",
+        href: "/matches"
+    },
+    {
+        name: "Article And Lives",
+        href: "/articles"
+    },
+
+    {
+        name: "AboutUS",
+        href: "/aboutUs"
+    },
+
+
+    {
+        name: "Contact US",
+        href: "/contactUs"
+    },
+
+    {
+        name: "Privacy",
+        href: "/privacy"
+    },
+]
 
 export default function Header() {
     return (
@@ -26,32 +58,19 @@ export default function Header() {
 
                     <ul
                         className='lg:flex lg:ml-14 lg:gap-x-5 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50'>
-                        <li className='mb-6 hidden max-lg:block'>
-                            <a href="javascript:void(0)"><img src="https://readymadeui.com/readymadeui.svg" alt="logo" className='w-36' />
-                            </a>
-                        </li>
-                        <li className='max-lg:border-b max-lg:py-3 px-3'>
-                            <a href='javascript:void(0)'
-                                className='lg:hover:text-[#007bff] text-[#007bff] block text-[15px]'>Home</a>
-                        </li>
-                        <li className='max-lg:border-b max-lg:py-3 px-3'><a href='javascript:void(0)'
-                            className='lg:hover:text-[#007bff] text-gray-800 block text-[15px]'>Team</a>
-                        </li>
-                        <li className='max-lg:border-b max-lg:py-3 px-3'><a href='javascript:void(0)'
-                            className='lg:hover:text-[#007bff] text-gray-800 block text-[15px]'>Feature</a>
-                        </li>
-                        <li className='max-lg:border-b max-lg:py-3 px-3'><a href='javascript:void(0)'
-                            className='lg:hover:text-[#007bff] text-gray-800 block text-[15px]'>Blog</a>
-                        </li>
-                        <li className='max-lg:border-b max-lg:py-3 px-3'><a href='javascript:void(0)'
-                            className='lg:hover:text-[#007bff] text-gray-800 block text-[15px]'>About</a>
-                        </li>
+                        {
+                            links.map((link, index) => (
+                                <li className='max-lg:border-b max-lg:py-3 px-3' key={index}>
+                                    <Link to={link.href} className='lg:hover:text-[#007bff] text-gray-400 block text-[15px]'>{link.name}</Link>
+                                </li>
+                            ))
+                        }
                     </ul>
                 </div>
 
                 <div className='flex gap-4 ml-auto'>
                     <div
-                        className='w-full flex gap-3    '>
+                        className='w-full flex gap-3        '>
                         <Input
                             className='w-full'
                             type='text' placeholder='Search ... '
