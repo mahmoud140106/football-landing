@@ -19,7 +19,7 @@ function App() {
     <div>
       <Header />
       <div className="max-w-7xl mx-auto">
-        <Social />
+
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/viewMatches" element={<ViewMatch />} />

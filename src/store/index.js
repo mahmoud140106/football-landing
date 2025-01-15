@@ -11,8 +11,8 @@ const store = configureStore({
     about: aboutReducer, // 1
     contact: contactReducer, // 1
     privacy: privacyReducer, // 1
-    matchesList: matchesListSlice,
     social: socialReducer,
+    matches: matchesListSlice,
     article: articleReducer,
   },
 });

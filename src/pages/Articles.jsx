@@ -3,7 +3,6 @@ import { Button } from '../components/ui/button'
 import {
     Card,
     CardContent,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "../components/ui/card"
@@ -35,13 +34,15 @@ export default function Articles() {
         }
     }
 
+
+    console.log('articlearticlearticlearticle', article);
+
     return (
-        <div className="max-w-7xl mx-auto my-5 w-full">
+        <div className=" my-5 w-full">
             <div className="h-[337px]">
                 <Advertisement />
             </div>
             <div className="w-full my-5">
-                {/* حالة التحميل */}
                 {isLoading ? (
                     <div className="text-center py-5">Loading articles...</div>
                 ) : error ? (
@@ -66,8 +67,6 @@ export default function Articles() {
                                 </Card>
                             ))}
                         </div>
-
-                        {/* Pagination Buttons */}
                         <div className="flex justify-center items-center gap-4 mt-5">
                             <Button
                                 variant="outline"
@@ -96,9 +95,7 @@ export default function Articles() {
                     </div>
                 )}
             </div>
-            <div className="h-[337px]">
-                <Advertisement />
-            </div>
+
         </div>
     )
 }

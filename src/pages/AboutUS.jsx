@@ -17,7 +17,7 @@ export default function AboutUS() {
     }
 
     return (
-        <div className='mt-10 max-w-7xl mx-auto text-center'>
+        <div className='mt-10  mx-auto text-center'>
 
             {about.map((item) => (
                 <div key={item._id}>

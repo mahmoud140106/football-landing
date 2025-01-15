@@ -14,7 +14,7 @@ export default function Privacy() {
     }, [dispatch])
 
     return (
-        <div className='mt-10 max-w-7xl mx-auto text-center'>
+        <div className='mt-10  text-center'>
 
             {privacy.map((item) => (
                 <div key={item._id}>

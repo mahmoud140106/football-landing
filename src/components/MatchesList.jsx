@@ -1,89 +1,61 @@
-import { useState } from 'react'
-import { Clock, MapPin } from 'lucide-react'
-import { Button } from './ui/button'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import { fetchMatches } from '../store/slices/MatchesListSlice'
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Clock, MapPin } from "lucide-react";
+import { Button } from "./ui/button";
+import { fetchMatches } from "../store/slices/MatchesListSlice";
+import { Link } from "react-router";
 
 export default function MatchSchedule() {
-    const dispatch = useDispatch()
-    const selectedTab = useSelector((state) => state.matches?.selectedTab)
-    const { matches = [], isLoading, error, pagination } = useSelector(state => state.matches || {})
+    const dispatch = useDispatch();
+    const { matches = [], isLoading, error } = useSelector((state) => state.matches || {});
 
-    const [currentPage, setCurrentPage] = useState(1)
-    const [matchesPerPage] = useState(5) // عدد المباريات في كل صفحة
 
     useEffect(() => {
-        dispatch(fetchMatches())
-    }, [dispatch])
+        dispatch(fetchMatches());
+    }, [dispatch]);
 
     if (isLoading) {
-        return <div>Loading...</div>
+        return <div>Loading...</div>;
     }
     if (error) {
-        return <div>Error: {error}</div>
+        return <div>Error: {error}</div>;
     }
 
-    // دالة لتصفية المباريات حسب التاريخ المحدد في التاب
-    const filterMatchesByDate = (matches, selectedTab) => {
-        const today = new Date().toLocaleDateString()
-        const yesterday = new Date(Date.now() - 86400000).toLocaleDateString() // الأمس
-        const tomorrow = new Date(Date.now() + 86400000).toLocaleDateString() // الغد
-
-        return matches.filter((match) => {
-            const matchDate = new Date(match.date).toLocaleDateString()
-            if (selectedTab === 'today') return matchDate === today
-            if (selectedTab === 'yesterday') return matchDate === yesterday
-            if (selectedTab === 'tomorrow') return matchDate === tomorrow
-            return true
-        })
-    }
-
-    // تصفية المباريات وفقًا للتاب
-    const filteredMatches = filterMatchesByDate(matches, selectedTab)
-
-    // حساب بداية ونهاية المباريات في الصفحة الحالية
-    const indexOfLastMatch = currentPage * matchesPerPage
-    const indexOfFirstMatch = indexOfLastMatch - matchesPerPage
-    const currentMatches = filteredMatches.slice(indexOfFirstMatch, indexOfLastMatch)
-
-    // دالة لتغيير الصفحة
-    const paginate = (pageNumber) => setCurrentPage(pageNumber)
-
-
-    console.log('currentMatches ', currentMatches);
+    console.log('matches', matches);
 
     return (
         <div className="mt-5 space-y-2">
-            {currentMatches.length === 0 ? (
-                <div>No matches available for this date</div>
-            ) : (
-                currentMatches.map((match, index) => (
+            {Array.isArray(matches) && matches.length > 0 ? (
+                matches.map((match, index) => (
                     <div key={index} className="rounded-lg shadow-sm border xl:p-4 p-2 flex items-center justify-between">
                         {/* محتوى المباراة */}
-                        <div className="flex items-center gap-8 xl:w-full mr-5">
+                        <div className="flex items-center gap-12 xl:w-full mr-5">
                             <div className="xl:flex items-center gap-4">
-                                <div className="w-8 h-8 rounded-full flex items-center justify-center">
+                                <div className=" flex items-center justify-center">
                                     <img
-                                        src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/1200px-Real_Madrid_CF.svg.png"
-                                        alt={match.teamOne}
+                                        src={match.teamOne.image}
+                                        alt={match.teamOne.name}
+                                        className="w-10 h-10 rounded-full border-2 border-orange-400"
+                                        loading="lazy"
                                     />
                                 </div>
-                                <h2 className="pt-2 text-center text-green-500 font-medium hidden xl:block">{match.homeTeam}</h2>
+                                <h2 className="pt-2 text-center text-green-500 font-medium hidden xl:block">{match.teamOne.name}</h2>
                             </div>
                             <div className="flex items-center gap-4">
-                                <span className="text-xl font-semibold">{match?.teamOne}</span>
+                                <span className="text-xl font-semibold">{match.goalOne}</span>
                                 <span>vs</span>
-                                <span className="text-xl font-semibold">{match.awayScore}</span>
+                                <span className="text-xl font-semibold">{match.goalTwo}</span>
                             </div>
                             <div className="xl:flex items-center gap-4">
-                                <div className="w-8 h-8 rounded-full flex items-center justify-center">
+                                <div className=" flex items-center justify-center">
                                     <img
-                                        src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/1200px-Real_Madrid_CF.svg.png"
-                                        alt={match.awayTeam}
+                                        src={match.teamTwo.image}
+                                        alt={match.teamTwo.name}
+                                        loading="lazy"
+                                        className="w-10 h-10 rounded-full border-2 border-orange-400"
                                     />
                                 </div>
-                                <h2 className="pt-2 text-green-500 font-medium hidden xl:block">{match.awayTeam}</h2>
+                                <h2 className="pt-2 text-green-500 font-medium hidden xl:block">{match.teamTwo.name}</h2>
                             </div>
                         </div>
                         {/* تفاصيل الوقت والمكان */}
@@ -98,40 +70,28 @@ export default function MatchSchedule() {
                             </div>
                             <div className="xl:w-2/4 w-full md:flex items-center gap-2 hidden">
                                 <MapPin className="hidden xl:block w-4 h-4" />
-                                <span>{match.venue}</span>
+                                <span>{match.stadium}</span>
                             </div>
-                            <Button
-                                variant="outline"
-                                className={`xl:w-1/4 w-full md:block ${match.status === "live" ? "text-green-500 hover:text-green-500" : match.status === "ended" ? "bg-red-50 text-red-500 hover:text-red-500" : "cursor-not-allowed bg-gray-300 hover:bg-gray-300 text-gray-700"}`}
-                            >
-                                {match.status === "live" ? "Watch Now" : match.status === "ended" ? "End" : "Watch"}
-                            </Button>
+                            <Link className="xl:w-1/4 w-full" to={match.livelink}>
+                                <Button
+                                    variant="outline"
+                                    className={` w-full md:block ${match.status === "live" ? "text-green-500 hover:text-green-500" : match.status === "ended" ? "bg-red-50 text-red-500 hover:text-red-500" : "cursor-not-allowed bg-gray-300 hover:bg-gray-300 text-gray-700"}`}
+                                >
+                                    {match.status === "live" ? "Watch" : match.status === "ended" ? "End" : "Pending"}
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                 ))
-            )}
-
-            {/* Pagination Controls */}
-            <div className="flex justify-center mt-4">
-                {pagination?.numberOfPages > 1 && (
-                    <div className="flex gap-2">
-                        {Array.from({ length: pagination.numberOfPages }, (_, index) => (
-                            <Button
-                                key={index + 1}
-                                variant="outline"
-                                className={`px-4 py-2 ${currentPage === index + 1 ? "bg-blue-500 text-white" : "bg-white text-blue-500"}`}
-                                onClick={() => paginate(index + 1)}
-                            >
-                                {index + 1}
-                            </Button>
-                        ))}
-                    </div>
-                )}
-            </div>
+            ) : (
+                <div>No matches available</div>
+            )
+            }
 
             <button className="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition-colors">
                 All Matches
             </button>
-        </div>
-    )
+        </div >
+    );
+
 }
