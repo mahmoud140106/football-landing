@@ -1,32 +1,25 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
-import { useDispatch, useSelector } from 'react-redux'
-// import { setSelectedTab } from ''
+import { Tabs, TabsList, TabsTrigger } from './ui/tabs';
 
-export default function TabButton() {
-    const selectedTab = useSelector((state) => state.matches?.selectedTab)  // Use optional chaining to prevent errors
-
-    const dispatch = useDispatch()
-
-    // const handleTabChange = (value) => {
-    //     dispatch(setSelectedTab(value))
-    // }
+export default function TabButton({ selectedTab, setSelectedTab }) {
+    const handleTabChange = (value) => {
+        setSelectedTab(value); // تغيير التاب المحدد
+    };
 
     return (
-        <Tabs defaultValue={selectedTab || "today"} className="w-[400px]">
-            <TabsList className="grid w-full grid-cols-3">
-
-            </TabsList>
-            <TabsContent value="yesterday">
-
-            </TabsContent>
-            <TabsContent value="today">
-
-            </TabsContent>
-
-            <TabsContent value="tomorrow">
-
-            </TabsContent>
-        </Tabs>
-    )
+        <div className='flex justify-end'>
+            <Tabs defaultValue={selectedTab} className="w-[400px] ">
+                <TabsList className="grid w-full grid-cols-3">
+                    <TabsTrigger onClick={() => handleTabChange('yesterday')} value="yesterday">
+                        أمس
+                    </TabsTrigger>
+                    <TabsTrigger onClick={() => handleTabChange('today')} value="today">
+                        اليوم
+                    </TabsTrigger>
+                    <TabsTrigger onClick={() => handleTabChange('tomorrow')} value="tomorrow">
+                        غدًا
+                    </TabsTrigger>
+                </TabsList>
+            </Tabs>
+        </div>
+    );
 }
-

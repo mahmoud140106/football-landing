@@ -1,18 +1,9 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Clock, MapPin } from "lucide-react";
-import { Button } from "./ui/button";
-import { fetchMatches } from "../store/slices/MatchesListSlice";
+import { useSelector } from "react-redux";
 import { Link } from "react-router";
+import { Button } from "./ui/button";
 
-export default function MatchSchedule() {
-    const dispatch = useDispatch();
+export default function MatchesList({ selectedTab }) {
     const { matches = [], isLoading, error } = useSelector((state) => state.matches || {});
-
-
-    useEffect(() => {
-        dispatch(fetchMatches());
-    }, [dispatch]);
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -21,12 +12,13 @@ export default function MatchSchedule() {
         return <div>Error: {error}</div>;
     }
 
-    console.log('matches', matches);
+    // تصفية المباريات بناءً على التاب المحدد
+    const filteredMatches = matches.filter((match) => match.day === selectedTab);
 
     return (
         <div className="mt-5 space-y-2">
-            {Array.isArray(matches) && matches.length > 0 ? (
-                matches.map((match, index) => (
+            {filteredMatches.length > 0 ? (
+                filteredMatches.map((match, index) => (
                     <div key={index} className="rounded-lg shadow-sm border xl:p-4 p-2 flex items-center justify-between">
                         {/* محتوى المباراة */}
                         <div className="flex items-center gap-12 xl:w-full mr-5">
@@ -61,21 +53,24 @@ export default function MatchSchedule() {
                         {/* تفاصيل الوقت والمكان */}
                         <div className="flex items-center gap-6 w-full">
                             <div className="xl:w-1/4 w-full text-center flex xl:justify-start justify-center items-center gap-2">
-                                <Clock className="hidden xl:block w-4 h-4" />
                                 <span
-                                    className={`${match.status === "live" ? "text-green-500" : match.status === "ended" ? "text-red-500" : "cursor-not-allowed"}`}
+                                    className={`${match.status === "live"
+                                        ? "text-green-500"
+                                        : match.status === "ended"
+                                            ? "text-red-500"
+                                            : "cursor-not-allowed"
+                                        }`}
                                 >
                                     {match.time}
                                 </span>
                             </div>
                             <div className="xl:w-2/4 w-full md:flex items-center gap-2 hidden">
-                                <MapPin className="hidden xl:block w-4 h-4" />
                                 <span>{match.stadium}</span>
                             </div>
-                            <Link className="xl:w-1/4 w-full" to={match.livelink}>
+                            <Link className="xl:w-1/4 w-full" href={match.livelink}>
                                 <Button
                                     variant="outline"
-                                    className={` w-full md:block ${match.status === "live" ? "text-green-500 hover:text-green-500" : match.status === "ended" ? "bg-red-50 text-red-500 hover:text-red-500" : "cursor-not-allowed bg-gray-300 hover:bg-gray-300 text-gray-700"}`}
+                                    className={`w-full md:block ${match.status === "live" ? "text-green-500 hover:text-green-500" : match.status === "ended" ? " text-red-500 hover:text-red-500" : "cursor-not-allowed bg-gray-300 hover:bg-gray-300 text-gray-700"}`}
                                 >
                                     {match.status === "live" ? "Watch" : match.status === "ended" ? "End" : "Pending"}
                                 </Button>
@@ -84,14 +79,9 @@ export default function MatchSchedule() {
                     </div>
                 ))
             ) : (
-                <div>No matches available</div>
+                <div>No matches available for this tab</div>
             )
             }
-
-            <button className="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition-colors">
-                All Matches
-            </button>
         </div >
     );
-
 }
