@@ -17,9 +17,9 @@ export default function Social() {
     }
 
     return (
-        <div className='bg-white absolute top-16 rounded-md left-0 p-4 space-y-3'>
+        <div className=' p-4 '>
             {social.map((item) => (
-                <div key={item._id}>
+                <div className='mt-5' key={item._id}>
                     <Link to={item.link}>
                         <img
                             loading="lazy"

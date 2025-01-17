@@ -12,7 +12,13 @@ export default function Matches() {
             <TabButton selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
             <HeroSection />
             <MatchesList selectedTab={selectedTab} />
-            <Advertisement />
+            <div className="w-full h-[450px]">
+                <Advertisement />
+            </div>
+
+            <div className="w-full h-[450px]">
+                <Advertisement />
+            </div>
         </div>
     );
 }

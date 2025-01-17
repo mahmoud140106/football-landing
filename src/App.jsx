@@ -18,8 +18,10 @@ function App() {
 
     <div>
       <Header />
-      <div className="max-w-7xl mx-auto">
-
+      <div className="max-w-[1250px] mx-auto">
+        <div className="hidden xl:block bg-white absolute top-16 rounded-md left-0 ">
+          <Social />
+        </div>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/viewMatches" element={<ViewMatch />} />

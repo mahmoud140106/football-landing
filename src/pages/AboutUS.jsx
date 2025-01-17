@@ -21,7 +21,8 @@ export default function AboutUS() {
 
             {about.map((item) => (
                 <div key={item._id}>
-                    <h1 className='text-4xl font-bold mb-5'>{item.title}</h1>
+                    <h1 className='text-4xl font-bold mb-5'>About Us</h1>
+                    <h2 className='text-xl font-semibold text-green-500 m-10'>Who We Are</h2>
                     <p className='text-lg'>{item.details}</p>
                 </div>
             ))}

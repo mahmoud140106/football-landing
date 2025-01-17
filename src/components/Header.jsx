@@ -3,6 +3,8 @@ import { Input } from './ui/input'
 import DarkMode from './mode-toggle.jsx'
 import { Link } from 'react-router'
 
+import Drawer from './Drawer.jsx'
+
 const links = [
     {
         name: "Main",
@@ -70,22 +72,12 @@ export default function Header() {
 
                 <div className='flex gap-4 ml-auto'>
                     <div
-                        className='w-full flex gap-3        '>
-                        <Input
-                            className='w-full'
-                            type='text' placeholder='Search ... '
-                        />
-
+                        className='w-full flex gap-3 '>
                         <DarkMode />
-
                     </div>
-                    <button id="toggleOpen" className='lg:hidden'>
-                        <svg className="w-7 h-7" fill="#000" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fillRule="evenodd"
-                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                clipRule="evenodd"></path>
-                        </svg>
-                    </button>
+                    <div className='block  lg:hidden'>
+                        <Drawer />
+                    </div>
                 </div>
 
             </div>
