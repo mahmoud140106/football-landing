@@ -4,14 +4,14 @@ import api from "../../ApiUrl";
 
 export const fetchArticle = createAsyncThunk(
   "article/fetchArticle",
-  async ({ page, limit }, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
       const response = await api.get(
-        `api/v1/articles/landing?page=${page}&limit=${limit}`
-      );
-      return response.data; // العودة بكل البيانات بما فيها البيانات والـ pagination
+        `api/v1/articles/landing?page=1&limit=1000`
+      ); // جلب كل المقالات
+      return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || "Error fetching Article");
+      return rejectWithValue(error.response?.data || "Error fetching articles");
     }
   }
 );
@@ -23,15 +23,8 @@ const ArticleSlice = createSlice({
     isLoading: false,
     isError: false,
     errorMessage: "",
-    pagination: {
-      currentPage: 1,
-      totalPages: 5,
-      limit: 20,
-    },
   },
-
   reducers: {},
-
   extraReducers: (builder) => {
     builder
       .addCase(fetchArticle.pending, (state) => {
@@ -43,8 +36,7 @@ const ArticleSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.errorMessage = "";
-        state.article = action.payload.data; // البيانات الفعلية للمقالات
-        state.pagination.totalPages = action.payload.pagination.numberOfPages;
+        state.article = action.payload.data; // تخزين المقالات
       })
       .addCase(fetchArticle.rejected, (state, action) => {
         state.isLoading = false;

@@ -1,7 +1,7 @@
 import HeroSection from '../components/HeroSection';
 import Advertisement from '../components/Advertisement';
 import { fetchArticle } from '../store/slices/articlesSlice';
-import { Card, CardHeader, CardContent, CardTitle } from '../components/ui/card';
+import { Card, CardHeader, CardContent, CardTitle, CardFooter } from '../components/ui/card';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { Button } from '../components/ui/button';
@@ -11,15 +11,18 @@ import { Clock, MapPin } from 'lucide-react';
 
 export default function Home() {
     const dispatch = useDispatch();
-    const { article, isLoading, error } = useSelector((state) => state.article);
 
-    console.log('article', article);
+    const { article, isLoading, error } = useSelector((state) => state.article);
+    console.log('articlearticlearticlearticle', article);
 
     const { matches = [] } = useSelector((state) => state.matches || {});
 
     useEffect(() => {
         dispatch(fetchMatches());
+        dispatch(fetchArticle());
     }, [dispatch]);
+
+
 
     // التحقق من أن هناك مباريات وأنها ليست فارغة
     const liveMatch = matches.find((match) => match.status === "live");
@@ -58,7 +61,7 @@ export default function Home() {
                                                 to={`/match/${liveMatch._id}`}>
                                                 <Button
                                                     variant={"outline"}
-                                                    className='w-full h-16 text-green-500 hover:text-green-500 bg-green-50'
+                                                    className='w-full h-16 text-green-500 hover:text-green-500'
                                                 >Watch</Button>
                                             </Link>
                                         </div>
@@ -78,9 +81,6 @@ export default function Home() {
 
                                         </div>
                                     </div>
-
-
-
                                     <div className="w-full flex justify-end col-span-3  items-center gap-4">
                                         <div className="">
                                             <span className="text-xl font-semibold  rounded-full border-2 px-3 py-1 border-gray-200">{liveMatch.goalOne}</span>
@@ -101,6 +101,7 @@ export default function Home() {
                             </div>
                         )
                         }
+                        <Button className='w-full bg-green-500 hover:bg-green-600' variant={"outline"}>DDDDDDDDD</Button>
                     </div>
                 </div>
                 <div className='hidden md:block col-span-2 h-[450px]'>
@@ -123,7 +124,7 @@ export default function Home() {
                         <div className="text-center py-5 text-red-500">Error: {error}</div>
                     ) : (
                         <div className="mb-5 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-5">
-                            {article.slice(0, 10).map((item) => (
+                            {article.slice(0, 16).map((item) => (
                                 <Card key={item._id}>
                                     <CardHeader>
                                         <img
@@ -136,6 +137,11 @@ export default function Home() {
                                     <CardContent>
                                         <CardTitle>{item.title}</CardTitle>
                                     </CardContent>
+
+                                    <CardFooter>
+                                        <p>Card Footer</p>
+                                    </CardFooter>
+
                                 </Card>
                             ))}
                         </div>
