@@ -10,10 +10,20 @@ export default function Matches() {
     return (
         <div className="mx-auto mt-10 grid gap-5 w-full">
             <TabButton selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+
+
             <HeroSection />
-            <MatchesList selectedTab={selectedTab} />
-            <div className="w-full h-[450px]">
-                <Advertisement />
+
+
+
+            <div className="xl:flex block gap-5">
+                <div className='hidden xl:block w-1/4 h-[450px]'>
+                    <Advertisement />
+                </div>
+
+                <div className='xl:w-3/4 w-full h-[450px]'>
+                    <MatchesList selectedTab={selectedTab} />
+                </div>
             </div>
 
             <div className="w-full h-[450px]">

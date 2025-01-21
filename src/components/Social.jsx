@@ -17,7 +17,7 @@ export default function Social() {
     }
 
     return (
-        <div className=' p-4 '>
+        <div className='p-4 max-h-[500px] overflow-y-auto'>
             {social.map((item) => (
                 <div className='mt-5' key={item._id}>
                     <Link to={item.link}>
@@ -32,3 +32,4 @@ export default function Social() {
         </div>
     )
 }
+

@@ -10,13 +10,13 @@ export default function TabButton({ selectedTab, setSelectedTab }) {
             <Tabs defaultValue={selectedTab} className="w-[400px] ">
                 <TabsList className="grid w-full grid-cols-3">
                     <TabsTrigger onClick={() => handleTabChange('yesterday')} value="yesterday">
-                        أمس
+                        Yesterday
                     </TabsTrigger>
                     <TabsTrigger onClick={() => handleTabChange('today')} value="today">
-                        اليوم
+                        Today
                     </TabsTrigger>
                     <TabsTrigger onClick={() => handleTabChange('tomorrow')} value="tomorrow">
-                        غدًا
+                        Tomorrow
                     </TabsTrigger>
                 </TabsList>
             </Tabs>

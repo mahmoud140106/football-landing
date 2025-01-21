@@ -132,7 +132,7 @@ export default function Home() {
                                     <CardHeader>
                                         <img
                                             loading="lazy"
-                                            className="w-full h-[200px] object-cover"
+                                            className="w-full rounded-md h-[200px] object-cover"
                                             src={item.cover}
                                             alt={item.title}
                                         />

@@ -1,5 +1,5 @@
 import Header from "./components/Header.jsx"
-
+import { useI18nContext } from "./context/i18n-context";
 import './App.css'
 import Footer from "./components/Footer.jsx"
 import { Routes, Route } from "react-router-dom";
@@ -11,32 +11,38 @@ import ContactUs from "./pages/Contactus.jsx"
 import Matches from "./pages/Matches.jsx"
 import Privacy from "./pages/Privacy.jsx"
 import Social from "./components/Social.jsx";
+import ArticleDetails from "./pages/ArticleDetails.jsx";
 
 function App() {
+  const { language } = useI18nContext();
 
   return (
-
-    <div>
+    <div
+      dir={language === "en" ? "ltr" : "rtl"}
+      className="flex flex-col min-h-screen" // استخدام Flexbox وملء الشاشة
+    >
       <Header />
-      <div className="max-w-[1250px] mx-auto">
-        <div className="hidden xl:block bg-white absolute top-16 rounded-md left-0 ">
-          <Social />
+      <div className="flex-1"> {/* تجعل هذا الجزء يأخذ المساحة المتبقية */}
+        <div className="max-w-[1250px] mx-auto">
+          <div className=" hidden xl:block bg-white absolute top-16 rounded-md left-0">
+            <Social />
+          </div>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/viewMatches" element={<ViewMatch />} />
+            <Route path="/Articles" element={<Articles />} />
+            <Route path="/aboutUs" element={<AboutUs />} />
+            <Route path="/contactUs" element={<ContactUs />} />
+            <Route path="/matches" element={<Matches />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/articles/:id" element={<ArticleDetails />} />
+          </Routes>
         </div>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/viewMatches" element={<ViewMatch />} />
-          <Route path="/Articles" element={<Articles />} />
-          <Route path="/aboutUs" element={<AboutUs />} />
-          <Route path="/contactUs" element={<ContactUs />} />
-          <Route path="/matches" element={<Matches />} />
-          <Route path="/privacy" element={<Privacy />} />
-
-        </Routes>
       </div>
       <Footer />
     </div>
-
-  )
+  );
 }
 
-export default App
+export default App;
+

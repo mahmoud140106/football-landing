@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { fetchArticle } from "../store/slices/articlesSlice";
 import Advertisement from "../components/Advertisement";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
+import { Button } from "../components/ui/button";
+import { Link } from "react-router";
 
 export default function Articles() {
     const dispatch = useDispatch();
@@ -13,6 +15,8 @@ export default function Articles() {
     useEffect(() => {
         dispatch(fetchArticle());
     }, [dispatch]);
+
+    console.log('articlearticle', article);
 
     return (
         <div className="my-5 w-full">
@@ -33,7 +37,7 @@ export default function Articles() {
                                 <CardHeader>
                                     <img
                                         loading="lazy"
-                                        className="w-full h-[200px] object-cover"
+                                        className="w-full rounded-md h-[200px] object-cover"
                                         src={item.cover}
                                         alt={item.title}
                                     />
@@ -42,12 +46,17 @@ export default function Articles() {
                                     <CardTitle>{item.title}</CardTitle>
                                 </CardContent>
                                 <CardFooter>
-                                    <p>Card Footer</p>
+                                    <Link to={`/articles/${item._id}`}> <Button variant={"outline"}> Read more </Button></Link>
+
                                 </CardFooter>
                             </Card>
                         ))}
                     </div>
                 )}
+            </div>
+
+            <div className="h-[337px]">
+                <Advertisement />
             </div>
         </div>
     );

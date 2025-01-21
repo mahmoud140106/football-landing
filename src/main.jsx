@@ -6,15 +6,18 @@ import { BrowserRouter } from "react-router";
 import { ThemeProvider } from "./components/theme-provider.tsx"
 import { Provider } from "react-redux";
 import store from "./store/index.js";
+import { I18nProvider } from "./context/i18n-context.jsx"; // Import the I18nProvider
+
 
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-
     <StrictMode>
       <BrowserRouter>
         <ThemeProvider>
-          <App />
+          <I18nProvider>
+            <App />
+          </I18nProvider>
         </ThemeProvider>
       </BrowserRouter>
     </StrictMode>,
