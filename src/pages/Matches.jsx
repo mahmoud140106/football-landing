@@ -18,7 +18,7 @@ export default function Matches() {
 
             <div className="xl:flex block gap-5">
                 <div className='hidden xl:block w-1/4 h-[450px]'>
-                    <Advertisement />
+                    <Advertisement adType="side" pageType="matches" />
                 </div>
 
                 <div className='xl:w-3/4 w-full h-[450px]'>
@@ -27,7 +27,7 @@ export default function Matches() {
             </div>
 
             <div className="w-full h-[450px]">
-                <Advertisement />
+                <Advertisement adType="bottom" pageType="matches" />
             </div>
         </div>
     );

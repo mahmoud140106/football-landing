@@ -21,7 +21,7 @@ export default function Articles() {
     return (
         <div className="my-5 w-full">
             <div className="h-[337px]">
-                <Advertisement />
+                <Advertisement adType="top" pageType="articles" />
             </div>
             <div className="w-full my-5">
                 {isLoading ? (
@@ -46,8 +46,7 @@ export default function Articles() {
                                     <CardTitle>{item.title}</CardTitle>
                                 </CardContent>
                                 <CardFooter>
-                                    <Link to={`/articles/${item._id}`}> <Button variant={"outline"}> Read more </Button></Link>
-
+                                    <Link to={"https://matches.livefootballia.com/:id"}> <Button variant={"outline"}> Read more </Button></Link>
                                 </CardFooter>
                             </Card>
                         ))}
@@ -56,7 +55,7 @@ export default function Articles() {
             </div>
 
             <div className="h-[337px]">
-                <Advertisement />
+                <Advertisement adType="bottom" pageType="articles" />
             </div>
         </div>
     );

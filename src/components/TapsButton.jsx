@@ -6,7 +6,7 @@ export default function TabButton({ selectedTab, setSelectedTab }) {
     };
 
     return (
-        <div className='flex justify-end'>
+        <div className=' flex justify-end'>
             <Tabs defaultValue={selectedTab} className="w-[400px] ">
                 <TabsList className="grid w-full grid-cols-3">
                     <TabsTrigger onClick={() => handleTabChange('yesterday')} value="yesterday">

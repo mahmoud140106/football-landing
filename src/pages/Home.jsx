@@ -1,12 +1,12 @@
 import HeroSection from '../components/HeroSection';
 import Advertisement from '../components/Advertisement';
-import { fetchArticle } from '../store/slices/articlesSlice';
+import { fetchArticle } from '../store/slices/articlesSlice.js';
 import { Card, CardHeader, CardContent, CardTitle, CardFooter } from '../components/ui/card';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { Button } from '../components/ui/button';
 import { Link } from 'react-router';
-import { fetchMatches } from '../store/slices/MatchesListSlice';
+import { fetchMatches } from '../store/slices/MatchesListSlice.js';
 import { Clock, MapPin } from 'lucide-react';
 
 export default function Home() {
@@ -22,8 +22,6 @@ export default function Home() {
     }, [dispatch]);
 
 
-
-
     const liveMatch = matches.find((match) => match.status === "live");
 
     const sortedArticles = [...article].sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -31,8 +29,8 @@ export default function Home() {
     return (
         <>
             <div className='mt-10 grid grid-cols-12 gap-5 w-full'>
-                <div className='col-span-12 lg:col-span-2  h-[450px]'>
-                    <Advertisement />
+                <div className='col-span-12 lg:col-span-2 h-[450px]'>
+                    <Advertisement adType="side" pageType="main" />
                 </div>
                 <div className='w-full lg:col-span-8 col-span-12'>
                     <HeroSection />
@@ -54,7 +52,6 @@ export default function Home() {
                                             <span className="text-xl rounded-full border-2 px-3 py-1 border-gray-200 font-semibold">{liveMatch.goalOne}</span>
                                         </div>
                                     </div>
-
                                     <div className=' md:block items-center justify-center w-full md:col-span-6  col-span-4'>
                                         <div className='w-full'>
                                             <Link
@@ -79,11 +76,8 @@ export default function Home() {
                                                 <MapPin className="hidden md:block w-4 h-4" />
                                                 <span className='text-sm '>{liveMatch.stadium}</span>
                                             </div>
-
                                         </div>
                                     </div>
-
-
                                     <div className="w-full flex justify-end md:col-span-3  col-span-4  items-center gap-4">
                                         <div className="">
                                             <span className="text-xl font-semibold  rounded-full border-2 px-3 py-1 border-gray-200">{liveMatch.goalOne}</span>
@@ -98,17 +92,15 @@ export default function Home() {
                                             />
                                         </div>
                                     </div>
-
                                 </div>
-
                             </div>
                         )
                         }
-                        <Button className='w-full bg-green-500 hover:bg-green-600' variant={"outline"}>View all</Button>
+                        <Link to="/matches"> <Button className='w-full bg-green-500 hover:bg-green-600' variant={"outline"}>View all</Button></Link>
                     </div>
                 </div>
                 <div className='hidden lg:block col-span-2 h-[450px]'>
-                    <Advertisement />
+                    <Advertisement adType="side" pageType="main" />
                 </div>
                 <div className='w-full col-span-12 flex justify-between'>
                     <h1 className='font-semibold'>News and articles</h1>
@@ -117,7 +109,7 @@ export default function Home() {
                     </Link>
                 </div>
                 <div className='w-full col-span-12 h-[450px]'>
-                    <Advertisement />
+                    <Advertisement adType="top" pageType="main" />
                 </div>
 
                 <div className='w-full col-span-12 gap-3'>
@@ -142,7 +134,7 @@ export default function Home() {
                                     </CardContent>
 
                                     <CardFooter>
-                                        <p>Card Footer</p>
+                                        <Link to={`https://matches.livefootballia.com/:id`}> <Button variant={"outline"}> Read more </Button></Link>
                                     </CardFooter>
 
                                 </Card>
@@ -152,7 +144,7 @@ export default function Home() {
                 </div>
 
                 <div className='w-full col-span-12 h-[450px]'>
-                    <Advertisement />
+                    <Advertisement adType="bottom" pageType="main" />
                 </div>
             </div>
         </>
