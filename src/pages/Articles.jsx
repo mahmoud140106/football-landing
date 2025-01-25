@@ -6,23 +6,33 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../compone
 import { Button } from "../components/ui/button";
 import { Link } from "react-router";
 
+import { useState } from "react"; // إضافة useState
+import PaginationComponent from "../components/Pagination";
+
 export default function Articles() {
     const dispatch = useDispatch();
     const { article, isLoading, isError, errorMessage } = useSelector(
         (state) => state.article
     );
 
+    const [currentPage, setCurrentPage] = useState(1); // الصفحة الحالية
+    const itemsPerPage = 5; // عدد المقالات في كل صفحة
+
     useEffect(() => {
         dispatch(fetchArticle());
     }, [dispatch]);
 
-    console.log('articlearticle', article);
+    // حساب المقالات الظاهرة بناءً على الصفحة الحالية
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedArticles = article.slice(startIndex, endIndex);
 
     return (
         <div className="my-5 w-full">
             <div className="h-[337px]">
                 <Advertisement adType="top" pageType="articles" />
             </div>
+
             <div className="w-full my-5">
                 {isLoading ? (
                     <div className="text-center py-5">Loading articles...</div>
@@ -32,7 +42,7 @@ export default function Articles() {
                     </div>
                 ) : (
                     <div className="mb-5 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-5">
-                        {article.map((item) => (
+                        {paginatedArticles.map((item) => (
                             <Card key={item._id}>
                                 <CardHeader>
                                     <img
@@ -46,7 +56,9 @@ export default function Articles() {
                                     <CardTitle>{item.title}</CardTitle>
                                 </CardContent>
                                 <CardFooter>
-                                    <Link to={"https://matches.livefootballia.com/:id"}> <Button variant={"outline"}> Read more </Button></Link>
+                                    <Link to={`/articles/${item._id}`}>
+                                        <Button variant={"outline"}>Read more</Button>
+                                    </Link>
                                 </CardFooter>
                             </Card>
                         ))}
@@ -54,9 +66,21 @@ export default function Articles() {
                 )}
             </div>
 
+            {/* تفعيل الباجينيشن */}
+            {!isLoading && !isError && (
+                <div className="my-5 flex justify-center">
+                    <PaginationComponent
+                        currentPage={currentPage}
+                        totalPages={Math.ceil(article.length / itemsPerPage)}
+                        onPageChange={(page) => setCurrentPage(page)}
+                    />
+                </div>
+            )}
+
             <div className="h-[337px]">
                 <Advertisement adType="bottom" pageType="articles" />
             </div>
         </div>
     );
 }
+
