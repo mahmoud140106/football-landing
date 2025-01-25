@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAds } from "../store/slices/adsSlice.js";
 
@@ -7,6 +7,8 @@ export default function Advertisement({ adType, pageType }) {
     const { ads, isLoading, isError, errorMessage } = useSelector(
         (state) => state.ads
     );
+
+    const [adContent, setAdContent] = useState(null); // حالة لتخزين محتوى الإعلان
 
     useEffect(() => {
         dispatch(fetchAds());
@@ -45,10 +47,13 @@ export default function Advertisement({ adType, pageType }) {
 
             script.onload = () => {
                 console.log("Script loaded successfully:", scriptSrc);
+                // بعد تحميل السكربت، يمكن تعديل حالة adContent لعرض الإعلان
+                setAdContent("Ad loaded successfully!");
             };
 
             script.onerror = (error) => {
                 console.error("Script load error:", error, scriptSrc);
+                setAdContent("Error loading the ad.");
             };
 
             document.body.appendChild(script);
@@ -64,7 +69,8 @@ export default function Advertisement({ adType, pageType }) {
 
     return (
         <div className="bg-gray-100 h-full w-full flex items-center justify-center">
-            <div>Ad is being loaded...</div>
+
+            <div>{adContent ? adContent : "Ad is being loaded..."}</div>
         </div>
     );
 }

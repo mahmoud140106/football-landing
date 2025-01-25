@@ -74,7 +74,7 @@ export default function Home() {
                                         <div className='w-full'>
                                             <Link
                                                 className='w-full '
-                                                to={`/match/${liveMatch._id}`}>
+                                                to={liveMatch.livelink}>
                                                 <Button
                                                     variant={"outline"}
                                                     className='hidden md:block w-full h-16 text-green-500 hover:text-green-500'
@@ -120,8 +120,9 @@ export default function Home() {
                 <div className='hidden lg:block col-span-2 h-[450px]'>
 
                     {article
-                        .slice(0, articlesToShow)
+                        .slice()
                         .sort((a, b) => b.visits - a.visits)
+                        .slice(0, articlesToShow)
                         .map((article, index) => (
                             <div key={index} className="mb-3 drop-shadow-xl overflow-hidden sm:rounded-md ">
                                 <div className="xl:flex gap-2 items-center">
@@ -138,9 +139,6 @@ export default function Home() {
                                 </div>
                             </div>
                         ))}
-
-
-
 
                 </div>
                 <div className='w-full col-span-12 flex justify-between'>

@@ -2,6 +2,7 @@ import { Button } from "./ui/button";
 import { fetchMatches } from "../store/slices/MatchesListSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { Link } from "react-router";
 
 export default function HeroSection() {
     const dispatch = useDispatch();
@@ -13,8 +14,7 @@ export default function HeroSection() {
     }, [dispatch]);
 
     // التحقق من أن هناك مباريات وأنها ليست فارغة
-    const liveMatch = matches.find((match) => match.status === "live");
-
+    const liveMatch = matches.find((match) => match.status === "live") || matches.find((match) => match.status === "pending");
     return (
         <div className='w-full h-[450px] bg-green-500 p-5 rounded-md'>
             {liveMatch && (
@@ -31,10 +31,13 @@ export default function HeroSection() {
 
                     <div className="grid text-center  items-center   ">
                         <h1 className="xl:text-4xl text-xl font-bold  text-white">{liveMatch.stadium}</h1>
-                        <Button
-                            variant="outline"
-                            className='hidden lg:block w-full h-16 text-green-500 hover:text-green-500'
-                        >Watch Now</Button>
+
+                        <Link to={liveMatch.livelink}>
+                            <Button
+                                variant="outline"
+                                className='hidden lg:block w-full h-16 text-green-500 hover:text-green-500'
+                            >Watch Now</Button>
+                        </Link>
 
                         <h4 className="text-xl font-semibold text-white">{liveMatch.time}</h4>
                     </div>
@@ -54,7 +57,7 @@ export default function HeroSection() {
                 <Button
                     variant="outline"
                     className='w-full h-16 text-green-500 hover:text-green-500'
-                >Watch Now</Button>
+                >{liveMatch ? "Watch Now" : "Pending"}</Button>
             </div>
         </div>
     );
