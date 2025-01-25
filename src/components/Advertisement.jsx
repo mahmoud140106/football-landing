@@ -9,14 +9,12 @@ export default function Advertisement({ adType, pageType }) {
     );
 
     useEffect(() => {
-        // جلب الإعلانات عند تحميل المكوّن
         dispatch(fetchAds());
     }, [dispatch]);
 
     useEffect(() => {
         if (ads.length === 0) return;
 
-        // فلترة الإعلانات بناءً على نوع الصفحة
         const filteredAd = ads.find((ad) => ad.type === pageType);
 
         if (!filteredAd) {
@@ -55,7 +53,6 @@ export default function Advertisement({ adType, pageType }) {
 
             document.body.appendChild(script);
 
-            // تنظيف السكربت عند إزالة المكوّن
             return () => {
                 document.body.removeChild(script);
             };
@@ -67,34 +64,7 @@ export default function Advertisement({ adType, pageType }) {
 
     return (
         <div className="bg-gray-100 h-full w-full flex items-center justify-center">
-            {adType === "button" ? (
-                <button
-                    className="btn-ad p-2 bg-blue-500 text-white rounded"
-                    onClick={() => {
-                        const filteredAd = ads.find((ad) => ad.type === pageType);
-                        if (filteredAd) {
-                            const scriptSrc = filteredAd.btnAd;
-                            if (scriptSrc) {
-                                const script = document.createElement("script");
-                                script.type = "text/javascript";
-                                script.src = scriptSrc;
-                                script.async = true;
-
-                                script.onload = () =>
-                                    console.log("Button Ad Script loaded:", scriptSrc);
-                                script.onerror = (error) =>
-                                    console.error("Button Ad load error:", error);
-
-                                document.body.appendChild(script);
-                            }
-                        }
-                    }}
-                >
-                    Show Ad on Click
-                </button>
-            ) : (
-                <div>Ad is being loaded...</div>
-            )}
+            <div>Ad is being loaded...</div>
         </div>
     );
 }

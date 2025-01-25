@@ -32,11 +32,23 @@ export default function Home() {
 
     const sortedArticles = [...article].sort((a, b) => new Date(b.date) - new Date(a.date));
 
+
+    const getPageType = () => {
+        const path = location.pathname;
+
+        if (path === "/") return "main";
+        if (path.startsWith("/matches")) return "matches";
+        if (path.startsWith("/articles")) return "articles";
+        return "default";
+    };
+
+    const pageType = getPageType();
+
     return (
         <>
             <div className='mt-10 grid grid-cols-12 gap-5 w-full'>
                 <div className='col-span-12 lg:col-span-2 h-[450px]'>
-                    <Advertisement adType="side" pageType="main" />
+                    <Advertisement adType="side" pageType={pageType} />
                 </div>
                 <div className='w-full lg:col-span-8 col-span-12'>
                     <HeroSection />
@@ -138,7 +150,7 @@ export default function Home() {
                     </Link>
                 </div>
                 <div className='w-full col-span-12 h-[450px]'>
-                    <Advertisement adType="top" pageType="main" />
+                    <Advertisement adType="top" pageType={pageType} />
                 </div>
 
                 <div className='w-full col-span-12 gap-3'>
@@ -173,7 +185,7 @@ export default function Home() {
                 </div>
 
                 <div className='w-full col-span-12 h-[450px]'>
-                    <Advertisement adType="bottom" pageType="main" />
+                    <Advertisement adType="bottom" pageType={pageType} />
                 </div>
             </div>
         </>

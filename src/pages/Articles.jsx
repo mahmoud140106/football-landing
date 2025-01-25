@@ -22,15 +22,31 @@ export default function Articles() {
         dispatch(fetchArticle());
     }, [dispatch]);
 
+
+    const getPageType = () => {
+        const path = location.pathname;
+
+        if (path === "/") return "main";
+        if (path.startsWith("/matches")) return "matches";
+        if (path.startsWith("/articles")) return "articles";
+        return "default";
+    };
+
+    const pageType = getPageType();
+
+
+
+
     // حساب المقالات الظاهرة بناءً على الصفحة الحالية
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const paginatedArticles = article.slice(startIndex, endIndex);
 
+
     return (
         <div className="my-5 w-full">
             <div className="h-[337px]">
-                <Advertisement adType="top" pageType="articles" />
+                <Advertisement adType="top" pageType={pageType} />
             </div>
 
             <div className="w-full my-5">
@@ -78,7 +94,7 @@ export default function Articles() {
             )}
 
             <div className="h-[337px]">
-                <Advertisement adType="bottom" pageType="articles" />
+                <Advertisement adType="bottom" pageType={pageType} />
             </div>
         </div>
     );
