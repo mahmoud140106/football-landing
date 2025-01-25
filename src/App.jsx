@@ -23,7 +23,7 @@ function App() {
     >
       <Header />
       <div className="flex-1"> {/* تجعل هذا الجزء يأخذ المساحة المتبقية */}
-        <div className="max-w-[1250px] mx-auto">
+        <div className="max-w-[1300px] mx-auto">
           <div className=" hidden xl:block bg-white absolute top-16 rounded-md left-0">
             <Social />
           </div>

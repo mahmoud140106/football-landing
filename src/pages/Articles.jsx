@@ -16,7 +16,7 @@ export default function Articles() {
     );
 
     const [currentPage, setCurrentPage] = useState(1); // الصفحة الحالية
-    const itemsPerPage = 5; // عدد المقالات في كل صفحة
+    const itemsPerPage = 16; // عدد المقالات في كل صفحة
 
     useEffect(() => {
         dispatch(fetchArticle());

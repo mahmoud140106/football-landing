@@ -8,6 +8,8 @@ import { Button } from '../components/ui/button';
 import { Link } from 'react-router';
 import { fetchMatches } from '../store/slices/MatchesListSlice.js';
 import { Clock, MapPin } from 'lucide-react';
+import { useMediaQuery } from "react-responsive";
+
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -20,6 +22,10 @@ export default function Home() {
         dispatch(fetchMatches());
         dispatch(fetchArticle());
     }, [dispatch]);
+
+    const isSmallScreen = useMediaQuery({ maxWidth: 1024 }); // الشاشات الصغيرة (<640px).
+    const articlesToShow = isSmallScreen ? 4 : 6;
+
 
 
     const liveMatch = matches.find((match) => match.status === "live");
@@ -100,7 +106,30 @@ export default function Home() {
                     </div>
                 </div>
                 <div className='hidden lg:block col-span-2 h-[450px]'>
-                    <Advertisement adType="side" pageType="main" />
+
+                    {article
+                        .slice(0, articlesToShow)
+                        .sort((a, b) => b.visits - a.visits)
+                        .map((article, index) => (
+                            <div key={index} className="mb-3 drop-shadow-xl overflow-hidden sm:rounded-md ">
+                                <div className="xl:flex gap-2 items-center">
+                                    <div className="md:shrink-0">
+                                        <img className="w-16 h-16" src={article.cover} alt={article.title} />
+                                    </div>
+                                    <div className="mx-1">
+
+                                        <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{article.title}</div>
+                                        <Link to={`/article/${article._id}`} className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">
+                                            <p className="text-gray-500 text-xs xl:mt-2 md:mt-1">Read more</p>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+
+
+
+
                 </div>
                 <div className='w-full col-span-12 flex justify-between'>
                     <h1 className='font-semibold'>News and articles</h1>
