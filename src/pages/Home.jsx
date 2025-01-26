@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { Button } from '../components/ui/button';
 import { Link } from 'react-router';
-import { fetchMatches } from '../store/slices/MatchesListSlice.js';
+import { fetchMatchesHero } from '../store/slices/MatchesListSlice.js';
 import { Clock, MapPin } from 'lucide-react';
 import { useMediaQuery } from "react-responsive";
 
@@ -19,16 +19,16 @@ export default function Home() {
     const { matches = [] } = useSelector((state) => state.matches || {});
 
     useEffect(() => {
-        dispatch(fetchMatches());
+        dispatch(fetchMatchesHero());
         dispatch(fetchArticle());
     }, [dispatch]);
 
-    const isSmallScreen = useMediaQuery({ maxWidth: 1024 }); // الشاشات الصغيرة (<640px).
+    const isSmallScreen = useMediaQuery({ maxWidth: 1024 });
     const articlesToShow = isSmallScreen ? 4 : 6;
 
 
 
-    const liveMatch = matches.find((match) => match.status === "live");
+    const liveMatch = matches.find((match) => match.status === "live") || matches.find((match) => match.status === "pending");
 
     const sortedArticles = [...article].sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -78,7 +78,7 @@ export default function Home() {
                                                 <Button
                                                     variant={"outline"}
                                                     className='hidden md:block w-full h-16 text-green-500 hover:text-green-500'
-                                                >Watch</Button>
+                                                >{liveMatch ? "Watch Now" : "Pending"}</Button>
                                             </Link>
                                         </div>
                                         <div className='mt-5  md:flex w-[90%] mx-auto  justify-between'>
@@ -132,7 +132,8 @@ export default function Home() {
                                     <div className="mx-1">
 
                                         <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{article.title}</div>
-                                        <Link to={`/article/${article._id}`} className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">
+                                        <Link
+                                            to={`https://matches.livefootballia.com/${article._id}`} className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">
                                             <p className="text-gray-500 text-xs xl:mt-2 md:mt-1">Read more</p>
                                         </Link>
                                     </div>
@@ -173,7 +174,7 @@ export default function Home() {
                                     </CardContent>
 
                                     <CardFooter>
-                                        <Link to={`https://matches.livefootballia.com/:id`}> <Button variant={"outline"}> Read more </Button></Link>
+                                        <Link to={`https://matches.livefootballia.com/${item._id}`}> <Button variant={"outline"}> Read more </Button></Link>
                                     </CardFooter>
 
                                 </Card>

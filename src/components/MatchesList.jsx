@@ -1,36 +1,44 @@
-import { useSelector } from "react-redux";
-import { Link } from "react-router";
-import { Button } from "./ui/button";
-import PaginationComponent from "../components/Pagination";
-import { useState } from "react";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMatches } from '../store/slices/MatchesListSlice';
+import { Button } from './ui/button';
+import { Link } from 'react-router';
+import PaginationComponent from './Pagination'; // استيراد كمبوننت Pagination
 
 export default function MatchesList({ selectedTab }) {
-    const { matches = [], isLoading, error } = useSelector((state) => state.matches || {});
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10;
+    const dispatch = useDispatch();
+    const { matches, isLoading, error } = useSelector((state) => state.matches);
+    const [currentPage, setCurrentPage] = useState(1); // تتبع الصفحة الحالية
+    const itemsPerPage = 10; // عدد المباريات في كل صفحة
+
+    useEffect(() => {
+        dispatch(fetchMatches(selectedTab));
+    }, [selectedTab, dispatch]);
 
     if (isLoading) {
         return <div>Loading...</div>;
     }
+
     if (error) {
         return <div>Error: {error}</div>;
     }
 
-    const filteredMatches = matches.filter((match) => match.day === selectedTab);
+    const filteredData = matches || [];
 
+    // تقسيم البيانات حسب الصفحة
     const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const paginatedMatches = filteredMatches.slice(startIndex, endIndex);
+    const currentMatches = filteredData.slice(startIndex, startIndex + itemsPerPage);
+    const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
 
     return (
         <div className="mt-5 space-y-2">
-            {paginatedMatches.length > 0 ? (
-                paginatedMatches.map((match, index) => (
-                    <div
-                        key={index}
-                        className="rounded-lg shadow-sm border xl:p-4 p-2 flex items-center justify-between"
-                    >
-                        {/* محتوى المباراة */}
+            {currentMatches.length > 0 ? (
+                currentMatches.map((match, index) => (
+                    <div key={index} className="rounded-lg shadow-sm border xl:p-4 p-2 flex items-center justify-between">
                         <div className="flex items-center gap-5 xl:w-full mr-5">
                             <div className="xl:flex items-center gap-4">
                                 <div className="flex items-center justify-center">
@@ -64,15 +72,14 @@ export default function MatchesList({ selectedTab }) {
                                 </h2>
                             </div>
                         </div>
-                        {/* تفاصيل الوقت والمكان */}
                         <div className="flex items-center gap-6 w-full">
                             <div className="xl:w-1/4 w-full text-center flex xl:justify-start justify-center items-center gap-2">
                                 <span
-                                    className={`${match.status === "live"
-                                        ? "text-green-500"
-                                        : match.status === "ended"
-                                            ? "text-red-500"
-                                            : "cursor-not-allowed"
+                                    className={`${match.status === 'live'
+                                        ? 'text-green-500'
+                                        : match.status === 'ended'
+                                            ? 'text-red-500'
+                                            : 'cursor-not-allowed'
                                         }`}
                                 >
                                     {match.time}
@@ -81,21 +88,21 @@ export default function MatchesList({ selectedTab }) {
                             <div className="xl:w-2/4 w-full md:flex items-center gap-2 hidden">
                                 <span>{match.stadium}</span>
                             </div>
-                            <Link className="xl:w-1/4 w-full" href={match.livelink}>
+                            <Link className="xl:w-1/4 w-full" to={match.livelink}>
                                 <Button
                                     variant="outline"
-                                    className={`w-full md:block ${match.status === "live"
-                                        ? "text-green-500 hover:text-green-500"
-                                        : match.status === "ended"
-                                            ? " text-red-500 hover:text-red-500  "
-                                            : ""
+                                    className={`w-full md:block ${match.status === 'live'
+                                        ? 'text-green-500 hover:text-green-500'
+                                        : match.status === 'ended'
+                                            ? 'text-red-500 hover:text-red-500'
+                                            : ''
                                         }`}
                                 >
-                                    {match.status === "live"
-                                        ? "Watch"
-                                        : match.status === "ended"
-                                            ? "End"
-                                            : "Pending"}
+                                    {match.status === 'live'
+                                        ? 'Watch'
+                                        : match.status === 'ended'
+                                            ? 'End'
+                                            : 'Pending'}
                                 </Button>
                             </Link>
                         </div>
@@ -104,13 +111,12 @@ export default function MatchesList({ selectedTab }) {
             ) : (
                 <div>No matches available for this tab</div>
             )}
-
-            {/* إضافة المكون الخاص بالـ Pagination */}
-            {filteredMatches.length > itemsPerPage && (
+            {/* عرض الباجينيشن */}
+            {totalPages > 1 && (
                 <PaginationComponent
                     currentPage={currentPage}
-                    totalPages={Math.ceil(filteredMatches.length / itemsPerPage)}
-                    onPageChange={(page) => setCurrentPage(page)}
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
                 />
             )}
         </div>

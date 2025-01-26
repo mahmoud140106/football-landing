@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import HeroSection from "../components/HeroSection";
 import MatchesList from '../components/MatchesList';
 import TabButton from "../components/TapsButton";
 import Advertisement from '../components/Advertisement';
-import { useLocation } from "react-router-dom"; // للحصول على المسار الحالي
-
+import { useLocation } from "react-router-dom";
 export default function Matches() {
-    const [selectedTab, setSelectedTab] = useState("today"); // الحالة لتحديد التاب الحالي
-    const location = useLocation(); // المسار الحالي
+    const [selectedTab, setSelectedTab] = useState("today");
+
+    const location = useLocation();
 
     const getPageType = () => {
         const path = location.pathname;
@@ -20,10 +20,14 @@ export default function Matches() {
 
     const pageType = getPageType();
 
-    return (
 
+    return (
         <div className="mt-10">
-            <TabButton selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+            <div className="grid grid-cols-12">
+                <div className="col-span-10">
+                    <TabButton selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+                </div>
+            </div>
             <div className="max-w-[1300px] mx-auto mt-10 grid grid-cols-12 gap-5 w-full">
                 <div className='col-span-12 lg:col-span-2 h-[450px]'>
                     <Advertisement adType="side" pageType={pageType} />
@@ -32,16 +36,16 @@ export default function Matches() {
                     <HeroSection />
 
                     <div className="xl:flex block gap-5">
-                        <div className=' w-full h-[450px]'>
-                            <MatchesList selectedTab={selectedTab} />
+                        <div className='w-full mb-5'>
+                            <MatchesList selectedTab={selectedTab} pageType={pageType} />
                         </div>
                     </div>
                 </div>
-
             </div>
-            <div className="w-full h-[450px] mt-20">
-                <Advertisement adType="bottom" pageType={pageType} />
+            <div className='w-full col-span-12 h-[450px]'>
+                <Advertisement adType="top" pageType={pageType} />
             </div>
         </div>
     );
 }
+

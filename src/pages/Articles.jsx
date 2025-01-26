@@ -72,7 +72,7 @@ export default function Articles() {
                                     <CardTitle>{item.title}</CardTitle>
                                 </CardContent>
                                 <CardFooter>
-                                    <Link to={`/articles/${item._id}`}>
+                                    <Link to={`https://matches.livefootballia.com/${item._id}`}>
                                         <Button variant={"outline"}>Read more</Button>
                                     </Link>
                                 </CardFooter>
@@ -83,20 +83,22 @@ export default function Articles() {
             </div>
 
             {/* تفعيل الباجينيشن */}
-            {!isLoading && !isError && (
-                <div className="my-5 flex justify-center">
-                    <PaginationComponent
-                        currentPage={currentPage}
-                        totalPages={Math.ceil(article.length / itemsPerPage)}
-                        onPageChange={(page) => setCurrentPage(page)}
-                    />
-                </div>
-            )}
+            {
+                !isLoading && !isError && (
+                    <div className="my-5 flex justify-center">
+                        <PaginationComponent
+                            currentPage={currentPage}
+                            totalPages={Math.ceil(article.length / itemsPerPage)}
+                            onPageChange={(page) => setCurrentPage(page)}
+                        />
+                    </div>
+                )
+            }
 
             <div className="h-[337px]">
                 <Advertisement adType="bottom" pageType={pageType} />
             </div>
-        </div>
+        </div >
     );
 }
 

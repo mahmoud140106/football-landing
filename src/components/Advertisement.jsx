@@ -47,7 +47,6 @@ export default function Advertisement({ adType, pageType }) {
 
             script.onload = () => {
                 console.log("Script loaded successfully:", scriptSrc);
-                // بعد تحميل السكربت، يمكن تعديل حالة adContent لعرض الإعلان
                 setAdContent("Ad loaded successfully!");
             };
 

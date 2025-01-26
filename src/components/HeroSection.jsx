@@ -1,5 +1,6 @@
 import { Button } from "./ui/button";
-import { fetchMatches } from "../store/slices/MatchesListSlice";
+import { fetchMatchesHero } from "../store/slices/MatchesListSlice";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { Link } from "react-router";
@@ -7,14 +8,22 @@ import { Link } from "react-router";
 export default function HeroSection() {
     const dispatch = useDispatch();
 
+    // احصل على البيانات من الـ Redux
     const { matches = [], isLoading, error } = useSelector((state) => state.matches || {});
 
+    // جلب البيانات عند تحميل المكون
     useEffect(() => {
-        dispatch(fetchMatches());
+        dispatch(fetchMatchesHero());
     }, [dispatch]);
 
-    // التحقق من أن هناك مباريات وأنها ليست فارغة
+
+    console.log('matches', matches);
+
+
     const liveMatch = matches.find((match) => match.status === "live") || matches.find((match) => match.status === "pending");
+
+    console.log('liveMatch', liveMatch);
+
     return (
         <div className='w-full h-[450px] bg-green-500 p-5 rounded-md'>
             {liveMatch && (
@@ -23,20 +32,20 @@ export default function HeroSection() {
                         <img
                             src={liveMatch.teamOne.image}
                             alt={liveMatch.teamOne.name}
-                            className="w-[150px] h-[150px]  lg:w-[200px] lg:h-[200px] "
+                            className="w-[150px] h-[150px] lg:w-[200px] lg:h-[200px]"
                             loading="lazy"
                         />
                         <h1 className="mt-4 text-white lg:text-4xl text-xl font-bold ">{liveMatch.teamOne.name}</h1>
                     </div>
 
-                    <div className="grid text-center  items-center   ">
-                        <h1 className="xl:text-4xl text-xl font-bold  text-white">{liveMatch.stadium}</h1>
+                    <div className="grid text-center items-center">
+                        <h1 className="xl:text-4xl text-xl font-bold text-white">{liveMatch.stadium}</h1>
 
                         <Link to={liveMatch.livelink}>
                             <Button
                                 variant="outline"
                                 className='hidden lg:block w-full h-16 text-green-500 hover:text-green-500'
-                            >Watch Now</Button>
+                            >{liveMatch.status === "live" ? "Watch Now" : liveMatch.status === "Pending" ? "Pending" : "Ended"}</Button>
                         </Link>
 
                         <h4 className="text-xl font-semibold text-white">{liveMatch.time}</h4>
@@ -46,8 +55,9 @@ export default function HeroSection() {
                         <img
                             src={liveMatch.teamTwo.image}
                             alt={liveMatch.teamTwo.name}
-                            className="w-[150px] h-[150px]  lg:w-[200px] lg:h-[200px] "
-                            loading="lazy" />
+                            className="w-[150px] h-[150px] lg:w-[200px] lg:h-[200px]"
+                            loading="lazy"
+                        />
                         <h1 className="mt-4 text-white lg:text-4xl text-xl font-bold ">{liveMatch.teamTwo.name}</h1>
                     </div>
                 </div>
