@@ -1,6 +1,5 @@
 import { Button } from "./ui/button";
 import { fetchMatchesHero } from "../store/slices/MatchesListSlice";
-
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { Link } from "react-router";
@@ -17,10 +16,7 @@ export default function HeroSection() {
     }, [dispatch]);
 
 
-    console.log('matches', matches);
-
-
-    const liveMatch = matches.find((match) => match.status === "live") || matches.find((match) => match.status === "pending");
+    const liveMatch = matches.find((match) => match.status === "live") || matches.find((match) => match.status === "pending" || matches.find((match) => match.status === "ended"));
 
     console.log('liveMatch', liveMatch);
 
