@@ -3,6 +3,7 @@ import { fetchMatchesHero } from "../store/slices/MatchesListSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { Link } from "react-router";
+import backGround from "../assets/HeroBG.png";
 
 export default function HeroSection() {
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ export default function HeroSection() {
     console.log('liveMatch', liveMatch);
 
     return (
-        <div className='w-full h-[450px] bg-green-500 p-5 rounded-md'>
+        <div style={{ backgroundImage: `url(${backGround})`, backgroundSize: 'cover' }} className='w-full h-[450px] p-5 rounded-md'>
             {liveMatch && (
                 <div key={liveMatch._id} className=" mt-10 mx-auto grid grid-cols-3 gap-4">
                     <div className="w-full grid items-center mt-10 justify-center text-center">

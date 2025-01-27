@@ -19,7 +19,7 @@ export default function Privacy() {
             {privacy.map((item) => (
                 <div key={item._id}>
                     <h1 className='text-4xl font-bold mb-5'>Our Privacy</h1>
-                    <div className='mt-10 mx-auto text-center bg-green-100 p-10 rounded-md'>
+                    <div className='mt-10 mx-auto text-center bg-green-200 p-10 rounded-md'>
                         <h1 className='text-2xl font-semibold mb-16'>Our WebSite Privacy</h1>
                         <p className='text-lg'>{item.details}</p>
                     </div>
