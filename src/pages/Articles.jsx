@@ -45,7 +45,7 @@ export default function Articles() {
 
     return (
         <div className="my-5 w-full">
-            <div className="h-[337px]">
+            <div className="h-[250px]">
                 <Advertisement adType="top" pageType={pageType} />
             </div>
 
@@ -95,7 +95,7 @@ export default function Articles() {
                 )
             }
 
-            <div className="h-[337px]">
+            <div className="h-[250px]">
                 <Advertisement adType="bottom" pageType={pageType} />
             </div>
         </div >

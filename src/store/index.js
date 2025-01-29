@@ -6,6 +6,7 @@ import matchesListSlice from "./slices/MatchesListSlice";
 import socialReducer from "./slices/SocialSlice";
 import articleReducer from "./slices/articlesSlice";
 import AdsReducer from "./slices/adsSlice";
+import VisitsReducer from "./slices/visitsSlice";
 // import languageReducer from "./slices/translateText ";
 
 const store = configureStore({
@@ -17,6 +18,7 @@ const store = configureStore({
     matches: matchesListSlice,
     article: articleReducer,
     ads: AdsReducer,
+    visits: VisitsReducer,
   },
 });
 

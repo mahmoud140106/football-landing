@@ -22,9 +22,9 @@ export default function HeroSection() {
     console.log('liveMatch', liveMatch);
 
     return (
-        <div style={{ backgroundImage: `url(${backGround})`, backgroundSize: 'cover' }} className='w-full h-[450px] p-5 rounded-md'>
+        <div style={{ backgroundImage: `url(${backGround})`, backgroundSize: 'cover' }} className='w-full p-5 rounded-md'>
             {liveMatch && (
-                <div key={liveMatch._id} className=" mt-10 mx-auto grid grid-cols-3 gap-4">
+                <div key={liveMatch._id} className="  mx-auto grid grid-cols-3 gap-4">
                     <div className="w-full grid items-center mt-10 justify-center text-center">
                         <img
                             src={liveMatch.teamOne.image}
@@ -33,10 +33,11 @@ export default function HeroSection() {
                             loading="lazy"
                         />
                         <h1 className="mt-4 text-white lg:text-4xl text-xl font-bold ">{liveMatch.teamOne.name}</h1>
+                        <h1 className="mt-4 text-white lg:text-4xl text-xl font-bold  ">{liveMatch.goalOne}</h1>
                     </div>
 
                     <div className="grid text-center items-center">
-                        <h1 className="xl:text-4xl text-xl font-bold text-white">{liveMatch.stadium}</h1>
+                        <h1 className="xl:text-4xl text-xl font-bold text-white">{liveMatch.championship?.name || "..."}</h1>
 
                         <Link to={liveMatch.livelink}>
                             <Button
@@ -56,6 +57,8 @@ export default function HeroSection() {
                             loading="lazy"
                         />
                         <h1 className="mt-4 text-white lg:text-4xl text-xl font-bold ">{liveMatch.teamTwo.name}</h1>
+                        <h1 className="mt-4 text-white lg:text-4xl text-xl font-bold ">{liveMatch.goalTwo}</h1>
+
                     </div>
                 </div>
             )}

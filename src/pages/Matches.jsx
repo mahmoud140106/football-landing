@@ -42,7 +42,7 @@ export default function Matches() {
                     </div>
                 </div>
             </div>
-            <div className='w-full col-span-12 h-[450px]'>
+            <div className='w-full col-span-12 h-[250px]'>
                 <Advertisement adType="top" pageType={pageType} />
             </div>
         </div>

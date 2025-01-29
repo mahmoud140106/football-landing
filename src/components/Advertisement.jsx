@@ -67,7 +67,7 @@ export default function Advertisement({ adType, pageType }) {
     if (isError) return <div>Error: {errorMessage}</div>;
 
     return (
-        <div className="bg-transparent border border-gray-200 h-full w-full flex items-center justify-center">
+        <div className="bg-transparent h-full w-full flex items-center justify-center">
 
             <div>{adContent ? adContent : ""}</div>
         </div>

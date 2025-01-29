@@ -34,6 +34,8 @@ export default function MatchesList({ selectedTab }) {
         setCurrentPage(page);
     };
 
+
+
     return (
         <div className="mt-5 space-y-2">
             {currentMatches.length > 0 ? (

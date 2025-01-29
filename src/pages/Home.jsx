@@ -6,8 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { Button } from '../components/ui/button';
 import { Link } from 'react-router';
-import { fetchMatchesHero } from '../store/slices/MatchesListSlice.js';
-import { Clock, MapPin } from 'lucide-react';
+// import { fetchMatchesHero } from '../store/slices/MatchesListSlice.js';
+import { fetchMatches } from '../store/slices/MatchesListSlice.js';
+import { fetchVisits } from '../store/slices/visitsSlice.js';
+import { Clock, MapPin, Trophy } from 'lucide-react';
 import { useMediaQuery } from "react-responsive";
 
 
@@ -16,10 +18,15 @@ export default function Home() {
 
     const { article, isLoading, error } = useSelector((state) => state.article);
 
-    const { matches = [] } = useSelector((state) => state.matches || {});
+    const { matches, } = useSelector((state) => state.matches);
+
+
+
+    console.log('matches', matches);
 
     useEffect(() => {
-        dispatch(fetchMatchesHero());
+        dispatch(fetchVisits());
+        dispatch(fetchMatches("today"));
         dispatch(fetchArticle());
     }, [dispatch]);
 
@@ -28,7 +35,12 @@ export default function Home() {
 
 
 
-    const liveMatch = matches.find((match) => match.status === "live") || matches.find((match) => match.status === "pending");
+    // const todayMatches = matches.find((match) => match.status === "live");
+    // const todayMatches = matches.filter((match) => match.day === "today");
+    const todayMatches = matches.filter((match) => match.day === "today");
+
+    console.log('todayMatches todayMatches', todayMatches);
+
 
     const sortedArticles = [...article].sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -46,78 +58,91 @@ export default function Home() {
 
     return (
         <>
-            <div className='mt-10 grid grid-cols-12 gap-5 w-full'>
-                <div className='col-span-12 lg:col-span-2 h-[450px]'>
+            <div className=' mt-10 grid grid-cols-12 gap-5 w-full'>
+                <div className='lg:block hidden  lg:col-span-2 h-[450px]'>
                     <Advertisement adType="side" pageType={pageType} />
                 </div>
                 <div className='w-full lg:col-span-8 col-span-12'>
                     <HeroSection />
                     <div className='mt-5 space-y-2'>
-                        {liveMatch && (
-                            <div className="rounded-lg shadow-sm border xl:p-4 p-2 flex items-center justify-between">
+
+                        {todayMatches.slice(0, 5).map((todayMatches, index) => (
+                            <div key={index} className="rounded-lg shadow-sm border xl:p-4 p-2 flex items-center justify-between">
                                 <div className="grid grid-cols-12 items-center gap-5 w-full">
-                                    <div className=" flex md:col-span-3  col-span-4 items-center lg:gap-2 gap-4 ">
+                                    <div className=" md:flex md:col-span-3 space-y-2 md:space-y-0 col-span-3 items-center lg:gap-2 gap-4 ">
                                         <div className="flex items-center xl:justify-center  gap-2">
                                             <img
-                                                src={liveMatch.teamOne.image}
-                                                alt={liveMatch.teamOne.name}
+                                                src={todayMatches.teamOne.image}
+                                                alt={todayMatches.teamOne.name}
                                                 className="xl:w-12 xl:h-12 w-20 h-20"
                                                 loading="lazy"
                                             />
-                                            <h2 className=" text-center text-green-500 font-medium hidden xl:block">{liveMatch.teamOne.name}</h2>
+                                            <h2 className=" text-center text-green-500 font-medium hidden xl:block">{todayMatches.teamOne.name}</h2>
                                         </div>
                                         <div className="">
-                                            <span className="text-xl rounded-full border-2 px-3 py-1 border-gray-200 font-semibold">{liveMatch.goalOne}</span>
+                                            <span className="text-xl rounded-full flex justify-center  px-3 py-1 font-semibold">{todayMatches.goalOne}</span>
                                         </div>
                                     </div>
-                                    <div className=' md:block items-center justify-center w-full md:col-span-6  col-span-4'>
+                                    <div className=' md:block items-center justify-center w-full md:col-span-6  col-span-6'>
                                         <div className='w-full'>
                                             <Link
                                                 className='w-full '
-                                                to={liveMatch.livelink}>
+                                                to={todayMatches.livelink}>
                                                 <Button
                                                     variant={"outline"}
                                                     className='hidden md:block w-full h-16 text-green-500 hover:text-green-500'
-                                                >{liveMatch ? "Watch Now" : "Pending"}</Button>
+                                                >{todayMatches ? "Watch Now" : "Pending"}</Button>
                                             </Link>
                                         </div>
-                                        <div className='mt-5  md:flex w-[90%] mx-auto  justify-between'>
-                                            <div className="  font-bold text-center md:justify-start justify-center flex items-center gap-2">
-                                                <Clock className="hidden md:block w-4 h-4" />
+                                        <div className='mt-5  md:flex  space-y-3 md:space-y-0   items-center justify-between'>
+                                            <div className="  font-bold text-center md:justify-start justify-start flex items-center gap-2">
+                                                <Clock className=" w-4 h-4" />
                                                 <span
-                                                    className={`text-sm ${liveMatch.status === "live" ? "text-green-500" : liveMatch.status === "ended" ? "text-red-500" : "cursor-not-allowed"}`}
+                                                    className={`text-sm ${todayMatches.status === "live" ? "text-green-500" : todayMatches.status === "ended" ? "text-red-500" : "cursor-not-allowed"}`}
                                                 >
-                                                    {liveMatch.time}
+                                                    {todayMatches.time}
+                                                </span>
+                                            </div>
+
+                                            <div className="  font-bold text-center md:justify-start justify-start flex items-center gap-2">
+                                                <Trophy className=" w-4 h-4" />
+                                                <span
+                                                    className='text-sm '                                                >
+                                                    {todayMatches.championship?.name}
                                                 </span>
                                             </div>
                                             <div className=" font-bold flex md:justify-end md:mt-0 mt-2 items-center gap-2 ">
-                                                <MapPin className="hidden md:block w-4 h-4" />
-                                                <span className='text-sm '>{liveMatch.stadium}</span>
+                                                <MapPin className=" w-4 h-4" />
+                                                <span className='text-sm '>{todayMatches.stadium}</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="w-full flex justify-end md:col-span-3  col-span-4  items-center gap-4">
-                                        <div className="">
-                                            <span className="text-xl font-semibold  rounded-full border-2 px-3 py-1 border-gray-200">{liveMatch.goalOne}</span>
+                                    <div className="w-full md:flex md:col-span-3 space-y-2 md:space-y-0 col-span-3 justify-start  items-center gap-2">
+                                        <div className="hidden md:block">
+                                            <span className="text-xl font-semibold  rounded-full  px-3 py-1  ">{todayMatches.goalTwo}</span>
                                         </div>
-                                        <h2 className=" text-green-500 font-medium hidden xl:block">{liveMatch.teamTwo.name}</h2>
+                                        <h2 className=" text-green-500 font-medium hidden text-right xl:block">{todayMatches.teamTwo.name}</h2>
                                         <div className=" flex items-center justify-center">
                                             <img
-                                                src={liveMatch.teamTwo.image}
-                                                alt={liveMatch.teamTwo.name}
+                                                src={todayMatches.teamTwo.image}
+                                                alt={todayMatches.teamTwo.name}
                                                 loading="lazy"
                                                 className="xl:w-12 xl:h-12 w-20 h-20"
                                             />
+                                        </div>
+                                        <div className="md:hidden flex justify-center">
+                                            <span className="text-xl font-semibold  rounded-full  px-3 py-1  ">{todayMatches.goalTwo}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        )
+                        ))
                         }
+
                         <Link to="/matches"> <Button className='w-full bg-green-500 hover:bg-green-600' variant={"outline"}>View all</Button></Link>
                     </div>
                 </div>
-                <div className='hidden lg:block col-span-2 h-[450px]'>
+                <div className='hidden lg:block col-span-2 h-[250px]'>
 
                     {article
                         .slice()
@@ -148,7 +173,7 @@ export default function Home() {
                         <Button variant={"outline"} className='font-semibold'>View all</Button>
                     </Link>
                 </div>
-                <div className='w-full col-span-12 h-[450px]'>
+                <div className='w-full col-span-12 h-[250px]'>
                     <Advertisement adType="top" pageType={pageType} />
                 </div>
 
@@ -183,7 +208,7 @@ export default function Home() {
                     )}
                 </div>
 
-                <div className='w-full col-span-12 h-[450px]'>
+                <div className='w-full col-span-12 h-[250px]'>
                     <Advertisement adType="bottom" pageType={pageType} />
                 </div>
             </div>

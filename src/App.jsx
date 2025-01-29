@@ -22,9 +22,9 @@ function App() {
       className="flex flex-col min-h-screen" // استخدام Flexbox وملء الشاشة
     >
       <Header />
-      <div className="flex-1"> {/* تجعل هذا الجزء يأخذ المساحة المتبقية */}
-        <div className="max-w-[1300px] mx-auto">
-          <div className=" hidden xl:block bg-white absolute top-16 rounded-md left-0">
+      <div className="flex-1">
+        <div className="max-w-[1300px]  mx-auto">
+          <div className=" hidden xl:block absolute top-16 rounded-md left-0">
             <Social />
           </div>
           <Routes>
