@@ -1,9 +1,11 @@
-
+import Logo from "../assets/footerLogo.png"
 export default function Footer() {
     return (
-        <footer className="mt-10 bg-gradient-to-r bg-[#27AE60]   py-10 px-10 font-sans tracking-wide">
+        <footer className="mt-10 bg-gradient-to-r bg-green-600   py-10 px-10 font-sans tracking-wide">
             <div className="max-w-2xl mx-auto text-center">
-                <h2 className="text-4xl font-semibold text-white">Live Footballia</h2>
+                <div className="flex justify-center">
+                    <img src={Logo} className="w-60 text-center" alt="" />
+                </div>
                 <p className="text-sm mt-8 text-gray-300">We’re a diverse and passionate team that takes ownership of your design and empower you to execute the roadmap. We stay light on our feet and truly enjoy delivering great work.
                 </p>
             </div>

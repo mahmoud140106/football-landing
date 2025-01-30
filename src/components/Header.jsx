@@ -3,6 +3,7 @@ import { Input } from './ui/input'
 import DarkMode from './mode-toggle.jsx'
 import { Link } from 'react-router'
 import Translate from '../components/Translate.jsx'
+import Logo from "../assets/mainLogo.png"
 // import { useSelector, useDispatch } from "react-redux";
 
 // import { fetchTranslation } from "../store/slices/translateText .js";
@@ -58,10 +59,10 @@ export default function Header() {
     return (
         <header className='w-full flex border-b py-3 px-4 sm:px-10 font-[sans-serif] min-h-[65px] tracking-wide relative z-50'>
             <div className='flex flex-wrap items-center gap-4  w-full'>
-                <a href="javascript:void(0)" className="max-sm:hidden"><img src="https://readymadeui.com/readymadeui.svg" alt="logo" className='w-32' />
+                <a href="javascript:void(0)" className="">
+                    <img src={Logo} alt="logo" className='w-44' />
                 </a>
-                <a href="javascript:void(0)" className="hidden max-sm:block"><img src="https://readymadeui.com/readymadeui-short.svg" alt="logo" className='w-8' />
-                </a>
+
 
                 <div id="collapseMenu"
                     className='max-lg:hidden lg:!block max-lg:w-full max-lg:fixed max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50'>
