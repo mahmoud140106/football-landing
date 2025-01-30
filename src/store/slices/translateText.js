@@ -1,48 +1,23 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice } from "@reduxjs/toolkit";
 
-// دالة لترجمة النصوص باستخدام Google Translate API
-const translateText = async (text, targetLanguage) => {
-  const apiKey = "YOUR_GOOGLE_API_KEY";
-  const url = `https://translation.googleapis.com/language/translate/v2`;
-
-  const response = await axios.post(url, {
-    q: text,
-    target: targetLanguage,
-    key: apiKey,
-  });
-
-  return response.data.data.translations[0].translatedText;
+const initialState = {
+  language: "en", // اللغة الافتراضية
+  translations: {},
 };
-
-// AsyncThunk للترجمة
-export const fetchTranslation = createAsyncThunk(
-  "language/fetchTranslation",
-  async ({ text, language }) => {
-    const translated = await translateText(text, language);
-    return { text, translated };
-  }
-);
 
 const languageSlice = createSlice({
   name: "language",
-  initialState: {
-    language: "en",
-    translations: {},
-  },
+  initialState,
   reducers: {
-    setLanguage(state, action) {
+    setLanguage: (state, action) => {
       state.language = action.payload;
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(fetchTranslation.fulfilled, (state, action) => {
-      const { text, translated } = action.payload;
-      state.translations[text] = translated;
-    });
+    setTranslations: (state, action) => {
+      state.translations = action.payload;
+    },
   },
 });
 
-export const { setLanguage } = languageSlice.actions;
+export const { setLanguage, setTranslations } = languageSlice.actions;
 
 export default languageSlice.reducer;

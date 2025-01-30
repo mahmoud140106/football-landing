@@ -44,8 +44,8 @@ export default function Articles() {
 
 
     return (
-        <div className="my-5 w-full">
-            <div className="h-[250px]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 my-5 w-full">
+            <div className="h-[100px] md:h-[150px] lg:h-[200px]">
                 <Advertisement adType="top" pageType={pageType} />
             </div>
 
@@ -95,7 +95,7 @@ export default function Articles() {
                 )
             }
 
-            <div className="h-[250px]">
+            <div className="h-[100px] md:h-[150px] lg:h-[200px]">
                 <Advertisement adType="bottom" pageType={pageType} />
             </div>
         </div >

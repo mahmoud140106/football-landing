@@ -19,6 +19,7 @@ const store = configureStore({
     article: articleReducer,
     ads: AdsReducer,
     visits: VisitsReducer,
+    // language: languageReducer,
   },
 });
 

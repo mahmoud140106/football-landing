@@ -22,14 +22,14 @@ export default function Matches() {
 
 
     return (
-        <div className="mt-10">
+        <div className="mt-10 mx-auto max-w-7xl px-4 sm:px-6 md:px-8 my-5 w-full">
             <div className="grid grid-cols-12">
                 <div className="col-span-10">
                     <TabButton selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
                 </div>
             </div>
             <div className="max-w-[1300px] mx-auto mt-10 grid grid-cols-12 gap-5 w-full">
-                <div className='col-span-12 lg:col-span-2 h-[450px]'>
+                <div className='hidden xl:block col-span-12 lg:col-span-2 h-[450px]'>
                     <Advertisement adType="side" pageType={pageType} />
                 </div>
                 <div className="col-span-12 xl:col-span-8">
@@ -41,8 +41,10 @@ export default function Matches() {
                         </div>
                     </div>
                 </div>
+
+
             </div>
-            <div className='w-full col-span-12 h-[250px]'>
+            <div className='w-full col-span-12 h-[100px] md:h-[150px] lg:h-[200px]'>
                 <Advertisement adType="top" pageType={pageType} />
             </div>
         </div>

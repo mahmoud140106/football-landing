@@ -2,9 +2,10 @@
 import { Input } from './ui/input'
 import DarkMode from './mode-toggle.jsx'
 import { Link } from 'react-router'
+import Translate from '../components/Translate.jsx'
 // import { useSelector, useDispatch } from "react-redux";
+
 // import { fetchTranslation } from "../store/slices/translateText .js";
-// import Translate from '../components/LanguageSelector.js'
 
 
 import Drawer from './Drawer.jsx'
@@ -42,6 +43,7 @@ const links = [
 ]
 
 export default function Header() {
+    // const { language } = useSelector(state => state.language);  // الحصول على اللغة الحالية من الـ Redux store
 
 
     // const { language, translations } = useSelector((state) => state.language);
@@ -98,6 +100,10 @@ export default function Header() {
                     </div>
                     <div className='block  lg:hidden'>
                         <Drawer />
+                    </div>
+
+                    <div className='w-full flex gap-3'>
+                        <Translate />
                     </div>
 
                 </div>

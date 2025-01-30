@@ -1,4 +1,3 @@
-import React from "react";
 const en = {
   previewForm: {
     title: "Basic Information",

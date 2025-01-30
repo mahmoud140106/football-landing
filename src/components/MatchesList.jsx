@@ -4,6 +4,7 @@ import { fetchMatches } from '../store/slices/MatchesListSlice';
 import { Button } from './ui/button';
 import { Link } from 'react-router';
 import PaginationComponent from './Pagination'; // استيراد كمبوننت Pagination
+import { Clock, MapPin, Trophy } from 'lucide-react';
 
 export default function MatchesList({ selectedTab }) {
     const dispatch = useDispatch();
@@ -40,73 +41,118 @@ export default function MatchesList({ selectedTab }) {
         <div className="mt-5 space-y-2">
             {currentMatches.length > 0 ? (
                 currentMatches.map((match, index) => (
-                    <div key={index} className="rounded-lg shadow-sm border xl:p-4 p-2 flex items-center justify-between">
-                        <div className="flex items-center gap-5 xl:w-full mr-5">
-                            <div className="xl:flex items-center gap-4">
-                                <div className="flex items-center justify-center">
-                                    <img
-                                        src={match.teamOne.image}
-                                        alt={match.teamOne.name}
-                                        className="xl:w-20 xl:h-20 md:w-28 md:h-16 w-32 h-20"
-                                        loading="lazy"
-                                    />
+                    <div key={index} className='rounded-lg shadow-sm border xl:p-4 p-2'>
+                        <div className="flex items-center justify-between ">
+                            <div className="flex items-center justify-between md:w-3/4 w-full gap-5">
+                                <div className="flex items-center gap-3 w-2/5">
+                                    <div className="flex items-center justify-center">
+                                        <img
+                                            src={match.teamOne.image}
+                                            alt={match.teamOne.name}
+                                            className="xl:w-20 xl:h-20 md:w-28 md:h-16 w-32 h-20"
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                    <h2 className="hidden pt-2 text-center text-green-500 font-medium md:flex items-center justify-center">
+                                        {match.teamOne.name}
+                                    </h2>
                                 </div>
-                                <h2 className="pt-2 text-center text-green-500 font-medium hidden xl:block">
-                                    {match.teamOne.name}
-                                </h2>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <span className="text-xl font-semibold">{match.goalOne}</span>
-                                <span>vs</span>
-                                <span className="text-xl font-semibold">{match.goalTwo}</span>
-                            </div>
-                            <div className="xl:flex items-center gap-2">
-                                <div className="flex items-center justify-center">
-                                    <img
-                                        src={match.teamTwo.image}
-                                        alt={match.teamTwo.name}
-                                        loading="lazy"
-                                        className="xl:w-20 xl:h-20 md:w-28 md:h-16 w-32 h-20"
-                                    />
+                                <div className="flex items-center gap-4 w-1/5">
+                                    <span className="text-xl font-semibold">{match.goalOne}</span>
+                                    <span>vs</span>
+                                    <span className="text-xl font-semibold">{match.goalTwo}</span>
                                 </div>
-                                <h2 className="pt-2 text-green-500 font-medium hidden xl:block">
-                                    {match.teamTwo.name}
-                                </h2>
+                                <div className="flex items-center gap-3 w-2/5">
+                                    <div className="flex items-center justify-center">
+                                        <img
+                                            src={match.teamTwo.image}
+                                            alt={match.teamTwo.name}
+                                            loading="lazy"
+                                            className="xl:w-20 xl:h-20 md:w-28 md:h-16 w-32 h-20"
+                                        />
+                                    </div>
+                                    <h2 className="hidden pt-2 md:flex items-center justify-center text-green-500 font-medium ">
+                                        {match.teamTwo.name}
+                                    </h2>
+                                </div>
                             </div>
+
+
+                            <div className="hidden w-1/4 md:flex items-center justify-end">
+                                <div className="w-[70%]">
+                                    <Link className="" to={match.livelink}>
+                                        <Button
+                                            variant="outline"
+                                            className={`w-full md:block ${match.status === 'live'
+                                                ? 'text-green-500 hover:text-green-500'
+                                                : match.status === 'ended'
+                                                    ? 'text-red-500 hover:text-red-500'
+                                                    : ''
+                                                }`}
+                                        >
+                                            {match.status === 'live'
+                                                ? 'Watch'
+                                                : match.status === 'ended'
+                                                    ? 'End'
+                                                    : 'Pending'}
+                                        </Button>
+                                    </Link>
+                                </div>
+                            </div>
+
+
                         </div>
-                        <div className="flex items-center gap-6 w-full">
-                            <div className="xl:w-1/4 w-full text-center flex xl:justify-start justify-center items-center gap-2">
+                        <div className="border-t p-3 mt-7 w-full  flex items-center justify-around gap-">
+                            <div className="text-center flex xl:justify-start  items-center gap-2">
                                 <span
-                                    className={`${match.status === 'live'
+                                    className={`flex items-center gap-2 ${match.status === 'live'
                                         ? 'text-green-500'
                                         : match.status === 'ended'
                                             ? 'text-red-500'
                                             : 'cursor-not-allowed'
                                         }`}
                                 >
+                                    <Clock className=" md:w-4 md:h-4 w-3 h-3" />
                                     {match.time}
                                 </span>
                             </div>
-                            <div className="xl:w-2/4 w-full md:flex items-center gap-2 hidden">
-                                <span>{match.stadium}</span>
+
+
+                            <div className="block md:hidden w-[30%]">
+                                <Link className="" to={match.livelink}>
+                                    <Button
+                                        variant="outline"
+                                        className={`w-full md:block ${match.status === 'live'
+                                            ? 'text-green-500 hover:text-green-500'
+                                            : match.status === 'ended'
+                                                ? 'text-red-500 hover:text-red-500'
+                                                : ''
+                                            }`}
+                                    >
+                                        {match.status === 'live'
+                                            ? 'Watch'
+                                            : match.status === 'ended'
+                                                ? 'End'
+                                                : 'Pending'}
+                                    </Button>
+                                </Link>
                             </div>
-                            <Link className="xl:w-1/4 w-full" to={match.livelink}>
-                                <Button
-                                    variant="outline"
-                                    className={`w-full md:block ${match.status === 'live'
-                                        ? 'text-green-500 hover:text-green-500'
-                                        : match.status === 'ended'
-                                            ? 'text-red-500 hover:text-red-500'
-                                            : ''
-                                        }`}
-                                >
-                                    {match.status === 'live'
-                                        ? 'Watch'
-                                        : match.status === 'ended'
-                                            ? 'End'
-                                            : 'Pending'}
-                                </Button>
-                            </Link>
+
+
+
+
+
+
+                            <div className=" flex items-center gap-2 ">
+                                <span className="flex items-center gap-2">
+                                    <Trophy className=" md:w-4 md:h-4 w-3 h-3" />
+                                    {match.championship?.name}</span>
+                            </div>
+                            <div className="  md:flex items-center gap-2 hidden">
+                                <span className="flex items-center gap-2">
+                                    <MapPin className="md:w-4 md:h-4 w-3 h-3" />
+                                    {match.stadium}</span>
+                            </div>
                         </div>
                     </div>
                 ))
