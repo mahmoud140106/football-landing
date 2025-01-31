@@ -1,4 +1,5 @@
 import { Tabs, TabsList, TabsTrigger } from './ui/tabs';
+import { Translate } from 'translate-easy';
 
 export default function TabButton({ selectedTab, setSelectedTab }) {
     const handleTabChange = (value) => {
@@ -10,13 +11,14 @@ export default function TabButton({ selectedTab, setSelectedTab }) {
             <Tabs defaultValue={selectedTab} className="w-[400px] ">
                 <TabsList className="grid w-full grid-cols-3">
                     <TabsTrigger onClick={() => handleTabChange('yesterday')} value="yesterday">
-                        Yesterday
+                        <Translate>Yesterday</Translate>
+
                     </TabsTrigger>
                     <TabsTrigger onClick={() => handleTabChange('today')} value="today">
-                        Today
+                        <Translate>Today</Translate>
                     </TabsTrigger>
                     <TabsTrigger onClick={() => handleTabChange('tomorrow')} value="tomorrow">
-                        Tomorrow
+                        <Translate>Tomorrow</Translate>
                     </TabsTrigger>
                 </TabsList>
             </Tabs>

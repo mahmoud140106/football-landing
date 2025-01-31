@@ -5,6 +5,8 @@ import { Button } from './ui/button';
 import { Link } from 'react-router';
 import PaginationComponent from './Pagination'; // استيراد كمبوننت Pagination
 import { Clock, MapPin, Trophy } from 'lucide-react';
+import { Translate } from 'translate-easy';
+
 
 export default function MatchesList({ selectedTab }) {
     const dispatch = useDispatch();
@@ -54,13 +56,14 @@ export default function MatchesList({ selectedTab }) {
                                         />
                                     </div>
                                     <h2 className="hidden pt-2 text-center text-green-500 font-medium md:flex items-center justify-center">
-                                        {match.teamOne.name}
+                                        <Translate>{match.teamOne.name}</Translate>
                                     </h2>
                                 </div>
                                 <div className="flex items-center gap-4 w-1/5">
-                                    <span className="text-xl font-semibold">{match.goalOne}</span>
-                                    <span>vs</span>
-                                    <span className="text-xl font-semibold">{match.goalTwo}</span>
+
+                                    <span className="text-xl font-semibold"><Translate>{match.goalOne}</Translate></span>
+                                    <span><Translate>vs</Translate></span>
+                                    <span className="text-xl font-semibold"> <Translate>{match.goalTwo}</Translate></span>
                                 </div>
                                 <div className="flex items-center gap-3 w-2/5">
                                     <div className="flex items-center justify-center">
@@ -72,7 +75,7 @@ export default function MatchesList({ selectedTab }) {
                                         />
                                     </div>
                                     <h2 className="hidden pt-2 md:flex items-center justify-center text-green-500 font-medium ">
-                                        {match.teamTwo.name}
+                                        <Translate>{match.teamTwo.name}</Translate>
                                     </h2>
                                 </div>
                             </div>
@@ -90,11 +93,13 @@ export default function MatchesList({ selectedTab }) {
                                                     : ''
                                                 }`}
                                         >
-                                            {match.status === 'live'
-                                                ? 'Watch'
-                                                : match.status === 'ended'
-                                                    ? 'End'
-                                                    : 'Pending'}
+                                            <Translate>
+                                                {match.status === 'live'
+                                                    ? 'Watch'
+                                                    : match.status === 'ended'
+                                                        ? 'End'
+                                                        : 'Pending'}
+                                            </Translate>
                                         </Button>
                                     </Link>
                                 </div>
@@ -113,7 +118,9 @@ export default function MatchesList({ selectedTab }) {
                                         }`}
                                 >
                                     <Clock className=" md:w-4 md:h-4 w-3 h-3" />
-                                    {match.time}
+                                    <Translate>
+                                        {match.time}
+                                    </Translate>
                                 </span>
                             </div>
 
@@ -129,29 +136,31 @@ export default function MatchesList({ selectedTab }) {
                                                 : ''
                                             }`}
                                     >
-                                        {match.status === 'live'
-                                            ? 'Watch'
-                                            : match.status === 'ended'
-                                                ? 'End'
-                                                : 'Pending'}
+                                        <Translate>
+                                            {match.status === 'live'
+                                                ? 'Watch'
+                                                : match.status === 'ended'
+                                                    ? 'End'
+                                                    : 'Pending'}
+                                        </Translate>
                                     </Button>
                                 </Link>
                             </div>
-
-
-
-
-
-
                             <div className=" flex items-center gap-2 ">
                                 <span className="flex items-center gap-2">
                                     <Trophy className=" md:w-4 md:h-4 w-3 h-3" />
-                                    {match.championship?.name}</span>
+                                    <Translate>
+                                        {match.championship?.name}
+                                    </Translate>
+                                </span>
                             </div>
                             <div className="  md:flex items-center gap-2 hidden">
                                 <span className="flex items-center gap-2">
                                     <MapPin className="md:w-4 md:h-4 w-3 h-3" />
-                                    {match.stadium}</span>
+                                    <Translate>
+                                        {match.stadium}
+                                    </Translate>
+                                </span>
                             </div>
                         </div>
                     </div>

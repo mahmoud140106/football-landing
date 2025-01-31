@@ -10,18 +10,10 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import translate from "easy-translate";
-import { useState } from "react";
-import { useDispatch } from 'react-redux';
-import { setLanguage } from "../store/slices/translateText.js"
+import { useLanguage } from "translate-easy";
 
-export default function DropdownMenuDemo({ }) {
-    const dispatch = useDispatch();
-
-    const handleLanguageChange = (lang) => {
-        dispatch(setLanguage(lang));  // تحديث اللغة في الـ Redux store
-    };
-
+export default function DropdownMenuDemo() {
+    const { languages, selectedLanguage, handleChangeLanguage } = useLanguage();
 
     return (
         <DropdownMenu>
@@ -34,18 +26,11 @@ export default function DropdownMenuDemo({ }) {
                 <DropdownMenuLabel>Choose Language</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                    <DropdownMenuItem onClick={() => handleLanguageChange("en")}>
-                        English
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleLanguageChange("ar")}>
-                        العربية
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleLanguageChange("fr")}>
-                        Français
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleLanguageChange("de")}>
-                        Deutsch
-                    </DropdownMenuItem>
+                    {languages.map((language) => (
+                        <DropdownMenuItem key={language.code} onClick={() => handleChangeLanguage(language.code)}>
+                            {language.name}
+                        </DropdownMenuItem>
+                    ))}
                 </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>

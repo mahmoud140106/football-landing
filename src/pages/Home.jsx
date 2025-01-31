@@ -11,19 +11,14 @@ import { fetchMatches } from '../store/slices/MatchesListSlice.js';
 import { fetchVisits } from '../store/slices/visitsSlice.js';
 import { Clock, MapPin, Trophy } from 'lucide-react';
 import { useMediaQuery } from "react-responsive";
+import { Translate } from 'translate-easy';
 
 
 export default function Home() {
     const dispatch = useDispatch();
-
     const { article, isLoading, error } = useSelector((state) => state.article);
-
     const { matches, } = useSelector((state) => state.matches);
-
-
-
     console.log('matches', matches);
-
     useEffect(() => {
         dispatch(fetchVisits());
         dispatch(fetchMatches("today"));
@@ -35,8 +30,6 @@ export default function Home() {
 
 
 
-    // const todayMatches = matches.find((match) => match.status === "live");
-    // const todayMatches = matches.filter((match) => match.day === "today");
     const todayMatches = matches.filter((match) => match.day === "today");
 
     console.log('todayMatches todayMatches', todayMatches);
@@ -78,10 +71,19 @@ export default function Home() {
                                                     className="xl:w-12 xl:h-12 w-20 h-20"
                                                     loading="lazy"
                                                 />
-                                                <h2 className=" text-center text-green-500 font-medium hidden xl:block">{todayMatches.teamOne.name}</h2>
+                                                <h2 className=" text-center text-green-500 font-medium hidden xl:block">
+                                                    <Translate>
+                                                        {todayMatches.teamOne.name}
+                                                    </Translate>
+                                                </h2>
                                             </div>
                                             <div className="">
-                                                <span className="text-xl rounded-full flex justify-center  px-3 py-1 font-semibold">{todayMatches.goalOne}</span>
+                                                <span className="text-xl rounded-full flex justify-center  px-3 py-1 font-semibold">
+                                                    <Translate>
+                                                        {todayMatches.goalOne}
+                                                    </Translate>
+
+                                                </span>
                                             </div>
                                         </div>
                                         <div className=' md:block items-center justify-center w-full md:col-span-6  col-span-6'>
@@ -92,15 +94,27 @@ export default function Home() {
                                                     <Button
                                                         variant={"outline"}
                                                         className='w-full h-16 text-green-500 hover:text-green-500'
-                                                    >{todayMatches ? "Watch Now" : "Pending"}</Button>
+                                                    >
+                                                        <Translate>
+                                                            {todayMatches ? "Watch Now" : "Pending"}
+                                                        </Translate>
+                                                    </Button>
                                                 </Link>
                                             </div>
                                         </div>
                                         <div className="w-full md:flex md:col-span-3 space-y-2 md:space-y-0 col-span-3 justify-start  items-center gap-2">
                                             <div className="hidden md:block">
-                                                <span className="text-xl font-semibold  rounded-full  px-3 py-1  ">{todayMatches.goalTwo}</span>
+                                                <span className="text-xl font-semibold  rounded-full  px-3 py-1  ">
+                                                    <Translate>
+                                                        {todayMatches.goalTwo}
+                                                    </Translate>
+                                                </span>
                                             </div>
-                                            <h2 className=" text-green-500 font-medium hidden text-right xl:block">{todayMatches.teamTwo.name}</h2>
+                                            <h2 className=" text-green-500 font-medium hidden text-right xl:block">
+                                                <Translate>
+                                                    {todayMatches.teamTwo.name}
+                                                </Translate>
+                                            </h2>
                                             <div className=" flex items-center justify-center">
                                                 <img
                                                     src={todayMatches.teamTwo.image}
@@ -110,7 +124,11 @@ export default function Home() {
                                                 />
                                             </div>
                                             <div className="md:hidden flex justify-center">
-                                                <span className="text-xl font-semibold  rounded-full  px-3 py-1  ">{todayMatches.goalTwo}</span>
+                                                <span className="text-xl font-semibold  rounded-full  px-3 py-1  ">
+                                                    <Translate>
+                                                        {todayMatches.goalTwo}
+                                                    </Translate>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -122,7 +140,9 @@ export default function Home() {
                                             className={`text-sm flex items-center gap-2 ${todayMatches.status === "live" ? "text-green-500" : todayMatches.status === "ended" ? "text-red-500" : "cursor-not-allowed"}`}
                                         >
                                             <Clock className=" md:block md:w-4 md:h-4 w-3 h-3" />
-                                            {todayMatches.time}
+                                            <Translate>
+                                                {todayMatches.time}
+                                            </Translate>
                                         </span>
                                     </div>
 
@@ -130,13 +150,19 @@ export default function Home() {
                                         <span
                                             className='text-sm flex items-center gap-2'                                                >
                                             <Trophy className=" md:block md:w-4 md:h-4 w-3 h-3" />
-                                            {todayMatches.championship?.name}
+                                            <Translate>
+                                                {todayMatches.championship?.name}
+                                            </Translate>
                                         </span>
                                     </div>
 
                                     <div className=" flex  font-bold  md:justify-end md:mt-0 mt-2 items-center gap-2 ">
                                         <MapPin className=" w-4 h-4" />
-                                        <span className='text-sm '>{todayMatches.stadium}</span>
+                                        <span className='text-sm '>
+                                            <Translate>
+                                                {todayMatches.stadium}
+                                            </Translate>
+                                        </span>
                                     </div>
 
                                 </div>
@@ -145,7 +171,11 @@ export default function Home() {
                         ))
                         }
 
-                        <Link to="/matches"> <Button className='w-full bg-green-500 hover:bg-green-600' variant={"outline"}>View all</Button></Link>
+                        <Link to="/matches"> <Button className='w-full bg-green-500 hover:bg-green-600' variant={"outline"}>
+                            <Translate>
+                                View all
+                            </Translate>
+                        </Button></Link>
                     </div>
                 </div>
                 <div className='hidden lg:block col-span-2 '>
@@ -161,11 +191,18 @@ export default function Home() {
                                         <img className="w-16 h-16" src={article.cover} alt={article.title} />
                                     </div>
                                     <div className="mx-1">
-
-                                        <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{article.title}</div>
+                                        <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
+                                            <Translate>
+                                                {article.title}
+                                            </Translate>
+                                        </div>
                                         <Link
                                             to={`https://matches.livefootballia.com/${article._id}`} className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">
-                                            <p className="text-gray-500 text-xs xl:mt-2 md:mt-1">Read more</p>
+                                            <p className="text-gray-500 text-xs xl:mt-2 md:mt-1">
+                                                <Translate>
+                                                    Read more
+                                                </Translate>
+                                            </p>
                                         </Link>
                                     </div>
                                 </div>
@@ -174,9 +211,12 @@ export default function Home() {
 
                 </div>
                 <div className='w-full col-span-12 flex justify-between'>
-                    <h1 className='font-semibold'>News and articles</h1>
+                    <h1 className='font-semibold'>
+                        <Translate>News and articles </Translate></h1>
                     <Link to="/articles">
-                        <Button variant={"outline"} className='font-semibold'>View all</Button>
+                        <Button variant={"outline"} className='font-semibold'>
+                            <Translate>View all
+                            </Translate></Button>
                     </Link>
                 </div>
                 <div className='w-full col-span-12 h-[100px] md:h-[150px] lg:h-[200px]'>
@@ -201,11 +241,17 @@ export default function Home() {
                                         />
                                     </CardHeader>
                                     <CardContent>
-                                        <CardTitle>{item.title}</CardTitle>
+                                        <CardTitle>
+                                            <Translate>
+                                                {item.title}
+                                            </Translate>
+                                        </CardTitle>
                                     </CardContent>
 
                                     <CardFooter>
-                                        <Link to={`https://matches.livefootballia.com/${item._id}`}> <Button variant={"outline"}> Read more </Button></Link>
+                                        <Link to={`https://matches.livefootballia.com/${item._id}`}> <Button variant={"outline"}>
+                                            <Translate> Read more
+                                            </Translate> </Button></Link>
                                     </CardFooter>
 
                                 </Card>

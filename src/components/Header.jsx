@@ -2,16 +2,15 @@
 import { Input } from './ui/input'
 import DarkMode from './mode-toggle.jsx'
 import { Link } from 'react-router'
-import Translate from '../components/Translate.jsx'
+import Translating from '../components/Translate.jsx'
 import Logo from "../assets/mainLogo.png"
-// import { useSelector, useDispatch } from "react-redux";
+import { Translate } from 'translate-easy';
 
-// import { fetchTranslation } from "../store/slices/translateText .js";
+// import LanguageSelector from "./LanguageSelector.jsx"
+
 
 
 import Drawer from './Drawer.jsx'
-// import { useEffect } from 'react';
-
 const links = [
     {
         name: "Main",
@@ -44,17 +43,6 @@ const links = [
 ]
 
 export default function Header() {
-    // const { language } = useSelector(state => state.language);  // الحصول على اللغة الحالية من الـ Redux store
-
-
-    // const { language, translations } = useSelector((state) => state.language);
-    // const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     dispatch(fetchTranslation({ text: "Welcome to the Home Page!", language }));
-    // }, [language, dispatch]);
-
-
 
     return (
         <header className='w-full flex border-b py-3 px-4 sm:px-10 font-[sans-serif] min-h-[65px] tracking-wide relative z-50'>
@@ -82,7 +70,11 @@ export default function Header() {
                         {
                             links.map((link, index) => (
                                 <li className='max-lg:border-b max-lg:py-3 xl:px-3' key={index}>
-                                    <Link to={link.href} className='lg:hover:text-[#007bff] text-gray-400 block text-[15px]'>{link.name}</Link>
+                                    <Link to={link.href} className='lg:hover:text-[#007bff] text-gray-400 block text-[15px]'>
+                                        <Translate>
+                                            {link.name}
+                                        </Translate>
+                                    </Link>
                                 </li>
                             ))
                         }
@@ -90,11 +82,7 @@ export default function Header() {
                 </div>
 
                 <div className='flex gap-4 ml-auto'>
-                    {/**
-                    <div>
-                        <Translate />
-                    </div>
-                     */}
+
                     <div
                         className='w-full flex gap-3 '>
                         <DarkMode />
@@ -104,7 +92,7 @@ export default function Header() {
                     </div>
 
                     <div className='w-full flex gap-3'>
-                        <Translate />
+                        <Translating />
                     </div>
 
                 </div>

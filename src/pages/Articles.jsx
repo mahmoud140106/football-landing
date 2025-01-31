@@ -5,6 +5,7 @@ import Advertisement from "../components/Advertisement";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router";
+import { Translate } from 'translate-easy';
 
 import { useState } from "react"; // إضافة useState
 import PaginationComponent from "../components/Pagination";
@@ -69,11 +70,15 @@ export default function Articles() {
                                     />
                                 </CardHeader>
                                 <CardContent>
-                                    <CardTitle>{item.title}</CardTitle>
+                                    <CardTitle>
+                                        <Translate>{item.title}</Translate>
+                                    </CardTitle>
                                 </CardContent>
                                 <CardFooter>
                                     <Link to={`https://matches.livefootballia.com/${item._id}`}>
-                                        <Button variant={"outline"}>Read more</Button>
+                                        <Button variant={"outline"}>
+                                            <Translate>Read more
+                                            </Translate></Button>
                                     </Link>
                                 </CardFooter>
                             </Card>

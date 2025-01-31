@@ -16,6 +16,8 @@ import {
 } from "@/components/ui/drawer"
 import { Link } from "react-router"
 import Logo from "../assets/mainLogo.png"
+import { Translate } from 'translate-easy';
+
 
 
 
@@ -73,7 +75,9 @@ export default function DrawerDemo() {
                             </li>
                             {links.map((link) => (
                                 <li className="max-lg:border-b max-lg:py-3 px-3" key={link.name}>
-                                    <Link className=' block text-[15px]' to={link.href}>{link.name}</Link>
+                                    <Link className=' block text-[15px]' to={link.href}>
+                                        <Translate>{link.name}</Translate>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
