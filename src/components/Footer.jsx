@@ -26,7 +26,7 @@ export default function Footer() {
                     <Translate>
                         Made by
                     </Translate>
-                    <a href="https://github.com/dramcode93 " className="text-md font-semibold text-gray-100 hover:text-white transition-colors">
+                    <a href="https://dramcode.top" className="text-md font-semibold text-gray-100 hover:text-white transition-colors">
                         <Translate>
                             &#34; DRAM Code &#34;
                         </Translate>
