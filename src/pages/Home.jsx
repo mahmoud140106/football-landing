@@ -31,7 +31,7 @@ export default function Home() {
     }, [dispatch]);
 
     const isSmallScreen = useMediaQuery({ maxWidth: 1024 });
-    const articlesToShow = isSmallScreen ? 4 : 6;
+    const articlesToShow = isSmallScreen ? 4 : 5;
 
 
 

@@ -17,9 +17,9 @@ export default function Footer() {
 
             <div className=" max-md:flex-col gap-4 space-y-2">
                 <p className="text-sm text-center text-gray-300">Copyright © 2025 - Live Footballia. All rights reserved</p>
-                <p className="text-sm text-center text-gray-300">Made by <a href="https://github.com/Ahmed-AbdElhameed" className="text-md font-semibold text-gray-100 hover:text-white transition-colors"> &#34; DRAM Code &#34; </a>Team</p>
+                <p className="text-sm text-center text-gray-300">Made by <a href="https://github.com/dramcode93 " className="text-md font-semibold text-gray-100 hover:text-white transition-colors"> &#34; DRAM Code &#34; </a>Team</p>
 
-
+                DRAMCode
             </div>
         </footer>
     )
