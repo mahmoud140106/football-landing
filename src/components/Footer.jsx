@@ -10,7 +10,7 @@ export default function Footer() {
                 </div>
                 <p className="text-sm mt-8 text-gray-300">
                     <Translate>
-                        We’re a diverse and passionate team that takes ownership of your design and empower you to execute the roadmap. We stay light on our feet and truly enjoy delivering great work.
+                        Watch live football matches, follow real-time scores, and stay updated with the latest football news, articles, and match highlights on Live Footballia.
                     </Translate>
                 </p>
             </div>
@@ -23,17 +23,11 @@ export default function Footer() {
                 </p>
 
                 <p className="text-sm text-center text-gray-300">
-                    <Translate>
-                        Made by
-                    </Translate>
-                    <a href="https://dramcode.top" className="text-md font-semibold text-gray-100 hover:text-white transition-colors">
-                        <Translate>
-                            &#34; DRAM Code &#34;
-                        </Translate>
+                    Made by
+                    <a href="https://dramcode.top" target={"_blank"} className="text-md font-semibold text-gray-100 hover:text-white transition-colors">
+                        &#34; DRAM Code &#34;
                     </a>
-                    <Translate>
-                        Team
-                    </Translate>
+                    Team
                 </p>
 
             </div>
