@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main pages -->
+  <url>
+    <loc>https://livefootballia.com/</loc>
+    <lastmod>2025-02-01</lastmod>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>https://livefootballia.com/viewMatches</loc>
+    <lastmod>2025-02-01</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://livefootballia.com/articles</loc>
+    <lastmod>2025-02-01</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://livefootballia.com/aboutUs</loc>
+    <lastmod>2025-02-01</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://livefootballia.com/contactUs</loc>
+    <lastmod>2025-02-01</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://livefootballia.com/privacy</loc>
+    <lastmod>2025-02-01</lastmod>
+    <priority>0.80</priority>
+  </url>
+</urlset>

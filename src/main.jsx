@@ -7,6 +7,7 @@ import { ThemeProvider } from "./components/theme-provider.tsx"
 import { Provider } from "react-redux";
 import store from "./store/index.js";
 import { I18nProvider } from "./context/i18n-context.jsx"; // Import the I18nProvider
+import { HelmetProvider } from "react-helmet-async";
 
 
 
@@ -16,7 +17,9 @@ createRoot(document.getElementById('root')).render(
       <BrowserRouter>
         <ThemeProvider>
           <I18nProvider>
-            <App />
+            <HelmetProvider>
+              <App />
+            </HelmetProvider>
           </I18nProvider>
         </ThemeProvider>
       </BrowserRouter>
