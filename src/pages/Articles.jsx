@@ -9,6 +9,7 @@ import { Translate } from 'translate-easy';
 
 import { useState } from "react"; // إضافة useState
 import PaginationComponent from "../components/Pagination";
+import { Helmet } from "react-helmet-async";
 
 export default function Articles() {
     const dispatch = useDispatch();
@@ -45,6 +46,16 @@ export default function Articles() {
 
 
     return (
+        <>
+        <Helmet>
+            
+        <title>Live Footballia</title>
+        <link rel="canonical" href="https://livefootballia.com/Articles" />
+        <meta
+          name="description"
+          content="Stay updated with the latest football news, in-depth match analysis, player insights, and expert opinions. Read top football articles on Live Footballia."
+        />
+      </Helmet>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 my-5 w-full">
             <div className="h-[100px] md:h-[150px] lg:h-[200px]">
                 <Advertisement adType="top" pageType={pageType} />
@@ -104,6 +115,7 @@ export default function Articles() {
                 <Advertisement adType="bottom" pageType={pageType} />
             </div>
         </div >
+        </>
     );
 }
 

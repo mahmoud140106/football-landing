@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://matches.livefootballia.com/sitemap.xml
