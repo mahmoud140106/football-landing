@@ -40,22 +40,22 @@ export default function MatchesList({ selectedTab }) {
 
 
     return (
-        <div className="mt-5 space-y-2">
+        <div className="mt-5 space-y-4">
             {currentMatches.length > 0 ? (
                 currentMatches.map((match, index) => (
                     <div key={index} className='rounded-lg shadow-sm border xl:p-4 p-2'>
                         <div className="flex items-center justify-between ">
                             <div className="flex items-center justify-between md:w-3/4 w-full gap-5">
-                                <div className="flex items-center gap-3 w-2/5">
-                                    <div className="flex items-center justify-center">
+                                <div className="flex items-center justify-center md:justify-start p-2 gap-3 w-2/5">
+                                    <div className="flex items-center ">
                                         <img
                                             src={match.teamOne.image}
                                             alt={match.teamOne.name}
-                                            className="xl:w-20 xl:h-20 md:w-28 md:h-16 w-32 h-20"
+                                            className="w-12 h-12"
                                             loading="lazy"
                                         />
                                     </div>
-                                    <h2 className="hidden pt-2 text-center text-green-500 font-medium md:flex items-center justify-center">
+                                    <h2 className="hidden text-center text-green-500 font-medium md:flex items-center justify-center">
                                         <Translate>{match.teamOne.name}</Translate>
                                     </h2>
                                 </div>
@@ -65,16 +65,16 @@ export default function MatchesList({ selectedTab }) {
                                     <span><Translate>vs</Translate></span>
                                     <span className="text-xl font-semibold"> <Translate>{match.goalTwo}</Translate></span>
                                 </div>
-                                <div className="flex items-center gap-3 w-2/5">
-                                    <div className="flex items-center justify-center">
+                                <div className="flex items-center gap-3 w-2/5 justify-center">
+                                    <div className="flex items-center ">
                                         <img
                                             src={match.teamTwo.image}
                                             alt={match.teamTwo.name}
                                             loading="lazy"
-                                            className="xl:w-20 xl:h-20 md:w-28 md:h-16 w-32 h-20"
+                                            className="w-12 h-12"
                                         />
                                     </div>
-                                    <h2 className="hidden pt-2 md:flex items-center justify-center text-green-500 font-medium ">
+                                    <h2 className="hidden md:flex items-center justify-center text-green-500 font-medium ">
                                         <Translate>{match.teamTwo.name}</Translate>
                                     </h2>
                                 </div>
@@ -94,11 +94,7 @@ export default function MatchesList({ selectedTab }) {
                                                 }`}
                                         >
                                             <Translate>
-                                                {match.status === 'live'
-                                                    ? 'Watch'
-                                                    : match.status === 'ended'
-                                                        ? 'End'
-                                                        : 'Pending'}
+                                                Watch
                                             </Translate>
                                         </Button>
                                     </Link>
@@ -107,7 +103,7 @@ export default function MatchesList({ selectedTab }) {
 
 
                         </div>
-                        <div className="border-t p-3 mt-7 w-full  flex items-center justify-around gap-">
+                        <div className="border-t pt-1 mt-3 w-full  flex items-center justify-around gap-">
                             <div className="text-center flex xl:justify-start  items-center gap-2">
                                 <span
                                     className={`flex items-center gap-2 ${match.status === 'live'

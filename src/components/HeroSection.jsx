@@ -27,15 +27,17 @@ export default function HeroSection() {
         <div style={{ backgroundImage: `url(${backGround})`, backgroundSize: 'cover' }} className='w-full p-5 rounded-md'>
             {liveMatch && (
                 <div key={liveMatch._id} className="  mx-auto grid grid-cols-3 gap-4">
-                    <div className="w-full grid items-center mt-10 justify-center text-center">
+                    <div className="w-full grid md:mt-5 items-center justify-center text-center">
                         <img
                             src={liveMatch.teamOne.image}
                             alt={liveMatch.teamOne.name}
-                            className="w-[150px] h-[150px] lg:w-[200px] lg:h-[200px]"
+                            className="mx-auto w-[80px] h-[80px] lg:w-[150px] lg:h-[150px]"
                             loading="lazy"
                         />
-                        <h1 className="mt-4 text-white lg:text-4xl text-xl font-bold "><Translate>{liveMatch.teamOne.name}</Translate> </h1>
-                        <h1 className="mt-4 text-white lg:text-4xl text-xl font-bold  ">
+                        <h1 className="mt-4 text-white lg:text-4xl text-xl font-bold text-center">
+                            <Translate>{liveMatch.teamOne.name}</Translate>
+                        </h1>
+                        <h1 className="mt-4 text-white lg:text-4xl text-xl font-bold text-center">
                             <Translate>{liveMatch.goalOne}</Translate>
                         </h1>
                     </div>
@@ -54,16 +56,15 @@ export default function HeroSection() {
                         <h4 className="text-xl font-semibold text-white"><Translate>{liveMatch.time}</Translate></h4>
                     </div>
 
-                    <div className="w-full grid mt-10 items-center justify-center text-center">
+                    <div className="w-full grid md:mt-5 items-center justify-center text-center">
                         <img
                             src={liveMatch.teamTwo.image}
                             alt={liveMatch.teamTwo.name}
-                            className="w-[150px] h-[150px] lg:w-[200px] lg:h-[200px]"
+                            className="mx-auto w-[80px] h-[80px] lg:w-[150px] lg:h-[150px]"
                             loading="lazy"
                         />
-                        <h1 className="mt-4 text-white lg:text-4xl text-xl font-bold "><Translate>{liveMatch.teamTwo.name}</Translate></h1>
-                        <h1 className="mt-4 text-white lg:text-4xl text-xl font-bold "><Translate>{liveMatch.goalTwo}</Translate></h1>
-
+                        <h1 className="mt-4 text-white lg:text-4xl text-xl font-bold text-center"><Translate>{liveMatch.teamTwo.name}</Translate></h1>
+                        <h1 className="mt-4 text-white lg:text-4xl text-xl font-bold text-center"><Translate>{liveMatch.goalTwo}</Translate></h1>
                     </div>
                 </div>
             )}

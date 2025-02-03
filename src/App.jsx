@@ -17,7 +17,7 @@ function App() {
       <div className="flex flex-col min-h-screen">
         <Header />
         <div className="flex-1">
-          <div className="max-w-[1300px] mx-auto">
+          <div className="">
             <div className="hidden xl:block absolute top-16 rounded-md left-0">
               <Social />
             </div>

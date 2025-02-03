@@ -69,23 +69,23 @@ export default function Home() {
         </div>
         <div className="w-full lg:col-span-8 col-span-12">
           <HeroSection />
-          <div className="mt-5 space-y-2">
+          <div className="mt-5 space-y-4">
             {todayMatches.slice(0, 5).map((todayMatches, index) => (
               <div
                 key={index}
-                className="rounded-lg shadow-sm border xl:p-4 p-2"
+                className="rounded-lg shadow-sm border xl:p-4 p-2 "
               >
                 <div className="  flex items-center justify-between">
                   <div className="grid grid-cols-12 items-center gap-5 w-full">
                     <div className=" md:flex md:col-span-3 space-y-2 md:space-y-0 col-span-3 items-center lg:gap-2 gap-4 ">
-                      <div className="flex items-center xl:justify-center  gap-2">
+                      <div className="flex flex-col items-center justify-center md:flex-row md:justify-center">
                         <img
                           src={todayMatches.teamOne.image}
                           alt={todayMatches.teamOne.name}
-                          className="xl:w-12 xl:h-12 w-20 h-20"
+                          className="w-12 h-12  md:mr-2"
                           loading="lazy"
                         />
-                        <h2 className=" text-center text-green-500 font-medium hidden xl:block">
+                        <h2 className="text-center text-green-500 font-medium hidden xl:block">
                           <Translate>{todayMatches.teamOne.name}</Translate>
                         </h2>
                       </div>
@@ -109,7 +109,7 @@ export default function Home() {
                         </Link>
                       </div>
                     </div>
-                    <div className="w-full md:flex md:col-span-3 space-y-2 md:space-y-0 col-span-3 justify-start  items-center gap-2">
+                    <div className="w-full md:flex md:col-span-3 space-y-2 md:space-y-0 col-span-3 justify-end  items-center gap-2">
                       <div className="hidden md:block">
                         <span className="text-xl font-semibold  rounded-full  px-3 py-1  ">
                           <Translate>{todayMatches.goalTwo}</Translate>
@@ -123,7 +123,7 @@ export default function Home() {
                           src={todayMatches.teamTwo.image}
                           alt={todayMatches.teamTwo.name}
                           loading="lazy"
-                          className="xl:w-12 xl:h-12 w-20 h-20"
+                          className="w-12 h-12"
                         />
                       </div>
                       <div className="md:hidden flex justify-center">
@@ -134,16 +134,15 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <div className="border-t pt-4 mt-5 flex items-center justify-between">
+                <div className="border-t p-1 mt-3 flex items-center justify-around">
                   <div className="  font-bold text-right">
                     <span
-                      className={`text-sm flex items-center gap-2 ${
-                        todayMatches.status === "live"
-                          ? "text-green-500"
-                          : todayMatches.status === "ended"
+                      className={`text-sm flex items-center gap-2 ${todayMatches.status === "live"
+                        ? "text-green-500"
+                        : todayMatches.status === "ended"
                           ? "text-red-500"
                           : "cursor-not-allowed"
-                      }`}
+                        }`}
                     >
                       <Clock className=" md:block md:w-4 md:h-4 w-3 h-3" />
                       <Translate>{todayMatches.time}</Translate>
