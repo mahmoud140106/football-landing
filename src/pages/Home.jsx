@@ -103,7 +103,7 @@ export default function Home() {
                             className="w-full h-16 text-green-500 hover:text-green-500"
                           >
                             <Translate>
-                              {todayMatches ? "Watch Now" : "Pending"}
+                              Watch Now
                             </Translate>
                           </Button>
                         </Link>

@@ -50,7 +50,7 @@ export default function HeroSection() {
                                 variant="outline"
                                 className='hidden lg:block w-full h-16 text-green-500 hover:text-green-500'
                             >
-                                <Translate>{liveMatch.status === "live" ? "Watch Now" : liveMatch.status === "Pending" ? "Pending" : "Ended"}</Translate></Button>
+                                <Translate>Watch Now</Translate></Button>
                         </Link>
 
                         <h4 className="text-xl font-semibold text-white"><Translate>{liveMatch.time}</Translate></h4>
@@ -73,7 +73,7 @@ export default function HeroSection() {
                 <Button
                     variant="outline"
                     className='w-full h-16 text-green-500 hover:text-green-500'
-                ><Translate>{liveMatch ? "Watch Now" : "Pending"}</Translate></Button>
+                ><Translate>Watch Now </Translate></Button>
             </div>
         </div>
     );
