@@ -63,14 +63,14 @@ export default function Home() {
           content="Watch live football matches, follow real-time scores, and stay updated with the latest football news, articles, and match highlights on Live Footballia."
         />
       </Helmet>
-      <div className=" mt-10 grid grid-cols-12 gap-5 w-full mx-auto max-w-7xl px-4 sm:px-6 md:px-8 my-5 ">
+      <div className=" mt-5 grid grid-cols-12 gap-5 w-full mx-auto max-w-7xl px-4 sm:px-6 md:px-8 my-5 ">
         <div className="lg:block hidden  lg:col-span-2 h-[450px]">
           <Advertisement adType="side" pageType={pageType} />
         </div>
         <div className="w-full lg:col-span-8 col-span-12">
           <HeroSection />
           <div className="mt-5 space-y-4">
-            {todayMatches.slice(0, 5).map((todayMatches, index) => (
+            {todayMatches.slice(0, 5).reverse().map((todayMatches, index) => (
               <div
                 key={index}
                 className="rounded-lg shadow-sm border xl:p-4 p-2 "
@@ -216,16 +216,15 @@ export default function Home() {
           <h1 className="font-semibold">
             <Translate>News and articles </Translate>
           </h1>
-          <Link to="/articles">
-            <Button variant={"outline"} className="font-semibold">
-              <Translate>View all</Translate>
-            </Button>
-          </Link>
         </div>
         <div className="w-full col-span-12 h-[100px] md:h-[150px] lg:h-[200px]">
           <Advertisement adType="top" pageType={pageType} />
         </div>
-
+        <Link to="/articles">
+          <Button variant={"outline"} className="font-semibold">
+            <Translate>View all</Translate>
+          </Button>
+        </Link>
         <div className="w-full col-span-12 gap-3 ">
           {isLoading ? (
             <div className="text-center py-5">Loading articles...</div>
@@ -233,7 +232,7 @@ export default function Home() {
             <div className="text-center py-5 text-red-500">Error: {error}</div>
           ) : (
             <div className="mb-5 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-5">
-              {sortedArticles.slice(0, 16).map((item) => (
+              {sortedArticles.slice(0, 4).map((item) => (
                 <Card key={item._id}>
                   <CardHeader>
                     <img
