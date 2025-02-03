@@ -48,9 +48,9 @@ export default function Header() {
         <header className='w-full flex border-b py-3 px-4 sm:px-10 font-[sans-serif] min-h-[65px] tracking-wide relative z-50'>
             <div className='flex flex-wrap items-center gap-4  w-full'>
                 {/* <a href="javascript:void(0)" className=""> */}
-                <a href="#" onClick={(e) => e.preventDefault()} className="">
+                <Link to="/">
                     <img src={Logo} alt="logo" className='w-44' />
-                </a>
+                </Link>
 
 
                 <div id="collapseMenu"

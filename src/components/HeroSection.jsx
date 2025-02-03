@@ -24,7 +24,7 @@ export default function HeroSection() {
     console.log('liveMatch', liveMatch);
 
     return (
-        <div style={{ backgroundImage: `url(${backGround})`, backgroundSize: 'cover' }} className='w-full p-5 rounded-md'>
+        <div style={{ backgroundImage: `url(${backGround})`, backgroundSize: 'cover' }} className='w-full p-5 rounded-md hidden sm:block'>
             {liveMatch && (
                 <div key={liveMatch._id} className="  mx-auto grid grid-cols-3 gap-4">
                     <div className="w-full grid md:mt-5 items-center justify-center text-center">

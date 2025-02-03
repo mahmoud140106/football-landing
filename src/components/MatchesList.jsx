@@ -42,7 +42,7 @@ export default function MatchesList({ selectedTab }) {
     return (
         <div className="mt-5 space-y-4">
             {currentMatches.length > 0 ? (
-                currentMatches.map((match, index) => (
+                currentMatches.reverse().map((match, index) => (
                     <div key={index} className='rounded-lg shadow-sm border xl:p-4 p-2'>
                         <div className="flex items-center justify-between ">
                             <div className="flex items-center justify-between md:w-3/4 w-full gap-5">
@@ -86,15 +86,10 @@ export default function MatchesList({ selectedTab }) {
                                     <Link className="" to={match.livelink}>
                                         <Button
                                             variant="outline"
-                                            className={`w-full md:block ${match.status === 'live'
-                                                ? 'text-green-500 hover:text-green-500'
-                                                : match.status === 'ended'
-                                                    ? 'text-red-500 hover:text-red-500'
-                                                    : ''
-                                                }`}
+                                            className={`w-full md:block text-green-500`}
                                         >
                                             <Translate>
-                                                Watch
+                                                Watch Now
                                             </Translate>
                                         </Button>
                                     </Link>
@@ -110,7 +105,7 @@ export default function MatchesList({ selectedTab }) {
                                         ? 'text-green-500'
                                         : match.status === 'ended'
                                             ? 'text-red-500'
-                                            : 'cursor-not-allowed'
+                                            : ''
                                         }`}
                                 >
                                     <Clock className=" md:w-4 md:h-4 w-3 h-3" />
@@ -125,19 +120,10 @@ export default function MatchesList({ selectedTab }) {
                                 <Link className="" to={match.livelink}>
                                     <Button
                                         variant="outline"
-                                        className={`w-full md:block ${match.status === 'live'
-                                            ? 'text-green-500 hover:text-green-500'
-                                            : match.status === 'ended'
-                                                ? 'text-red-500 hover:text-red-500'
-                                                : ''
-                                            }`}
+                                        className={`w-full md:block text-green-500`}
                                     >
                                         <Translate>
-                                            {match.status === 'live'
-                                                ? 'Watch'
-                                                : match.status === 'ended'
-                                                    ? 'End'
-                                                    : 'Pending'}
+                                            Watch Now
                                         </Translate>
                                     </Button>
                                 </Link>
