@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAds } from "../store/slices/adsSlice.js";
 
@@ -8,7 +8,7 @@ export default function Advertisement({ adType, pageType }) {
         (state) => state.ads
     );
 
-    const [adContent, setAdContent] = useState(null); // حالة لتخزين محتوى الإعلان
+    console.log('ads ads', ads);
 
     useEffect(() => {
         dispatch(fetchAds());
@@ -18,48 +18,42 @@ export default function Advertisement({ adType, pageType }) {
         if (ads.length === 0) return;
 
         const filteredAd = ads.find((ad) => ad.type === pageType);
-
         if (!filteredAd) {
             console.log("No ad available for this page.");
             return;
         }
 
-        let scriptSrc;
+        let adContent;
         switch (adType) {
             case "top":
-                scriptSrc = filteredAd.topAd;
+                adContent = filteredAd.topAd;
                 break;
             case "side":
-                scriptSrc = filteredAd.sideAd;
+                adContent = filteredAd.sideAd;
                 break;
             case "bottom":
-                scriptSrc = filteredAd.bottomAd;
+                adContent = filteredAd.bottomAd;
                 break;
             default:
                 return;
         }
 
-        if (scriptSrc) {
-            const script = document.createElement("script");
-            script.type = "text/javascript";
-            script.src = scriptSrc;
-            script.async = true;
+        if (adContent) {
+            const tempDiv = document.createElement("div");
+            tempDiv.innerHTML = adContent.trim();
+            const scriptElement = tempDiv.querySelector("script");
 
-            script.onload = () => {
-                console.log("Script loaded successfully:", scriptSrc);
-                setAdContent("");
-            };
+            if (scriptElement && scriptElement.src && !document.querySelector(`script[src="${scriptElement.src}"]`)) {
+                const newScript = document.createElement("script");
+                newScript.src = scriptElement.src;
+                newScript.type = "text/javascript";
+                newScript.async = true;
 
-            script.onerror = (error) => {
-                console.error("Script load error:", error, scriptSrc);
-                setAdContent("Error loading the ad.");
-            };
+                newScript.onload = () => console.log("✅ Ad script loaded:", newScript.src);
+                newScript.onerror = (error) => console.error("❌ Error loading ad script:", error);
 
-            document.body.appendChild(script);
-
-            return () => {
-                document.body.removeChild(script);
-            };
+                document.head.appendChild(newScript);
+            }
         }
     }, [ads, adType, pageType]);
 
@@ -67,9 +61,8 @@ export default function Advertisement({ adType, pageType }) {
     if (isError) return <div>Error: {errorMessage}</div>;
 
     return (
-        <div className="bg-transparent h-full w-full flex items-center justify-center">
-
-            <div>{adContent ? adContent : ""}</div>
+        <div className="h-full w-full flex items-center justify-center">
+            {ads.length > 0 ? "" : null}
         </div>
     );
 }

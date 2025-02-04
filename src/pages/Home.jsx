@@ -36,7 +36,7 @@ export default function Home() {
 
   const todayMatches = matches.filter((match) => match.day === "today");
 
-  //   console.log("todayMatches todayMatches", todayMatches);
+  console.log("todayMatches todayMatches", todayMatches);
 
   const sortedArticles = [...article].sort(
     (a, b) => new Date(b.date) - new Date(a.date)
