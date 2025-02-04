@@ -37,10 +37,11 @@ export default function Advertisement({ adType, pageType }) {
             default:
                 return;
         }
+        const scripts = adContent.split('\n').filter(Boolean);
 
-        if (adContent) {
+        scripts.forEach(scriptStr => {
             const tempDiv = document.createElement("div");
-            tempDiv.innerHTML = adContent.trim();
+            tempDiv.innerHTML = scriptStr.trim();
             const scriptElement = tempDiv.querySelector("script");
 
             if (scriptElement && scriptElement.src && !document.querySelector(`script[src="${scriptElement.src}"]`)) {
@@ -54,7 +55,24 @@ export default function Advertisement({ adType, pageType }) {
 
                 document.head.appendChild(newScript);
             }
-        }
+        });
+        // if (adContent) {
+        //     const tempDiv = document.createElement("div");
+        //     tempDiv.innerHTML = adContent.trim();
+        //     const scriptElement = tempDiv.querySelector("script");
+        //
+        //     if (scriptElement && scriptElement.src && !document.querySelector(`script[src="${scriptElement.src}"]`)) {
+        //         const newScript = document.createElement("script");
+        //         newScript.src = scriptElement.src;
+        //         newScript.type = "text/javascript";
+        //         newScript.async = true;
+        //
+        //         newScript.onload = () => console.log("✅ Ad script loaded:", newScript.src);
+        //         newScript.onerror = (error) => console.error("❌ Error loading ad script:", error);
+        //
+        //         document.head.appendChild(newScript);
+        //     }
+        // }
     }, [ads, adType, pageType]);
 
     if (isLoading) return <div>Loading Ads...</div>;
