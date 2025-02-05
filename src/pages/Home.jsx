@@ -36,7 +36,7 @@ export default function Home() {
 
   const todayMatches = matches.filter((match) => match.day === "today");
 
-  console.log("todayMatches todayMatches", todayMatches);
+  // console.log("todayMatches todayMatches", todayMatches);
 
   const sortedArticles = [...article].sort(
     (a, b) => new Date(b.date) - new Date(a.date)
@@ -70,101 +70,107 @@ export default function Home() {
         <div className="w-full lg:col-span-8 col-span-12">
           <HeroSection />
           <div className="mt-5 space-y-4">
-            {todayMatches.slice(0, 5).reverse().map((todayMatches, index) => (
-              <div
-                key={index}
-                className="rounded-lg shadow-sm border xl:p-4 p-2 "
-              >
-                <div className="  flex items-center justify-between">
-                  <div className="grid grid-cols-12 items-center gap-5 w-full">
-                    <div className=" md:flex md:col-span-3 space-y-2 md:space-y-0 col-span-3 items-center lg:gap-2 gap-4 ">
-                      <div className="flex flex-col items-center justify-center md:flex-row md:justify-center">
-                        <img
-                          src={todayMatches.teamOne.image}
-                          alt={todayMatches.teamOne.name}
-                          className="w-12 h-12  md:mr-2"
-                          loading="lazy"
-                        />
-                        <h2 className="text-center text-green-500 font-medium hidden xl:block">
-                          <Translate>{todayMatches.teamOne.name}</Translate>
+            <div className="w-full col-span-12 h-[100px] md:h-[150px] lg:h-[200px]">
+              <Advertisement adType="btn" pageType={pageType} />
+            </div>
+            {todayMatches
+              .slice(0, 5)
+              .reverse()
+              .map((todayMatches, index) => (
+                <div
+                  key={index}
+                  className="rounded-lg shadow-sm border xl:p-4 p-2 "
+                >
+                  <div className="  flex items-center justify-between">
+                    <div className="grid grid-cols-12 items-center gap-5 w-full">
+                      <div className=" md:flex md:col-span-3 space-y-2 md:space-y-0 col-span-3 items-center lg:gap-2 gap-4 ">
+                        <div className="flex flex-col items-center justify-center md:flex-row md:justify-center">
+                          <img
+                            src={todayMatches.teamOne.image}
+                            alt={todayMatches.teamOne.name}
+                            className="w-12 h-12  md:mr-2"
+                            loading="lazy"
+                          />
+                          <h2 className="text-center text-green-500 font-medium hidden xl:block">
+                            <Translate>{todayMatches.teamOne.name}</Translate>
+                          </h2>
+                        </div>
+                        <div className="">
+                          <span className="text-xl rounded-full flex justify-center  px-3 py-1 font-semibold">
+                            <Translate>{todayMatches.goalOne}</Translate>
+                          </span>
+                        </div>
+                      </div>
+                      <div className=" md:block items-center justify-center w-full md:col-span-6  col-span-6">
+                        <div className="w-full">
+                          <Link className="w-full " to={todayMatches.livelink}>
+                            <Button
+                              variant={"outline"}
+                              className="w-full h-16 text-green-500 hover:text-green-500"
+                            >
+                              <Translate>Watch Now</Translate>
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+
+                      <div className="w-full md:flex md:col-span-3 space-y-2 md:space-y-0 col-span-3 justify-end  items-center gap-2">
+                        <div className="hidden md:block">
+                          <span className="text-xl font-semibold  rounded-full  px-3 py-1  ">
+                            <Translate>{todayMatches.goalTwo}</Translate>
+                          </span>
+                        </div>
+                        <h2 className=" text-green-500 font-medium hidden text-right xl:block">
+                          <Translate>{todayMatches.teamTwo.name}</Translate>
                         </h2>
-                      </div>
-                      <div className="">
-                        <span className="text-xl rounded-full flex justify-center  px-3 py-1 font-semibold">
-                          <Translate>{todayMatches.goalOne}</Translate>
-                        </span>
-                      </div>
-                    </div>
-                    <div className=" md:block items-center justify-center w-full md:col-span-6  col-span-6">
-                      <div className="w-full">
-                        <Link className="w-full " to={todayMatches.livelink}>
-                          <Button
-                            variant={"outline"}
-                            className="w-full h-16 text-green-500 hover:text-green-500"
-                          >
-                            <Translate>
-                              Watch Now
-                            </Translate>
-                          </Button>
-                        </Link>
-                      </div>
-                    </div>
-                    <div className="w-full md:flex md:col-span-3 space-y-2 md:space-y-0 col-span-3 justify-end  items-center gap-2">
-                      <div className="hidden md:block">
-                        <span className="text-xl font-semibold  rounded-full  px-3 py-1  ">
-                          <Translate>{todayMatches.goalTwo}</Translate>
-                        </span>
-                      </div>
-                      <h2 className=" text-green-500 font-medium hidden text-right xl:block">
-                        <Translate>{todayMatches.teamTwo.name}</Translate>
-                      </h2>
-                      <div className=" flex items-center justify-center">
-                        <img
-                          src={todayMatches.teamTwo.image}
-                          alt={todayMatches.teamTwo.name}
-                          loading="lazy"
-                          className="w-12 h-12"
-                        />
-                      </div>
-                      <div className="md:hidden flex justify-center">
-                        <span className="text-xl font-semibold  rounded-full  px-3 py-1  ">
-                          <Translate>{todayMatches.goalTwo}</Translate>
-                        </span>
+                        <div className=" flex items-center justify-center">
+                          <img
+                            src={todayMatches.teamTwo.image}
+                            alt={todayMatches.teamTwo.name}
+                            loading="lazy"
+                            className="w-12 h-12"
+                          />
+                        </div>
+                        <div className="md:hidden flex justify-center">
+                          <span className="text-xl font-semibold  rounded-full  px-3 py-1  ">
+                            <Translate>{todayMatches.goalTwo}</Translate>
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="border-t p-1 mt-3 flex items-center justify-around">
-                  <div className="  font-bold text-right">
-                    <span
-                      className={`text-sm flex items-center gap-2 ${todayMatches.status === "live"
-                        ? "text-green-500"
-                        : todayMatches.status === "ended"
-                          ? "text-red-500"
-                          : "cursor-not-allowed"
+                  <div className="border-t p-1 mt-3 flex items-center justify-around">
+                    <div className="  font-bold text-right">
+                      <span
+                        className={`text-sm flex items-center gap-2 ${
+                          todayMatches.status === "live"
+                            ? "text-green-500"
+                            : todayMatches.status === "ended"
+                            ? "text-red-500"
+                            : "cursor-not-allowed"
                         }`}
-                    >
-                      <Clock className=" md:block md:w-4 md:h-4 w-3 h-3" />
-                      <Translate>{todayMatches.time}</Translate>
-                    </span>
-                  </div>
+                      >
+                        <Clock className=" md:block md:w-4 md:h-4 w-3 h-3" />
+                        <Translate>{todayMatches.time}</Translate>
+                      </span>
+                    </div>
 
-                  <div className="  font-bold text-center md:justify-start justify-start flex items-center gap-2">
-                    <span className="text-sm flex items-center gap-2">
-                      <Trophy className=" md:block md:w-4 md:h-4 w-3 h-3" />
-                      <Translate>{todayMatches.championship?.name}</Translate>
-                    </span>
-                  </div>
+                    <div className="  font-bold text-center md:justify-start justify-start flex items-center gap-2">
+                      <span className="text-sm flex items-center gap-2">
+                        <Trophy className=" md:block md:w-4 md:h-4 w-3 h-3" />
+                        <Translate>{todayMatches.championship?.name}</Translate>
+                      </span>
+                    </div>
 
-                  <div className=" flex  font-bold  md:justify-end md:mt-0 mt-2 items-center gap-2 ">
-                    <MapPin className=" w-4 h-4" />
-                    <span className="text-sm ">
-                      <Translate>{todayMatches.stadium}</Translate>
-                    </span>
+                    <div className=" flex  font-bold  md:justify-end md:mt-0 mt-2 items-center gap-2 ">
+                      <MapPin className=" w-4 h-4" />
+                      <span className="text-sm ">
+                        <Translate>{todayMatches.stadium}</Translate>
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
 
             <Link to="/matches">
               {" "}

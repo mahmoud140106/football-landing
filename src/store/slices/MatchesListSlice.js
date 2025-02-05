@@ -7,10 +7,10 @@ export const fetchMatchesHero = createAsyncThunk(
   async (day, { rejectWithValue }) => {
     try {
       const response = await api.get(`api/v1/matches/landing`);
-      console.log("API Response:", response.data);
+      // console.log("API Response:", response.data);
       return response.data;
     } catch (error) {
-      console.error("Fetch Matches Hero Error:", error);
+      // console.error("Fetch Matches Hero Error:", error);
       return rejectWithValue(
         error.response?.data || "Error fetching Matches Hero"
       );
@@ -24,10 +24,10 @@ export const fetchMatches = createAsyncThunk(
   async (day, { rejectWithValue }) => {
     try {
       const response = await api.get(`api/v1/matches/landing?day=${day}`);
-      console.log("API Response:", response.data);
+      // console.log("API Response:", response.data);
       return response.data;
     } catch (error) {
-      console.error("Fetch Matches Error:", error);
+      // console.error("Fetch Matches Error:", error);
       return rejectWithValue(error.response?.data || "Error fetching Matches");
     }
   }

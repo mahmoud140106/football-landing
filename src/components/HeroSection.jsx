@@ -21,7 +21,7 @@ export default function HeroSection() {
 
     const liveMatch = matches.find((match) => match.status === "live") || matches.find((match) => match.status === "pending" || matches.find((match) => match.status === "ended"));
 
-    console.log('liveMatch', liveMatch);
+    // console.log('liveMatch', liveMatch);
 
     return (
         <div style={{ backgroundImage: `url(${backGround})`, backgroundSize: 'cover' }} className='w-full p-5 rounded-md hidden sm:block'>

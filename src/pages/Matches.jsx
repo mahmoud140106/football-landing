@@ -40,8 +40,11 @@ export default function Matches() {
             />
           </div>
         </div>
+        <div className="hidden xl:block col-span-12 lg:col-span-2 h-[100px]">
+            <Advertisement adType="btn" pageType={pageType} />
+          </div>
         <div className="max-w-[1300px] mx-auto mt-1 grid grid-cols-12 gap-5 w-full">
-          <div className="hidden xl:block col-span-12 lg:col-span-2 h-[450px]">
+          <div className="hidden xl:block col-span-12 lg:col-span-2 h-[100px]">
             <Advertisement adType="side" pageType={pageType} />
           </div>
           <div className="col-span-12 xl:col-span-8">
@@ -55,7 +58,7 @@ export default function Matches() {
           </div>
         </div>
         <div className="w-full col-span-12 h-[100px] md:h-[150px] lg:h-[200px]">
-          <Advertisement adType="top" pageType={pageType} />
+          <Advertisement adType="bottom" pageType={pageType} />
         </div>
       </div>
     </>
