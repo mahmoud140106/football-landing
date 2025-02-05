@@ -25,7 +25,6 @@ export default function ContactSection() {
     <>
       
       <Helmet>
-        <title>Live Footballia</title>
         <link rel="canonical" href="https://livefootballia.com/contactUs" />
         <meta
           name="description"

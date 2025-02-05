@@ -4,7 +4,6 @@ export default function ViewMatch() {
   return (
     <>
       <Helmet>
-        <title>Live Footballia</title>
         <link rel="canonical" href="https://livefootballia.com/viewMatches" />
         <meta
           name="description"

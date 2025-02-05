@@ -45,7 +45,6 @@ export default function ArticleDetails() {
   return (
     <>
       <Helmet>
-        <title>Live Footballia</title>
         <link
           rel="canonical"
           href={`https://livefootballia.com/articles/${_id}`}

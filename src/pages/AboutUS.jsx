@@ -22,7 +22,6 @@ export default function AboutUS() {
     return (
         <>
          <Helmet>
-        <title>Live Footballia</title>
         <link rel="canonical" href="https://livefootballia.com/aboutUs" />
         <meta
           name="description"
