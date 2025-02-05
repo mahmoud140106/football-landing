@@ -75,9 +75,9 @@ export default function DrawerDemo() {
                             </li>
                             {links.map((link) => (
                                 <li className="max-lg:border-b max-lg:py-3 px-3" key={link.name}>
-                                    <Link className=' block text-[15px]' to={link.href}>
+                                    <a className=' block text-[15px]' href={link.href}>
                                         <Translate>{link.name}</Translate>
-                                    </Link>
+                                    </a>
                                 </li>
                             ))}
                         </ul>

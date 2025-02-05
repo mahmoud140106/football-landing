@@ -173,7 +173,7 @@ export default function Home() {
                 </div>
               ))}
 
-            <Link to="/matches">
+            <a href="/matches">
               {" "}
               <Button
                 className="w-full bg-green-500 hover:bg-green-600"
@@ -181,7 +181,7 @@ export default function Home() {
               >
                 <Translate>View all</Translate>
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
         
@@ -229,11 +229,11 @@ export default function Home() {
          <div className="w-full col-span-12">
           <Advertisement adType="top" pageType={pageType} />
         </div>
-        <Link to="/articles">
+        <a href="/articles">
           <Button variant={"outline"} className="font-semibold">
             <Translate>View all</Translate>
           </Button>
-        </Link>
+        </a>
         <div className="w-full col-span-12 gap-3 ">
           {isLoading ? (
             <div className="text-center py-5">Loading articles...</div>

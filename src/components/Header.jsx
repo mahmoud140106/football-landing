@@ -48,9 +48,9 @@ export default function Header() {
         <header className='w-full flex border-b py-3 px-4 sm:px-10 font-[sans-serif] min-h-[65px] tracking-wide relative z-50'>
             <div className='flex flex-wrap items-center gap-4  w-full'>
                 {/* <a href="javascript:void(0)" className=""> */}
-                <Link to="/">
+                <a href="/">
                     <img src={Logo} alt="logo" className='w-44' />
-                </Link>
+                </a>
 
 
                 <div id="collapseMenu"
@@ -71,11 +71,11 @@ export default function Header() {
                         {
                             links.map((link, index) => (
                                 <li className='max-lg:border-b max-lg:py-3 xl:px-3' key={index}>
-                                    <Link to={link.href} className='lg:hover:text-[#007bff] text-gray-400 block text-[15px]'>
+                                    <a href={link.href} className='lg:hover:text-[#007bff] text-gray-400 block text-[15px]'>
                                         <Translate>
                                             {link.name}
                                         </Translate>
-                                    </Link>
+                                    </a>
                                 </li>
                             ))
                         }
