@@ -3,9 +3,11 @@ import api from "../../ApiUrl";
 
 export const fetchAds = createAsyncThunk(
   "ads/fetchAds",
-  async (_, { rejectWithValue }) => {
+  async ({ type }, { rejectWithValue }) => {
     try {
-      const response = await api.get("api/v1/ads/landing");
+      const response = await api.get("api/v1/ads/landing", {
+        params: { type, lang: "en" },
+      });
       return response.data.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || "Error fetching Ads");
@@ -35,7 +37,7 @@ const AdsSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.errorMessage = "";
-        state.ads = action.payload;
+        state.ads = action.payload||[];
       })
       .addCase(fetchAds.rejected, (state, action) => {
         state.isLoading = false;
