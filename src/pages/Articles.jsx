@@ -49,7 +49,6 @@ export default function Articles() {
   return (
     <>
       <Helmet>
-        <title>Live Footballia</title>
         <link rel="canonical" href="https://livefootballia.com/Articles" />
         <meta
           name="description"

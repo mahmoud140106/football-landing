@@ -24,7 +24,6 @@ export default function Matches() {
   return (
     <>
       <Helmet>
-        <title>Live Footballia</title>
         <link rel="canonical" href="https://livefootballia.com/matches" />
         <meta
           name="description"

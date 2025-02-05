@@ -56,7 +56,6 @@ export default function Home() {
   return (
     <>
       <Helmet>
-        <title>Live Footballia</title>
         <link rel="canonical" href="https://livefootballia.com" />
         <meta
           name="description"

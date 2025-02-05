@@ -16,7 +16,6 @@ export default function Privacy() {
   return (
     <>
       <Helmet>
-        <title>Live Footballia</title>
         <link rel="canonical" href="https://livefootballia.com/privacy" />
         <meta
           name="description"
