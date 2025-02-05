@@ -20,7 +20,7 @@ export default function Social() {
         <div className='p-4 max-h-[500px] overflow-y-auto'>
             {social.map((item) => (
                 <div className='mt-5' key={item._id}>
-                    <Link to={item.link}>
+                    <Link to={item.link} target={"_blank"}>
                         <img
                             loading="lazy"
                             className='w-[50px] h-[50px] rounded-full object-cover'

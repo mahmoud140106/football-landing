@@ -57,9 +57,9 @@ export default function Articles() {
         />
       </Helmet>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 my-5 w-full">
-        {/* <div className="h-[100px] md:h-[150px] lg:h-[200px]"> */}
+         <div className="">
           <Advertisement adType="top" pageType={pageType} />
-        {/* </div> */}
+         </div>
 
         <div className="w-full my-5">
           {isLoading ? (
@@ -101,7 +101,6 @@ export default function Articles() {
           )}
         </div>
 
-        {/* تفعيل الباجينيشن */}
         {!isLoading && !isError && (
           <div className="my-5 flex justify-center">
             <PaginationComponent
@@ -112,9 +111,9 @@ export default function Articles() {
           </div>
         )}
 
-        {/* <div className="h-[100px] md:h-[150px] lg:h-[200px]"> */}
+         <div className="">
           <Advertisement adType="bottom" pageType={pageType} />
-        {/* </div> */}
+         </div>
       </div>
     </>
   );
