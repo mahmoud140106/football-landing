@@ -64,15 +64,14 @@ export default function Home() {
         />
       </Helmet>
       <div className=" mt-5 grid grid-cols-12 gap-5 w-full mx-auto max-w-7xl px-4 sm:px-6 md:px-8 my-5 ">
-        <div className="lg:block hidden  lg:col-span-2 h-[450px]">
-          <Advertisement adType="side" pageType={pageType} />
-        </div>
+      <Advertisement adType="top" pageType={pageType} />
+
         <div className="w-full lg:col-span-8 col-span-12">
           <HeroSection />
           <div className="mt-5 space-y-4">
-            <div className="w-full col-span-12 h-[100px] md:h-[150px] lg:h-[200px]">
+            {/* <div className="w-full col-span-12 h-[100px] md:h-[150px] lg:h-[200px]"> */}
               <Advertisement adType="btn" pageType={pageType} />
-            </div>
+            {/* </div> */}
             {todayMatches
               .slice(0, 5)
               .reverse()
@@ -139,6 +138,7 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
+
                   <div className="border-t p-1 mt-3 flex items-center justify-around">
                     <div className="  font-bold text-right">
                       <span
@@ -183,6 +183,10 @@ export default function Home() {
             </Link>
           </div>
         </div>
+        
+        {/* <div className="lg:block hidden  lg:col-span-2 h-[450px]"> */}
+        <Advertisement adType="side" pageType={pageType} />
+        {/* </div> */}
         <div className="hidden lg:block col-span-2 ">
           {article
             .slice()
@@ -223,9 +227,9 @@ export default function Home() {
             <Translate>News and articles </Translate>
           </h1>
         </div>
-        <div className="w-full col-span-12 h-[100px] md:h-[150px] lg:h-[200px]">
+        {/* <div className="w-full col-span-12 h-[100px] md:h-[150px] lg:h-[200px]">
           <Advertisement adType="top" pageType={pageType} />
-        </div>
+        </div> */}
         <Link to="/articles">
           <Button variant={"outline"} className="font-semibold">
             <Translate>View all</Translate>
@@ -268,9 +272,9 @@ export default function Home() {
           )}
         </div>
 
-        <div className="w-full col-span-12 h-[100px] md:h-[150px] lg:h-[200px] ">
+        {/* <div className="w-full col-span-12 h-[100px] md:h-[150px] lg:h-[200px] "> */}
           <Advertisement adType="bottom" pageType={pageType} />
-        </div>
+        {/* </div> */}
       </div>
     </>
   );

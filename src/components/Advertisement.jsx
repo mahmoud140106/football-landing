@@ -15,11 +15,12 @@ export default function Advertisement({ adType, pageType }) {
     dispatch(fetchAds({ type: pageType }));
   }, [dispatch, pageType]);
 
+
+
   useEffect(() => {
     if (!ads || ads.length === 0 || !adType || !adContainerRef.current) return;
 
     const adData = ads[0];
-    console.log("adData", adData);
 
     let adContent;
 
@@ -39,15 +40,51 @@ export default function Advertisement({ adType, pageType }) {
       default:
         return;
     }
+
     if (adContent && adContainerRef.current) {
+      // Set ad content into container
       adContainerRef.current.innerHTML = adContent;
 
+      // Execute all script tags within the ad container
       const scripts = adContainerRef.current.querySelectorAll("script");
+
       scripts.forEach((script) => {
-        const newScript = document.createElement("script");
-        newScript.text = script.innerText;
-        document.body.appendChild(newScript);
+        const existingScript = document.querySelector(
+          `script[src="${script.src}"]`
+        );
+
+        // If the script is not already loaded, create and append it
+        if (!existingScript) {
+          const newScript = document.createElement("script");
+
+          if (script.src) {
+            newScript.src = script.src; // For external scripts
+            newScript.async = true; // Ensure script loads asynchronously
+            newScript.defer = true; // Ensure script executes after DOM is parsed
+          } else {
+            // For inline scripts, just copy the inner content
+            newScript.text = script.innerText || script.textContent;
+          }
+
+          // Add error handling for script load
+        //   newScript.onload = () => {
+        //     console.log(`Script loaded successfully: ${newScript.src}`);
+        //   };
+
+        //   newScript.onerror = (error) => {
+        //     console.error(`Error loading script: ${newScript.src}`, error);
+        //   };
+
+          // Catch any issues with the script execution
+          try {
+            adContainerRef.current.appendChild(newScript);
+          } catch (error) {
+            // console.error("Error appending script:", error);
+          }
+        }
       });
+
+    //   console.log(adData);
     //   console.log("📢 Ad Loaded: success", adType);
     //   console.log("📢 Ad Loaded: success", adContent);
     }
