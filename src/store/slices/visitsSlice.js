@@ -1,14 +1,14 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import api from "../../ApiUrl";
 
 export const fetchVisits = createAsyncThunk(
   "visits/fetchVisits",
-  async (_, { rejectWithValue }) => {
+  async (_, {rejectWithValue}) => {
     try {
       const response = await api.get("api/v1/visits/landing");
       return response.data.visits;
     } catch (error) {
-      return rejectWithValue(error.response?.data || "Error fetching visits");
+      return rejectWithValue("");
     }
   }
 );
@@ -29,7 +29,7 @@ const visitsSlice = createSlice({
       })
       .addCase(fetchVisits.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.count = action.payload; // حفظ عدد الزيارات
+        state.count = action.payload;
       })
       .addCase(fetchVisits.rejected, (state, action) => {
         state.isLoading = false;

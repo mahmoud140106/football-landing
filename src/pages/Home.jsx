@@ -1,42 +1,32 @@
 import HeroSection from "../components/HeroSection";
 import Advertisement from "../components/Advertisement";
-import { fetchArticle } from "../store/slices/articlesSlice.js";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardTitle,
-  CardFooter,
-} from "../components/ui/card";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { Button } from "../components/ui/button";
-import { Link } from "react-router";
-// import { fetchMatchesHero } from '../store/slices/MatchesListSlice.js';
-import { fetchMatches } from "../store/slices/MatchesListSlice.js";
-import { fetchVisits } from "../store/slices/visitsSlice.js";
-import { Clock, MapPin, Trophy } from "lucide-react";
-import { useMediaQuery } from "react-responsive";
-import { Translate } from "translate-easy";
-import { Helmet } from "react-helmet-async";
+import {fetchArticle} from "../store/slices/articlesSlice.js";
+import {Card, CardContent, CardFooter, CardHeader, CardTitle,} from "../components/ui/card";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {Button} from "../components/ui/button";
+import {Link} from "react-router";
+import {fetchMatches} from "../store/slices/MatchesListSlice.js";
+import {fetchVisits} from "../store/slices/visitsSlice.js";
+import {Clock, MapPin, Trophy} from "lucide-react";
+import {useMediaQuery} from "react-responsive";
+import {Translate} from "translate-easy";
+import {Helmet} from "react-helmet-async";
 
 export default function Home() {
   const dispatch = useDispatch();
-  const { article, isLoading, error } = useSelector((state) => state.article);
-  const { matches } = useSelector((state) => state.matches);
-  //   console.log("matches", matches);
+  const {article, isLoading, error} = useSelector((state) => state.article);
+  const {matches} = useSelector((state) => state.matches);
   useEffect(() => {
     dispatch(fetchVisits());
     dispatch(fetchMatches("today"));
     dispatch(fetchArticle());
   }, [dispatch]);
 
-  const isSmallScreen = useMediaQuery({ maxWidth: 1024 });
+  const isSmallScreen = useMediaQuery({maxWidth: 1024});
   const articlesToShow = isSmallScreen ? 4 : 5;
 
   const todayMatches = matches.filter((match) => match.day === "today");
-
-  // console.log("todayMatches todayMatches", todayMatches);
 
   const sortedArticles = [...article].sort(
     (a, b) => new Date(b.date) - new Date(a.date)
@@ -56,7 +46,7 @@ export default function Home() {
   return (
     <>
       <Helmet>
-        <link rel="canonical" href="https://livefootballia.com" />
+        <link rel="canonical" href="https://livefootballia.com"/>
         <meta
           name="description"
           content="Watch live football matches, follow real-time scores, and stay updated with the latest football news, articles, and match highlights on Live Footballia."
@@ -64,14 +54,14 @@ export default function Home() {
       </Helmet>
       <div className=" mt-5 grid grid-cols-12 gap-5 w-full mx-auto max-w-7xl px-4 sm:px-6 md:px-8 my-5 ">
         <div className="lg:block hidden  lg:col-span-2">
-          <Advertisement adType="side" pageType={pageType} />
+          <Advertisement adType="side" pageType={pageType}/>
         </div>
         <div className="w-full lg:col-span-8 col-span-12">
-          <HeroSection />
+          <HeroSection/>
           <div className="mt-5 space-y-4">
-             <div className="">
-              <Advertisement adType="btn" pageType={pageType} />
-             </div>
+            <div className="">
+              <Advertisement adType="btn" pageType={pageType}/>
+            </div>
             {todayMatches
               .slice(0, 5)
               .reverse()
@@ -82,7 +72,8 @@ export default function Home() {
                 >
                   <div className="  flex items-center justify-between">
                     <div className="grid grid-cols-12 items-center gap-5 w-full">
-                      <div className=" md:flex md:col-span-3 space-y-2 md:space-y-0 col-span-3 items-center lg:gap-2 gap-4 ">
+                      <div
+                        className=" md:flex md:col-span-3 space-y-2 md:space-y-0 col-span-3 items-center lg:gap-2 gap-4 ">
                         <div className="flex flex-col items-center justify-center md:flex-row md:justify-center">
                           <img
                             src={todayMatches.teamOne.image}
@@ -113,7 +104,8 @@ export default function Home() {
                         </div>
                       </div>
 
-                      <div className="w-full md:flex md:col-span-3 space-y-2 md:space-y-0 col-span-3 justify-end  items-center gap-2">
+                      <div
+                        className="w-full md:flex md:col-span-3 space-y-2 md:space-y-0 col-span-3 justify-end  items-center gap-2">
                         <div className="hidden md:block">
                           <span className="text-xl font-semibold  rounded-full  px-3 py-1  ">
                             <Translate>{todayMatches.goalTwo}</Translate>
@@ -146,24 +138,24 @@ export default function Home() {
                           todayMatches.status === "live"
                             ? "text-green-500"
                             : todayMatches.status === "ended"
-                            ? "text-red-500"
-                            : "cursor-not-allowed"
+                              ? "text-red-500"
+                              : "cursor-not-allowed"
                         }`}
                       >
-                        <Clock className=" md:block md:w-4 md:h-4 w-3 h-3" />
+                        <Clock className=" md:block md:w-4 md:h-4 w-3 h-3"/>
                         <Translate>{todayMatches.time}</Translate>
                       </span>
                     </div>
 
                     <div className="  font-bold text-center md:justify-start justify-start flex items-center gap-2">
                       <span className="text-sm flex items-center gap-2">
-                        <Trophy className=" md:block md:w-4 md:h-4 w-3 h-3" />
+                        <Trophy className=" md:block md:w-4 md:h-4 w-3 h-3"/>
                         <Translate>{todayMatches.championship?.name}</Translate>
                       </span>
                     </div>
 
                     <div className=" flex  font-bold  md:justify-end md:mt-0 mt-2 items-center gap-2 ">
-                      <MapPin className=" w-4 h-4" />
+                      <MapPin className=" w-4 h-4"/>
                       <span className="text-sm ">
                         <Translate>{todayMatches.stadium}</Translate>
                       </span>
@@ -183,7 +175,7 @@ export default function Home() {
             </a>
           </div>
         </div>
-        
+
 
         <div className="hidden lg:block col-span-2 ">
           {article
@@ -225,8 +217,8 @@ export default function Home() {
             <Translate>News and articles </Translate>
           </h1>
         </div>
-         <div className="w-full col-span-12">
-          <Advertisement adType="top" pageType={pageType} />
+        <div className="w-full col-span-12">
+          <Advertisement adType="top" pageType={pageType}/>
         </div>
         <a href="/articles">
           <Button variant={"outline"} className="font-semibold">
@@ -270,9 +262,9 @@ export default function Home() {
           )}
         </div>
 
-         <div className="w-full col-span-12">
-          <Advertisement adType="bottom" pageType={pageType} />
-         </div>
+        <div className="w-full col-span-12">
+          <Advertisement adType="bottom" pageType={pageType}/>
+        </div>
       </div>
     </>
   );
