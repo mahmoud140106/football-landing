@@ -1,34 +1,26 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import api from "../../ApiUrl";
 
-// Fetch Matches Hero
 export const fetchMatchesHero = createAsyncThunk(
-  "matches/fetchMatchesHero", // Updated type string
-  async (day, { rejectWithValue }) => {
+  "matches/fetchMatchesHero",
+  async (day, {rejectWithValue}) => {
     try {
       const response = await api.get(`api/v1/matches/landing`);
-      // console.log("API Response:", response.data);
       return response.data;
     } catch (error) {
-      // console.error("Fetch Matches Hero Error:", error);
-      return rejectWithValue(
-        error.response?.data || "Error fetching Matches Hero"
-      );
+      return rejectWithValue("");
     }
   }
 );
 
-// Fetch Matches
 export const fetchMatches = createAsyncThunk(
-  "matches/fetchMatches", // Kept this as it is
-  async (day, { rejectWithValue }) => {
+  "matches/fetchMatches",
+  async (day, {rejectWithValue}) => {
     try {
       const response = await api.get(`api/v1/matches/landing?day=${day}`);
-      // console.log("API Response:", response.data);
       return response.data;
     } catch (error) {
-      // console.error("Fetch Matches Error:", error);
-      return rejectWithValue(error.response?.data || "Error fetching Matches");
+      return rejectWithValue("");
     }
   }
 );
@@ -49,11 +41,11 @@ const MatchesSlice = createSlice({
       })
       .addCase(fetchMatchesHero.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.matches = action.payload.data; // فقط خزّن البيانات
+        state.matches = action.payload.data;
       })
       .addCase(fetchMatchesHero.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload || "Failed to fetch matches.";
+        state.error = action.payload || "No Available Matches.";
       });
 
     builder
@@ -63,11 +55,11 @@ const MatchesSlice = createSlice({
       })
       .addCase(fetchMatches.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.matches = action.payload.data; // فقط خزّن البيانات
+        state.matches = action.payload.data;
       })
       .addCase(fetchMatches.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload || "Failed to fetch matches.";
+        state.error = action.payload || "No Available Matches.";
       });
   },
 });

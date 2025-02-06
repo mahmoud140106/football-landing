@@ -1,16 +1,16 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import api from "../../ApiUrl";
 
 export const fetchAds = createAsyncThunk(
   "ads/fetchAds",
-  async ({ type }, { rejectWithValue }) => {
+  async ({type}, {rejectWithValue}) => {
     try {
       const response = await api.get("api/v1/ads/landing", {
-        params: { type, lang: "en" },
+        params: {type, lang: "en"},
       });
       return response.data.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || "Error fetching Ads");
+      return rejectWithValue(error.response?.data?.error?.message || "");
     }
   }
 );
@@ -37,7 +37,7 @@ const AdsSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.errorMessage = "";
-        state.ads = action.payload||[];
+        state.ads = action.payload || [];
       })
       .addCase(fetchAds.rejected, (state, action) => {
         state.isLoading = false;

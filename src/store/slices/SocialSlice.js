@@ -1,14 +1,14 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import api from "../../ApiUrl";
 
 export const fetchSocial = createAsyncThunk(
   "social/fetchSocial",
-  async (_, { rejectWithValue }) => {
+  async (_, {rejectWithValue}) => {
     try {
       const response = await api.get("api/v1/social/landing");
       return response.data.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || "Error fetching Social");
+      return rejectWithValue("");
     }
   }
 );
