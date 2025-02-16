@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { Link } from "react-router";
 import backGround from "../assets/HeroBG.png";
 import { Translate } from "translate-easy";
+import { motion } from "framer-motion";
 
 export default function HeroSection() {
   const dispatch = useDispatch();
@@ -19,10 +20,18 @@ export default function HeroSection() {
     dispatch(getImportantMatch());
   }, [dispatch]);
 
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+  };
+
   return (
-    <div
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={fadeInUp}
       style={{ backgroundImage: `url(${backGround})`, backgroundSize: "cover" }}
-      className="w-full p-5 rounded-md hidden sm:block"
+      className="w-full p-5 pt-0 rounded-md hidden sm:block"
     >
       {importantMatch && (
         <div
@@ -88,6 +97,6 @@ export default function HeroSection() {
           <Translate>Watch Now </Translate>
         </Button>
       </div>
-    </div>
+    </motion.div>
   );
 }

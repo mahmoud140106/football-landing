@@ -20,6 +20,8 @@ import { Translate } from "translate-easy";
 import { Helmet } from "react-helmet-async";
 import TabButton from "../components/TapsButton.jsx";
 import Loading from "./../components/ui/Loading";
+import NotificationCard from "../components/NotificationCard.jsx";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -53,6 +55,58 @@ export default function Home() {
 
   const pageType = getPageType();
 
+  const [showNotification, setShowNotification] = useState(true);
+
+  useEffect(() => {
+    const notificationDismissed = localStorage.getItem("notificationDismissed");
+    // console.log("Notification Dismissed:", notificationDismissed);
+    // console.log("Notification Permission:", Notification.permission);
+
+    if (
+      notificationDismissed === "true" &&
+      Notification.permission === "granted"
+    ) {
+      setShowNotification(false);
+    }
+  }, []);
+
+  const handleDismiss = () => {
+    setShowNotification(false);
+    localStorage.setItem("notificationDismissed", "true");
+  };
+
+  const handleAllow = () => {
+    if ("Notification" in window) {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          new Notification("Subscribed!", {
+            body: "You will now receive notifications.",
+            icon: "/bell-icon.png",
+          });
+          handleDismiss();
+        }
+      });
+    }
+  };
+
+  const matchCardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: (index) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: index * 0.1, duration: 0.5 },
+    }),
+  };
+
+  const articleVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: (index) => ({
+      opacity: 1,
+      scale: 1,
+      transition: { delay: index * 0.15, duration: 0.5 },
+    }),
+  };
+
   return (
     <>
       <Helmet>
@@ -62,9 +116,15 @@ export default function Home() {
           content="Watch live football matches, follow real-time scores, and stay updated with the latest football news, articles, and match highlights on Live Footballia."
         />
       </Helmet>
-      <div className=" mt-5 grid grid-cols-12 gap-5 w-full mx-auto max-w-7xl px-4 sm:px-6 md:px-8 my-5 ">
-        <div className="w-full lg:col-span-12 col-span-2">
-          <div className="flex justify-center items-center my-2">
+
+      {showNotification && (
+        <div className=" fixed flex justify-center items-center top-5 left-1/2 transform -translate-x-1/2 bg-white z-50">
+          <NotificationCard onDismiss={handleDismiss} onAllow={handleAllow} />
+        </div>
+      )}
+      <div className=" mt-2 grid grid-cols-12 gap-2 w-full mx-auto max-w-7xl px-4 sm:px-6 md:px-8 my-5 ">
+        <div className="w-full  max-w-[63.4rem] lg:col-span-12 col-span-2">
+          <div className=" flex justify-end items-center">
             <TabButton
               selectedTab={selectedTab}
               setSelectedTab={setSelectedTab}
@@ -88,9 +148,13 @@ export default function Home() {
               </div>
             ) : (
               matches.slice(0, 5).map((match, index) => (
-                <div
-                  key={index}
-                  className="rounded-lg shadow-sm border xl:p-4 p-2 "
+                <motion.div
+                  key={`${selectedTab}-${index}`}
+                  variants={matchCardVariants}
+                  initial="hidden"
+                  animate="visible"
+                  custom={index}
+                  className="rounded-lg shadow-sm border xl:p-4 p-2"
                 >
                   <div className="  flex items-center justify-between">
                     <div className="grid grid-cols-12 items-center gap-5 w-full">
@@ -181,7 +245,7 @@ export default function Home() {
                       </span>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))
             )}
 
@@ -256,33 +320,40 @@ export default function Home() {
           ) : (
             <div className="mb-5 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-5">
               {sortedArticles.slice(0, 4).map((item) => (
-                <Link
+                <motion.div
                   key={item._id}
-                  to={`https://matches.livefootballia.com/${item._id}`}
+                  variants={articleVariants}
+                  initial="hidden"
+                  animate="visible"
+                  custom={index}
                 >
-                  <Card
-                    title={`Read more about: ${item.title}`}
-                    className="cursor-pointer transition-all border duration-300 hover:shadow-lg scale-95 hover:scale-100"
+                  <Link
+                    // key={item._id}
+                    to={`https://matches.livefootballia.com/${item._id}`}
                   >
-                    <CardHeader>
-                      <img
-                        loading="lazy"
-                        className="w-full rounded-md h-[200px] object-cover"
-                        src={item.cover}
-                        alt={item.title}
-                      />
-                    </CardHeader>
-                    <CardContent>
-                      <CardTitle
-                        className="text-lg font-semibold transition-all duration-300 
+                    <Card
+                      title={`Read more about: ${item.title}`}
+                      className="cursor-pointer transition-all border duration-300 hover:shadow-lg scale-95 hover:scale-100"
+                    >
+                      <CardHeader>
+                        <img
+                          loading="lazy"
+                          className="w-full rounded-md h-[200px] object-cover"
+                          src={item.cover}
+                          alt={item.title}
+                        />
+                      </CardHeader>
+                      <CardContent>
+                        <CardTitle
+                          className="text-lg font-semibold transition-all duration-300 
                       hover:text-green-500 hover:underline active:text-green-700
                       "
-                      >
-                        <Translate>{item.title}</Translate>
-                      </CardTitle>
-                    </CardContent>
+                        >
+                          <Translate>{item.title}</Translate>
+                        </CardTitle>
+                      </CardContent>
 
-                    {/* <CardFooter>
+                      {/* <CardFooter>
                     <Link to={`https://matches.livefootballia.com/${item._id}`}>
                       {" "}
                       <Button variant={"outline"}>
@@ -290,8 +361,9 @@ export default function Home() {
                       </Button>
                     </Link>
                   </CardFooter> */}
-                  </Card>
-                </Link>
+                    </Card>
+                  </Link>{" "}
+                </motion.div>
               ))}
             </div>
           )}

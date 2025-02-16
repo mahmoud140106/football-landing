@@ -31,9 +31,9 @@ export default function Matches() {
           content="Watch live football matches, follow real-time scores, and get the latest updates on today’s games. Stay updated with Live Footballia!"
         />
       </Helmet>
-      <div className="mt-5 mx-auto max-w-7xl px-4 sm:px-6 md:px-8 my-5 w-full">
+      <div className="mt-2 mx-auto max-w-7xl px-4 sm:px-6 md:px-8 my-5 w-full">
         <div className="grid grid-cols-12">
-          <div className="col-span-8 my-2">
+          <div className="col-span-10">
             <TabButton
               selectedTab={selectedTab}
               setSelectedTab={setSelectedTab}
@@ -43,7 +43,7 @@ export default function Matches() {
         <div className="col-span-12 lg:col-span-2">
           <Advertisement adType="btn" pageType={pageType}/>
         </div>
-        <div className="max-w-[1300px] mx-auto mt-1 grid grid-cols-12 gap-5 w-full">
+        <div className="max-w-[1300px] mx-auto mt-2 grid grid-cols-12 gap-5 w-full">
           <div className="hidden xl:block col-span-12 lg:col-span-2">
             <Advertisement adType="side" pageType={pageType}/>
           </div>

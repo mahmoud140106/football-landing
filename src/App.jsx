@@ -12,7 +12,6 @@ import { Fragment, useEffect, useMemo, useState } from "react";
 import { fetchAdsCompanies, fetchKeywords } from "./store/slices/adsSlice.js";
 import parse from "html-react-parser";
 import { Helmet } from "react-helmet-async";
-import NotificationCard from "./components/NotificationCard.jsx";
 function App() {
   const dispatch = useDispatch();
   const { adsCompanies, keywords } = useSelector((state) => state.ads);
@@ -42,39 +41,7 @@ function App() {
     );
   };
 
-  const [showNotification, setShowNotification] = useState(true);
 
-  useEffect(() => {
-    const notificationDismissed = localStorage.getItem("notificationDismissed");
-    // console.log("Notification Dismissed:", notificationDismissed);
-    // console.log("Notification Permission:", Notification.permission);
-
-    if (
-      notificationDismissed === "true" &&
-      Notification.permission === "granted"
-    ) {
-      setShowNotification(false);
-    }
-  }, []);
-
-  const handleDismiss = () => {
-    setShowNotification(false);
-    localStorage.setItem("notificationDismissed", "true");
-  };
-
-  const handleAllow = () => {
-    if ("Notification" in window) {
-      Notification.requestPermission().then((permission) => {
-        if (permission === "granted") {
-          new Notification("Subscribed!", {
-            body: "You will now receive notifications.",
-            icon: "/bell-icon.png",
-          });
-          handleDismiss();
-        }
-      });
-    }
-  };
   return (
     <>
       <Helmet>
@@ -94,11 +61,6 @@ function App() {
           content={keywords?.keywords?.map((keyword) => keyword)}
         />
       </Helmet>
-      {showNotification && (
-        <div className=" fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
-          <NotificationCard onDismiss={handleDismiss} onAllow={handleAllow} />
-        </div>
-      )}
       <LanguageProvider>
         <div className="flex flex-col min-h-screen">
           <Header />

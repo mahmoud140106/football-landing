@@ -34,7 +34,10 @@ const ArticleSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchArticle.pending, (state) => {
-        state.isLoading = true;
+        // state.isLoading = true;
+        if (state.article.length === 0) {
+          state.isLoading = true; 
+        }
         state.isError = false;
         state.errorMessage = "";
       })
