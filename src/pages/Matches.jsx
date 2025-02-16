@@ -33,7 +33,7 @@ export default function Matches() {
       </Helmet>
       <div className="mt-5 mx-auto max-w-7xl px-4 sm:px-6 md:px-8 my-5 w-full">
         <div className="grid grid-cols-12">
-          <div className="col-span-10">
+          <div className="col-span-8 my-2">
             <TabButton
               selectedTab={selectedTab}
               setSelectedTab={setSelectedTab}

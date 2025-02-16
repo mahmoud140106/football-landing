@@ -22,16 +22,6 @@ export default function Footer() {
             Copyright © 2025 - Live Footballia. All rights reserved
           </Translate>
         </p>
-
-        <p className="text-sm text-center text-gray-300">
-          Made by
-          <a href="https://dramcode.top" target={"_blank"}
-             className="text-md font-semibold text-gray-100 hover:text-white transition-colors">
-            &#34; DRAM Code &#34;
-          </a>
-          Team
-        </p>
-
       </div>
     </footer>
   )
