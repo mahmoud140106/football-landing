@@ -14,6 +14,7 @@ import { Link } from "react-router";
 import { Translate } from "translate-easy";
 import PaginationComponent from "../components/Pagination";
 import { Helmet } from "react-helmet-async";
+import { motion } from 'framer-motion';
 
 export default function Articles() {
   const dispatch = useDispatch();
@@ -71,6 +72,15 @@ export default function Articles() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pagination, loadingMore, isLoading, isError]);
   // console.log(article);
+
+  const articleVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: (index) => ({
+      opacity: 1,
+      scale: 1,
+      transition: { delay: index * 0.15, duration: 0.5 },
+    }),
+  };
   return (
     <>
       <Helmet>
@@ -93,28 +103,35 @@ export default function Articles() {
           ) : (
             <div className="mb-5 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-5">
               {article.map((item) => (
-                <Link
+                <motion.div
                   key={item._id}
-                  to={`https://matches.livefootballia.com/${item._id}`}
+                  variants={articleVariants}
+                  initial="hidden"
+                  animate="visible"
+                  custom={item._id}
                 >
-                  <Card
-                    title={`Read more about: ${item.title}`}
-                    className="cursor-pointer transition-all duration-300 border hover:shadow-lg scale-95 hover:scale-100"
+                  <Link
+                    // key={item._id}
+                    to={`https://matches.livefootballia.com/${item._id}`}
                   >
-                    <CardHeader>
-                      <img
-                        loading="lazy"
-                        className="w-full rounded-md h-[200px] object-cover"
-                        src={item.cover}
-                        alt={item.title}
-                      />
-                    </CardHeader>
-                    <CardContent>
-                      <CardTitle>
-                        <Translate>{item.title}</Translate>
-                      </CardTitle>
-                    </CardContent>
-                    {/* <CardFooter>
+                    <Card
+                      title={`Read more about: ${item.title}`}
+                      className="cursor-pointer transition-all duration-300 border hover:shadow-lg scale-95 hover:scale-100"
+                    >
+                      <CardHeader>
+                        <img
+                          loading="lazy"
+                          className="w-full rounded-md h-[200px] object-cover"
+                          src={item.cover}
+                          alt={item.title}
+                        />
+                      </CardHeader>
+                      <CardContent>
+                        <CardTitle>
+                          <Translate>{item.title}</Translate>
+                        </CardTitle>
+                      </CardContent>
+                      {/* <CardFooter>
                       <Link
                         to={`https://matches.livefootballia.com/${item._id}`}
                       >
@@ -123,8 +140,9 @@ export default function Articles() {
                         </Button>
                       </Link>
                     </CardFooter> */}
-                  </Card>{" "}
-                </Link>
+                    </Card>{" "}
+                  </Link>
+                </motion.div>
               ))}
               <Advertisement adType="btn" pageType={pageType} />
             </div>

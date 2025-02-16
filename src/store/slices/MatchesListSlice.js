@@ -70,7 +70,10 @@ const MatchesSlice = createSlice({
 
     builder
       .addCase(fetchMatches.pending, (state) => {
-        state.isLoading = true;
+        // state.isLoading = true;
+        if (state.matches.length === 0) {
+          state.isLoading = true;
+        }
         state.error = null;
       })
       .addCase(fetchMatches.fulfilled, (state, action) => {
@@ -84,7 +87,10 @@ const MatchesSlice = createSlice({
       });
     builder
       .addCase(getImportantMatch.pending, (state) => {
-        state.isLoading = true;
+        // state.isLoading = true;
+        if (state.matches.length === 0) {
+          state.isLoading = true;
+        }
         state.error = null;
       })
       .addCase(getImportantMatch.fulfilled, (state, action) => {
