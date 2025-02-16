@@ -2,7 +2,7 @@ import axios from "axios";
 import CryptoJS from "crypto-js";
 import Cookies from "js-cookie";
 
-const baseURL = "https://livefootballia.com/";
+const baseURL = "https://football.dramcode.top/";
 const api = axios.create({
     baseURL,
     withCredentials: true,
