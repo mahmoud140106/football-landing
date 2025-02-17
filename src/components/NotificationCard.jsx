@@ -8,7 +8,7 @@ const NotificationCard = ({ onDismiss,onAllow }) => {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -50, scale: 0.9 }}
       transition={{ duration: 0.4, ease: "easeInOut" }}
-      className="bg-white shadow-lg border p-4 w-min text-center flex flex-col items-end justify-between min-h-[10rem]"
+      className="bg-white shadow-lg border p-4 w-fit text-center flex flex-col items-end justify-between min-h-[10rem]"
     >
       <div className="flex justify-between items-center gap-2">
         <div className="flex justify-center items-center bg-blue-800 p-2 rounded-full">

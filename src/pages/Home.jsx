@@ -1,6 +1,5 @@
 import HeroSection from "../components/HeroSection";
 import Advertisement from "../components/Advertisement";
-import { fetchArticle } from "../store/slices/articlesSlice.js";
 import {
   Card,
   CardContent,
@@ -22,11 +21,15 @@ import TabButton from "../components/TapsButton.jsx";
 import Loading from "./../components/ui/Loading";
 import NotificationCard from "../components/NotificationCard.jsx";
 import { motion } from "framer-motion";
+import { fetchArticle } from "./../store/slices/articlesSlice";
 
 export default function Home() {
   const dispatch = useDispatch();
   const [selectedTab, setSelectedTab] = useState("today");
-  const { article, isLoading, error } = useSelector((state) => state.article);
+  const { article, isLoading, isError, errorMessage } = useSelector(
+    (state) => state.article
+  );
+
   const { matches, loading: loadingMaches, error: errorMaches } = useSelector(
     (state) => state.matches
   );
@@ -34,8 +37,11 @@ export default function Home() {
   useEffect(() => {
     dispatch(fetchVisits());
     dispatch(fetchMatches({ day: selectedTab }));
-    dispatch(fetchArticle());
   }, [dispatch, selectedTab]);
+
+  useEffect(() => {
+    dispatch(fetchArticle({ page: "1", limit: "10" }));
+  }, [dispatch]);
 
   const isSmallScreen = useMediaQuery({ maxWidth: 1024 });
   const articlesToShow = isSmallScreen ? 4 : 5;
@@ -118,7 +124,7 @@ export default function Home() {
       </Helmet>
 
       {showNotification && (
-        <div className=" fixed flex justify-center items-center top-5 left-1/2 transform -translate-x-1/2 bg-white z-50">
+        <div className=" fixed flex justify-center items-center top-5 left-1/2 transform -translate-x-1/2 bg-white w-fit z-50">
           <NotificationCard onDismiss={handleDismiss} onAllow={handleAllow} />
         </div>
       )}
@@ -295,7 +301,7 @@ export default function Home() {
                 </div>
               </div>
             ))}
-        </div> */}
+        </div>  */}
         <div className="hidden lg:block col-span-2 ">
           <Advertisement adType="videoAd" pageType={pageType} />
         </div>
@@ -315,11 +321,13 @@ export default function Home() {
         <div className="w-full col-span-12 gap-3 ">
           {isLoading ? (
             <Loading />
-          ) : error ? (
-            <div className="text-center py-5 text-red-500">Error: {error}</div>
+          ) : isError ? (
+            <div className="text-center py-5 text-red-500">
+              Error: {isError}
+            </div>
           ) : (
             <div className="mb-5 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-5">
-              {sortedArticles.slice(0, 4).map((item) => (
+              {sortedArticles.slice(0, 4).map((item, index) => (
                 <motion.div
                   key={item._id}
                   variants={articleVariants}
