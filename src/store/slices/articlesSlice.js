@@ -3,7 +3,7 @@ import api from "../../ApiUrl";
 
 export const fetchArticle = createAsyncThunk(
   "article/fetchArticle",
-  async ({ page, limit }, { rejectWithValue }) => {
+  async ({ page='1', limit='10' }, { rejectWithValue }) => {
     try {
       const response = await api.get(`api/v2/articles/landing`, {
         params: {
