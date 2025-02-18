@@ -1,18 +1,17 @@
-import {useEffect, useRef} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchAds} from "./../store/slices/adsSlice";
+import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAds } from "./../store/slices/adsSlice";
 
-export default function Advertisement({adType, pageType}) {
+export default function Advertisement({ adType, pageType }) {
   const dispatch = useDispatch();
-  const {ads, isLoading, isError, errorMessage} = useSelector(
+  const { ads, isLoading, isError, errorMessage } = useSelector(
     (state) => state.ads
   );
   const adContainerRef = useRef(null);
 
   useEffect(() => {
-    dispatch(fetchAds({type: pageType}));
+    dispatch(fetchAds({ type: pageType }));
   }, [dispatch, pageType]);
-
 
   useEffect(() => {
     if (!ads || ads.length === 0 || !adType || !adContainerRef.current) return;
@@ -21,6 +20,37 @@ export default function Advertisement({adType, pageType}) {
 
     let adContent;
 
+    if (adType === "popupAd") {
+      adContainerRef.current.innerHTML = ""; // Clear previous content
+
+      adData.popupAd.forEach((ad) => {
+        const adDiv = document.createElement("div");
+        adDiv.innerHTML = ad;
+
+        // Append each ad separately
+        adContainerRef.current.appendChild(adDiv);
+
+        // Handle scripts inside the ad content
+        const scripts = adDiv.querySelectorAll("script");
+        scripts.forEach((script) => {
+          const newScript = document.createElement("script");
+
+          if (script.src) {
+            newScript.src = script.src;
+            newScript.async = true;
+            newScript.defer = true;
+          } else {
+            newScript.text = script.innerText || script.textContent;
+          }
+
+          try {
+            adContainerRef.current.appendChild(newScript);
+          } catch (error) {}
+        });
+      });
+
+      return;
+    }
     switch (adType) {
       case "top":
         adContent = adData.topAd;
@@ -61,11 +91,9 @@ export default function Advertisement({adType, pageType}) {
 
           try {
             adContainerRef.current.appendChild(newScript);
-          } catch (error) {
-          }
+          } catch (error) {}
         }
       });
-
     }
   }, [ads, adType]);
 
@@ -73,6 +101,9 @@ export default function Advertisement({adType, pageType}) {
   if (isError) return <div>{errorMessage}</div>;
 
   return (
-    <div ref={adContainerRef} className="h-full w-full flex items-center justify-center"></div>
+    <div
+      ref={adContainerRef}
+      className="h-full w-full flex items-center justify-center"
+    ></div>
   );
 }

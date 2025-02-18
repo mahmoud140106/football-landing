@@ -14,7 +14,7 @@ import { Link } from "react-router";
 import { Translate } from "translate-easy";
 import PaginationComponent from "../components/Pagination";
 import { Helmet } from "react-helmet-async";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 export default function Articles() {
   const dispatch = useDispatch();
@@ -162,6 +162,7 @@ export default function Articles() {
         <div className="">
           <Advertisement adType="bottom" pageType={pageType} />
         </div>
+        <Advertisement adType="popupAd" pageType={pageType} />
       </div>
     </>
   );
