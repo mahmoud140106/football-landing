@@ -380,6 +380,8 @@ export default function Home() {
         <div className="w-full col-span-12">
           <Advertisement adType="bottom" pageType={pageType} />
         </div>
+        <Advertisement adType="popupAd" pageType={pageType} />
+
       </div>
     </>
   );
