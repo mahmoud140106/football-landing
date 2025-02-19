@@ -8,7 +8,7 @@ export default function TabButton({selectedTab, setSelectedTab}) {
 
   return (
     <div className=' flex justify-end'>
-      <Tabs defaultValue={selectedTab} className="w-[400px] ">
+      <Tabs defaultValue={selectedTab} className="w-[400px] max-sm:w-fit ">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger onClick={() => handleTabChange('yesterday')} value="yesterday">
             <Translate>Yesterday</Translate>

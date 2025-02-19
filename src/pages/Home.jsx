@@ -124,12 +124,12 @@ export default function Home() {
       </Helmet>
 
       {showNotification && (
-        <div className=" fixed flex justify-center items-center top-5 left-1/2 transform -translate-x-1/2 bg-white w-fit z-50">
+        <div className=" fixed flex justify-center items-center top-5 left-1/2 transform -translate-x-1/2 w-fit max-sm:w-full z-50">
           <NotificationCard onDismiss={handleDismiss} onAllow={handleAllow} />
         </div>
       )}
-      <div className=" mt-2 grid grid-cols-12 gap-2 w-full mx-auto max-w-7xl px-4 sm:px-6 md:px-8 my-5 ">
-        <div className="w-full  max-w-[63.4rem] lg:col-span-12 col-span-2">
+      <div className=" mt-2 grid grid-cols-12 gap-2 w-full mx-auto max-w-7xl px-4 sm:px-6 md:px-8 my-5  ">
+        <div className="w-full  max-w-[63.4rem] max-sm:max-w-fit lg:col-span-12 col-span-12">
           <div className=" flex justify-end items-center">
             <TabButton
               selectedTab={selectedTab}
@@ -142,7 +142,7 @@ export default function Home() {
         </div>
         <div className="w-full lg:col-span-8 col-span-12">
           <HeroSection />
-          <div className="mt-5 space-y-4">
+          <div className="mt-5 space-y-4 max-sm:mt-0 max-sm:space-y-1">
             <div className="">
               <Advertisement adType="btn" pageType={pageType} />
             </div>
@@ -341,9 +341,9 @@ export default function Home() {
                   >
                     <Card
                       title={`Read more about: ${item.title}`}
-                      className="cursor-pointer transition-all border duration-300 hover:shadow-lg scale-95 hover:scale-100"
+                      className="cursor-pointer transition-all border-none duration-300 scale-95 hover:scale-100"
                     >
-                      <CardHeader>
+                      <CardHeader className="p-2">
                         <img
                           loading="lazy"
                           className="w-full rounded-md h-[200px] object-cover"
@@ -351,10 +351,10 @@ export default function Home() {
                           alt={item.title}
                         />
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="p-2 pb-4">
                         <CardTitle
                           className="text-lg font-semibold transition-all duration-300 
-                      hover:text-green-500 hover:underline active:text-green-700
+                      
                       "
                         >
                           <Translate>{item.title}</Translate>

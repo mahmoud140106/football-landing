@@ -30,9 +30,9 @@ const links = [
 export default function Header() {
   return (
     <header className="w-full flex border-b py-3 px-4 sm:px-10 font-[sans-serif] min-h-[65px] tracking-wide relative z-50">
-      <div className="flex flex-wrap items-center gap-4  w-full">
+      <div className="flex flex-wrap items-center gap-4 max-sm:gap-1 w-full">
         <a href="/">
-          <img src={Logo} alt="logo" className="w-44" />
+          <img src={Logo} alt="logo" className="w-44 max-sm:w-28" />
         </a>
 
         <div

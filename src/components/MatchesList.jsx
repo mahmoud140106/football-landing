@@ -84,7 +84,7 @@ export default function MatchesList({ selectedTab }) {
     );
   }
   return (
-    <div className="mt-5 space-y-4">
+    <div className="mt-5 space-y-4  max-sm:mt-3 max-sm:space-y-1">
       <AnimatePresence mode="wait">
         {matches.length > 0 &&
           matches.map((match, index) => (
