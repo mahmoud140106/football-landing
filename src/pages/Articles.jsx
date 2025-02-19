@@ -116,9 +116,9 @@ export default function Articles() {
                   >
                     <Card
                       title={`Read more about: ${item.title}`}
-                      className="cursor-pointer transition-all duration-300 border hover:shadow-lg scale-95 hover:scale-100"
+                      className="cursor-pointer transition-all duration-300 border-none  scale-95 hover:scale-100"
                     >
-                      <CardHeader>
+                      <CardHeader className="p-2">
                         <img
                           loading="lazy"
                           className="w-full rounded-md h-[200px] object-cover"
@@ -126,7 +126,7 @@ export default function Articles() {
                           alt={item.title}
                         />
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="p-2 pb-4">
                         <CardTitle>
                           <Translate>{item.title}</Translate>
                         </CardTitle>
