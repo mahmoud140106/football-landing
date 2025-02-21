@@ -1,49 +1,43 @@
 import HeroSection from "../components/HeroSection";
 import Advertisement from "../components/Advertisement";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../components/ui/card";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { Button } from "../components/ui/button";
-import { Link } from "react-router";
-import { fetchMatches } from "../store/slices/MatchesListSlice.js";
-import { fetchVisits } from "../store/slices/visitsSlice.js";
-import { Clock, MapPin, Trophy } from "lucide-react";
-import { useMediaQuery } from "react-responsive";
-import { Translate } from "translate-easy";
-import { Helmet } from "react-helmet-async";
+import {Card, CardContent, CardHeader, CardTitle,} from "../components/ui/card";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import {Button} from "../components/ui/button";
+import {Link} from "react-router";
+import {fetchMatches} from "../store/slices/MatchesListSlice.js";
+import {fetchVisits} from "../store/slices/visitsSlice.js";
+import {Clock, MapPin, Trophy} from "lucide-react";
+import {useMediaQuery} from "react-responsive";
+import {Translate} from "translate-easy";
+import {Helmet} from "react-helmet-async";
 import TabButton from "../components/TapsButton.jsx";
 import Loading from "./../components/ui/Loading";
 import NotificationCard from "../components/NotificationCard.jsx";
-import { motion } from "framer-motion";
-import { fetchArticle } from "./../store/slices/articlesSlice";
+import {motion} from "framer-motion";
+import {fetchArticle} from "./../store/slices/articlesSlice";
 
 export default function Home() {
   const dispatch = useDispatch();
   const [selectedTab, setSelectedTab] = useState("today");
-  const { article, isLoading, isError, errorMessage } = useSelector(
+  const {article, isLoading, isError, errorMessage} = useSelector(
     (state) => state.article
   );
 
-  const { matches, loading: loadingMaches, error: errorMaches } = useSelector(
+  const {matches, loading: loadingMaches, error: errorMaches} = useSelector(
     (state) => state.matches
   );
 
   useEffect(() => {
     dispatch(fetchVisits());
-    dispatch(fetchMatches({ day: selectedTab }));
+    dispatch(fetchMatches({day: selectedTab}));
   }, [dispatch, selectedTab]);
 
   useEffect(() => {
-    dispatch(fetchArticle({ page: "1", limit: "10" }));
+    dispatch(fetchArticle({page: "1", limit: "10"}));
   }, [dispatch]);
 
-  const isSmallScreen = useMediaQuery({ maxWidth: 1024 });
+  const isSmallScreen = useMediaQuery({maxWidth: 1024});
   const articlesToShow = isSmallScreen ? 4 : 5;
 
   const sortedArticles = [...article].sort(
@@ -96,27 +90,27 @@ export default function Home() {
   };
 
   const matchCardVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: {opacity: 0, y: 30},
     visible: (index) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: index * 0.1, duration: 0.5 },
+      transition: {delay: index * 0.1, duration: 0.5},
     }),
   };
 
   const articleVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
+    hidden: {opacity: 0, scale: 0.9},
     visible: (index) => ({
       opacity: 1,
       scale: 1,
-      transition: { delay: index * 0.15, duration: 0.5 },
+      transition: {delay: index * 0.15, duration: 0.5},
     }),
   };
 
   return (
     <>
       <Helmet>
-        <link rel="canonical" href="https://livefootballia.com" />
+        <link rel="canonical" href="https://livefootballia.com"/>
         <meta
           name="description"
           content="Watch live football matches, follow real-time scores, and stay updated with the latest football news, articles, and match highlights on Live Footballia."
@@ -124,14 +118,12 @@ export default function Home() {
       </Helmet>
 
       {showNotification && (
-        <div className=" fixed flex justify-center items-center top-5 left-1/2 transform -translate-x-1/2 w-fit max-sm:w-full z-50">
-          <NotificationCard onDismiss={handleDismiss} onAllow={handleAllow} />
+        <div
+          className=" fixed flex justify-center items-center top-5 left-1/2 transform -translate-x-1/2 w-fit max-sm:w-full z-50">
+          <NotificationCard onDismiss={handleDismiss} onAllow={handleAllow}/>
         </div>
       )}
       <div className=" mt-2 grid grid-cols-12 gap-2 w-full mx-auto max-w-7xl px-4 sm:px-6 md:px-8 my-5  ">
-        <div className="w-full col-span-12">
-          <Advertisement adType="top" pageType={pageType} />
-        </div>
         <div className="w-full  max-w-[63.4rem] max-sm:max-w-fit lg:col-span-12 col-span-12">
           <div className=" flex justify-end items-center">
             <TabButton
@@ -141,16 +133,13 @@ export default function Home() {
           </div>
         </div>
         <div className="lg:block hidden  lg:col-span-2">
-          <Advertisement adType="side" pageType={pageType} />
+          <Advertisement adType="side" pageType={pageType}/>
         </div>
         <div className="w-full lg:col-span-8 col-span-12">
-          <HeroSection />
+          <HeroSection/>
           <div className="mt-5 space-y-4 max-sm:mt-0 max-sm:space-y-1">
-            <div className="">
-              <Advertisement adType="btn" pageType={pageType} />
-            </div>
             {loadingMaches ? (
-              <Loading height="h-40" />
+              <Loading height="h-40"/>
             ) : errorMaches ? (
               <div className="text-center text-red-500 font-semibold text-lg p-5">
                 <Translate>No Available Matches For This Day</Translate>
@@ -167,7 +156,8 @@ export default function Home() {
                 >
                   <div className="  flex items-center justify-between">
                     <div className="grid grid-cols-12 items-center gap-5 w-full">
-                      <div className=" md:flex md:col-span-3 space-y-2 md:space-y-0 col-span-3 items-center lg:gap-2 gap-4 ">
+                      <div
+                        className=" md:flex md:col-span-3 space-y-2 md:space-y-0 col-span-3 items-center lg:gap-2 gap-4 ">
                         <div className="flex flex-col items-center justify-center md:flex-row md:justify-center">
                           <img
                             src={match.teamOne.image}
@@ -198,7 +188,8 @@ export default function Home() {
                         </div>
                       </div>
 
-                      <div className="w-full md:flex md:col-span-3 space-y-2 md:space-y-0 col-span-3 justify-end  items-center gap-2">
+                      <div
+                        className="w-full md:flex md:col-span-3 space-y-2 md:space-y-0 col-span-3 justify-end  items-center gap-2">
                         <div className="hidden md:block">
                           <span className="text-xl font-semibold  rounded-full  px-3 py-1  ">
                             <Translate>{match.goalTwo}</Translate>
@@ -231,24 +222,24 @@ export default function Home() {
                           match.status === "live"
                             ? "text-green-500"
                             : match.status === "ended"
-                            ? "text-red-500"
-                            : "cursor-not-allowed"
+                              ? "text-red-500"
+                              : "cursor-not-allowed"
                         }`}
                       >
-                        <Clock className=" md:block md:w-4 md:h-4 w-3 h-3" />
+                        <Clock className=" md:block md:w-4 md:h-4 w-3 h-3"/>
                         <Translate>{match.time}</Translate>
                       </span>
                     </div>
 
                     <div className="  font-bold text-center md:justify-start justify-start flex items-center gap-2">
                       <span className="text-sm flex items-center gap-2">
-                        <Trophy className=" md:block md:w-4 md:h-4 w-3 h-3" />
+                        <Trophy className=" md:block md:w-4 md:h-4 w-3 h-3"/>
                         <Translate>{match.championship?.name}</Translate>
                       </span>
                     </div>
 
                     <div className=" flex  font-bold  md:justify-end md:mt-0 mt-2 items-center gap-2 ">
-                      <MapPin className=" w-4 h-4" />
+                      <MapPin className=" w-4 h-4"/>
                       <span className="text-sm ">
                         <Translate>{match.stadium}</Translate>
                       </span>
@@ -306,14 +297,16 @@ export default function Home() {
             ))}
         </div>  */}
         <div className="hidden lg:block col-span-2 ">
-          <Advertisement adType="videoAd" pageType={pageType} />
+          <Advertisement adType="videoAd" pageType={pageType}/>
         </div>
         <div className="w-full col-span-12 flex justify-between">
           <h1 className="font-semibold">
             <Translate>News and articles </Translate>
           </h1>
         </div>
-
+        <div className="w-full col-span-12">
+          <Advertisement adType="top" pageType={pageType}/>
+        </div>
         <a href="/articles">
           <Button variant={"outline"} className="font-semibold">
             <Translate>View all</Translate>
@@ -321,7 +314,7 @@ export default function Home() {
         </a>
         <div className="w-full col-span-12 gap-3 ">
           {isLoading ? (
-            <Loading />
+            <Loading/>
           ) : isError ? (
             <div className="text-center py-5 text-red-500">
               Error: {isError}
@@ -378,10 +371,12 @@ export default function Home() {
           )}
         </div>
 
+        {/*<VideoAdPlayer/>*/}
         <div className="w-full col-span-12">
-          <Advertisement adType="bottom" pageType={pageType} />
+          <Advertisement adType="bottom" pageType={pageType}/>
         </div>
-        <Advertisement adType="popupAd" pageType={pageType} />
+        <Advertisement adType="popupAd" pageType={pageType}/>
+        <Advertisement adType="btn" pageType={pageType}/>
       </div>
     </>
   );

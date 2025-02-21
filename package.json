@@ -41,7 +41,8 @@
     "vaul": "^1.1.2",
     "video.js": "^8.21.0",
     "videojs-contrib-ads": "^7.5.2",
-    "videojs-ima": "^2.3.0"
+    "videojs-ima": "^2.3.0",
+    "videojs-vast-vpaid": "^3.0.0-beta.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
