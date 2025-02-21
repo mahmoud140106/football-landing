@@ -21,14 +21,6 @@ function App() {
     dispatch(fetchKeywords());
   }, [dispatch]);
 
-  const adsContent = useMemo(() => {
-    return adsCompanies?.map((ad, index) => (
-      <>
-        <Fragment key={index}>{parse(ad.key)}</Fragment>
-      </>
-    ));
-  }, [adsCompanies]);
-
   const parseMeta = (metaString) => {
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = metaString;
@@ -41,21 +33,44 @@ function App() {
     );
   };
 
+  // console.log(adsCompanies);
 
+  const parseScript = (scriptString) => {
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = scriptString;
+    const script = tempDiv.firstChild;
+
+    if (!script || script.tagName !== "SCRIPT")
+      return { attributes: {}, content: "" };
+
+    return {
+      attributes: Object.fromEntries(
+        [...script.attributes].map((attr) => [attr.name, attr.value])
+      ),
+      content: script.textContent,
+    };
+  };
   return (
     <>
       <Helmet>
-        {/* {adsCompanies?.map((ad) => (
-          <Fragment key={ad._id}>{parse(ad.key)}</Fragment>
-        ))} */}
-        {adsCompanies?.map((ad) =>
-          ad.key.includes("<script") ? (
-            <Fragment key={ad._id}>{parse(ad.key)}</Fragment>
-          ) : (
-            <meta key={ad._id} {...parseMeta(ad.key)} />
-          )
-        )}
-        {/* {adsContent} */}
+        {adsCompanies?.map((ad) => {
+          if (ad.key.includes("<script")) {
+            const { attributes, content } = parseScript(ad.key);
+
+            return attributes.src ? (
+              <script key={ad._id} {...attributes} />
+            ) : (
+              <script
+                key={ad._id}
+                {...attributes}
+                dangerouslySetInnerHTML={{ __html: content }}
+              />
+            );
+          } else {
+            return <meta key={ad._id} {...parseMeta(ad.key)} />;
+          }
+        })}
+
         <meta
           name="keywords"
           content={keywords?.keywords?.map((keyword) => keyword)}
