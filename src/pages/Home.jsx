@@ -129,6 +129,9 @@ export default function Home() {
         </div>
       )}
       <div className=" mt-2 grid grid-cols-12 gap-2 w-full mx-auto max-w-7xl px-4 sm:px-6 md:px-8 my-5  ">
+        <div className="w-full col-span-12">
+          <Advertisement adType="top" pageType={pageType} />
+        </div>
         <div className="w-full  max-w-[63.4rem] max-sm:max-w-fit lg:col-span-12 col-span-12">
           <div className=" flex justify-end items-center">
             <TabButton
@@ -310,9 +313,7 @@ export default function Home() {
             <Translate>News and articles </Translate>
           </h1>
         </div>
-        <div className="w-full col-span-12">
-          <Advertisement adType="top" pageType={pageType} />
-        </div>
+
         <a href="/articles">
           <Button variant={"outline"} className="font-semibold">
             <Translate>View all</Translate>
@@ -381,7 +382,6 @@ export default function Home() {
           <Advertisement adType="bottom" pageType={pageType} />
         </div>
         <Advertisement adType="popupAd" pageType={pageType} />
-
       </div>
     </>
   );
