@@ -1,16 +1,16 @@
-import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchAds } from "./../store/slices/adsSlice";
+import {useEffect, useRef} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchAds} from "./../store/slices/adsSlice";
 
-export default function Advertisement({ adType, pageType }) {
+export default function Advertisement({adType, pageType}) {
   const dispatch = useDispatch();
-  const { ads, isLoading, isError, errorMessage } = useSelector(
+  const {ads, isLoading, isError, errorMessage} = useSelector(
     (state) => state.ads
   );
   const adContainerRef = useRef(null);
 
   useEffect(() => {
-    dispatch(fetchAds({ type: pageType }));
+    dispatch(fetchAds({type: pageType}));
   }, [dispatch, pageType]);
 
   useEffect(() => {
@@ -45,7 +45,8 @@ export default function Advertisement({ adType, pageType }) {
 
           try {
             adContainerRef.current.appendChild(newScript);
-          } catch (error) {}
+          } catch (error) {
+          }
         });
       });
 
@@ -63,6 +64,9 @@ export default function Advertisement({ adType, pageType }) {
         break;
       case "btn":
         adContent = adData.btnAd;
+        break;
+      case "videoAd":
+        adContent = adData.videoAd;
         break;
       default:
         return;
@@ -91,7 +95,8 @@ export default function Advertisement({ adType, pageType }) {
 
           try {
             adContainerRef.current.appendChild(newScript);
-          } catch (error) {}
+          } catch (error) {
+          }
         }
       });
     }
