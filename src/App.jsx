@@ -50,6 +50,9 @@ function App() {
       content: script.textContent,
     };
   };
+
+
+
   return (
     <>
       <Helmet>

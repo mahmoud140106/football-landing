@@ -42,7 +42,8 @@
     "video.js": "^8.21.0",
     "videojs-contrib-ads": "^7.5.2",
     "videojs-ima": "^2.3.0",
-    "videojs-vast-vpaid": "^3.0.0-beta.8"
+    "videojs-vast-vpaid": "^3.0.0-beta.8",
+    "web-push": "^3.6.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
