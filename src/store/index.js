@@ -7,7 +7,7 @@ import socialReducer from "./slices/SocialSlice";
 import articleReducer from "./slices/articlesSlice";
 import AdsReducer from "./slices/adsSlice";
 import VisitsReducer from "./slices/visitsSlice";
-
+import notificationsReducer from "./slices/notificationsSlice";
 const store = configureStore({
   reducer: {
     about: aboutReducer,
@@ -18,6 +18,7 @@ const store = configureStore({
     article: articleReducer,
     ads: AdsReducer,
     visits: VisitsReducer,
+    notifications: notificationsReducer,
   },
 });
 
