@@ -22,6 +22,7 @@ import NotificationCard from "../components/NotificationCard.jsx";
 import { motion } from "framer-motion";
 import { fetchArticle } from "./../store/slices/articlesSlice";
 import { saveSubscription } from "../store/slices/notificationsSlice.js";
+import VideoAdPlayer from "../components/VideoAdPlayer.jsx";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -330,6 +331,7 @@ export default function Home() {
         </div>  */}
         <div className="hidden lg:block col-span-2 ">
           {/* <Advertisement adType="videoAd" pageType={pageType} /> */}
+          <VideoAdPlayer/>
         </div>
         <div className="w-full col-span-12 flex justify-between">
           <h1 className="font-semibold">
