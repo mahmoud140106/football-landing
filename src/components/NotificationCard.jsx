@@ -1,14 +1,15 @@
 import { Bell } from "lucide-react";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
+import { Translate } from "translate-easy";
 
-const NotificationCard = ({ onDismiss,onAllow }) => {
+const NotificationCard = ({ onDismiss, onAllow }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50, scale: 0.9 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -50, scale: 0.9 }}
       transition={{ duration: 0.4, ease: "easeInOut" }}
-      className="bg-white shadow-lg border p-4 w-fit max-sm:w-fit mx-4 text-center flex flex-col items-end justify-between min-h-[10rem] "
+      className="bg-background shadow-lg border p-4 w-fit max-sm:w-fit mx-4 text-center flex flex-col items-end justify-between min-h-[10rem] "
     >
       <div className="flex justify-between items-center gap-2">
         <div className="flex justify-center items-center bg-blue-800 p-2 rounded-full">
@@ -16,10 +17,12 @@ const NotificationCard = ({ onDismiss,onAllow }) => {
         </div>
         <div className="flex flex-col justify-start items-start ">
           <p className="text-green-600 font-semibold min-w-max max-sm:min-w-fit">
-            Click to allow notification subscription
+            <Translate>Click to allow notification subscription</Translate>
           </p>
           <p className="text-slate-600 text-sm min-w-max max-sm:min-w-fit">
-            Stay updated with the latest happenings on our site.
+            <Translate>
+              Stay updated with the latest happenings on our site.
+            </Translate>
           </p>
         </div>
       </div>
@@ -29,13 +32,13 @@ const NotificationCard = ({ onDismiss,onAllow }) => {
           className="bg-green-500 text-white px-4 py-2 rounded-lg"
           onClick={onAllow}
         >
-          Allow
+          <Translate>Allow</Translate>
         </button>
         <button
           className="bg-slate-400 text-slate-600 px-4 py-2 rounded-lg"
           onClick={onDismiss}
         >
-          Later
+          <Translate>Later</Translate>
         </button>
       </div>
     </motion.div>

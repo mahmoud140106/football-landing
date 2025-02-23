@@ -83,6 +83,10 @@ export default function Home() {
   const [isSubscribed, setIsSubscribed] = useState(false);
 
   useEffect(() => {
+    if (typeof Notification === "undefined") {
+      console.warn("Notifications are not supported on this browser.");
+      return;
+    }
     const notificationDismissed = localStorage.getItem("notificationDismissed");
 
     if (Notification.permission === "granted") {
