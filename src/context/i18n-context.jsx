@@ -10,7 +10,7 @@ const defaultLanguage = "en";
 
 export const I18nProvider = ({ children }) => {
   const [language, setLanguage] = useState(defaultLanguage);
-  console.log(language);
+  // console.log(language);
 
   useEffect(() => {
     const browserLang = navigator.language.split("-")[0];
