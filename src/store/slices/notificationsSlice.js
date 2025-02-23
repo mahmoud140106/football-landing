@@ -16,7 +16,9 @@ export const saveSubscription = createAsyncThunk(
           lang: "en",
         }
       );
-      return response.data.data;
+      console.log("response", response.data);
+
+      return response.data;
     } catch (error) {
       console.log("notifications", error);
       return rejectWithValue(

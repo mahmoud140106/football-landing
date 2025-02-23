@@ -132,7 +132,7 @@ export default function Home() {
         });
 
         // Save subscription to the backend
-        await dispatch(saveSubscription(subscription.toJSON()));
+         dispatch(saveSubscription(subscription.toJSON()));
 
         setIsSubscribed(true);
         setShowAskNotification(false);
@@ -329,7 +329,7 @@ export default function Home() {
             ))}
         </div>  */}
         <div className="hidden lg:block col-span-2 ">
-          <Advertisement adType="videoAd" pageType={pageType} />
+          {/* <Advertisement adType="videoAd" pageType={pageType} /> */}
         </div>
         <div className="w-full col-span-12 flex justify-between">
           <h1 className="font-semibold">
