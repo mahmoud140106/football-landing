@@ -18,7 +18,7 @@ const VideoAdPlayer = () => {
     if (!ads?.length || !ads[0]?.videoAd) return;
 
     const videoAdUrl = ads[0].videoAd;
-    console.log("Using Video Ad URL:", videoAdUrl);
+    // console.log("Using Video Ad URL:", videoAdUrl);
 
     const loadIMA = () => {
       if (!window.google?.ima) {
@@ -82,12 +82,12 @@ const VideoAdPlayer = () => {
         adsManager.init(adContainer.clientWidth, adContainer.clientHeight, window.google.ima.ViewMode.NORMAL);
         adsManager.start();
       } catch (error) {
-        console.log("Error initializing AdsManager:", error);
+        // console.log("Error initializing AdsManager:", error);
       }
     };
 
     const onAdError = (error) => {
-      console.log("Ad error:", error);
+      // console.log("Ad error:", error);
     };
 
     loadIMA();

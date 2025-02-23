@@ -16,11 +16,11 @@ export const saveSubscription = createAsyncThunk(
           lang: "en",
         }
       );
-      console.log("response", response.data);
+      // console.log("response", response.data);
 
       return response.data;
     } catch (error) {
-      console.log("notifications", error);
+      // console.log("notifications", error);
       return rejectWithValue(
         error.response?.data?.error?.message || "Something went wrong"
       );

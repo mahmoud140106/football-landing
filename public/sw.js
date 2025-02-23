@@ -1,5 +1,5 @@
 self.addEventListener("push", (event) => {
-    console.log("Received push event:", event);
+    // console.log("Received push event:", event);
 
     if (!event.data) {
         console.warn("Push event received without data!");
@@ -13,7 +13,7 @@ self.addEventListener("push", (event) => {
         notificationData = { title: "Notification", message: event.data.text() };
     }
 
-    console.log("Parsed push data:", notificationData);
+    // console.log("Parsed push data:", notificationData);
 
     self.registration.showNotification(notificationData.title, {
         body: notificationData.message,

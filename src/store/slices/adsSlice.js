@@ -10,7 +10,7 @@ export const fetchAds = createAsyncThunk(
       });
       return response.data.data;
     } catch (error) {
-      console.log("ads", error);
+      // console.log("ads", error);
       return rejectWithValue(error.response?.data?.error?.message || "");
     }
   }
@@ -27,7 +27,7 @@ export const fetchAdsCompanies = createAsyncThunk(
       });
       return response.data.data;
     } catch (error) {
-      console.log("ads", error);
+      // console.log("ads", error);
       return rejectWithValue(error.response?.data?.error?.message || "");
     }
   }
@@ -43,7 +43,7 @@ export const fetchKeywords = createAsyncThunk(
       });
       return response.data.data;
     } catch (error) {
-      console.log("ads", error);
+      // console.log("ads", error);
       return rejectWithValue(error.response?.data?.error?.message || "");
     }
   }

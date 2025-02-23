@@ -100,7 +100,6 @@ export default function Home() {
       setIsSubscribed(false);
     }
 
-    // Register service worker if not already registered
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
         .register("/sw.js")
@@ -136,7 +135,6 @@ export default function Home() {
             "BDHiWm_PUn4DghehBLMR69Z6yVAHqbq6nmVhZ1YoQHjOxQNyjvBudexWS-9h_VsD1KhtJJW_ljyrkfgOQnp3JGE",
         });
 
-        // Save subscription to the backend
          dispatch(saveSubscription(subscription.toJSON()));
 
         setIsSubscribed(true);
@@ -297,42 +295,6 @@ export default function Home() {
             </a>
           </div>
         </div>
-
-        {/* <div className="hidden lg:block col-span-2 ">
-          {article
-            .slice()
-            .sort((a, b) => b.visits - a.visits)
-            .slice(0, articlesToShow)
-            .map((article, index) => (
-              <div
-                key={index}
-                className="mb-3 drop-shadow-xl overflow-hidden sm:rounded-md "
-              >
-                <div className="xl:flex gap-2 items-center">
-                  <div className="md:shrink-0">
-                    <img
-                      className="w-16 h-16"
-                      src={article.cover}
-                      alt={article.title}
-                    />
-                  </div>
-                  <div className="mx-1">
-                    <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
-                      <Translate>{article.title}</Translate>
-                    </div>
-                    <Link
-                      to={`https://matches.livefootballia.com/${article._id}`}
-                      className="block mt-1 text-lg leading-tight font-medium text-black hover:underline"
-                    >
-                      <p className="text-gray-500 text-xs xl:mt-2 md:mt-1">
-                        <Translate>Read more</Translate>
-                      </p>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
-        </div>  */}
         <div className="hidden lg:block col-span-2 ">
           {/* <Advertisement adType="videoAd" pageType={pageType} /> */}
           <VideoAdPlayer/>
@@ -385,22 +347,12 @@ export default function Home() {
                       </CardHeader>
                       <CardContent className="p-2 pb-4">
                         <CardTitle
-                          className="text-lg font-semibold transition-all duration-300 
-                      
-                      "
+                          className="text-lg font-semibold transition-all duration-300 "
                         >
                           <Translate>{item.title}</Translate>
                         </CardTitle>
                       </CardContent>
 
-                      {/* <CardFooter>
-                    <Link to={`https://matches.livefootballia.com/${item._id}`}>
-                      {" "}
-                      <Button variant={"outline"}>
-                        <Translate> Read more</Translate>{" "}
-                      </Button>
-                    </Link>
-                  </CardFooter> */}
                     </Card>
                   </Link>{" "}
                 </motion.div>
