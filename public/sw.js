@@ -1,11 +1,24 @@
 self.addEventListener("push", (event) => {
-    if (event.data) {
-        const data = event.data.json();
-        self.registration.showNotification(data.title, {
-            body: data.message,
-            icon: "/logo192.png",
-            badge: "/logo192.png",
-            vibrate: [200, 100, 200],
-        });
+    console.log("Received push event:", event);
+
+    if (!event.data) {
+        console.warn("Push event received without data!");
+        return;
     }
+
+    let notificationData;
+    try {
+        notificationData = event.data.json();
+    } catch (error) {
+        notificationData = { title: "Notification", message: event.data.text() };
+    }
+
+    console.log("Parsed push data:", notificationData);
+
+    self.registration.showNotification(notificationData.title, {
+        body: notificationData.message,
+        icon: "/titleIcon.png",
+        badge: "/titleIcon.png",
+        vibrate: [200, 100, 200],
+    });
 });
