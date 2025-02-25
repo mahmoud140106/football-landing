@@ -104,11 +104,11 @@ export default function MatchesList({ selectedTab }) {
                       <img
                         src={match.teamOne.image}
                         alt={match.teamOne.name}
-                        className="w-12 h-12"
+                        className="w-12 h-12  min-w-12 min-h-12 object-contain"
                         loading="lazy"
                       />
                     </div>
-                    <h2 className="hidden text-center text-green-500 font-medium md:flex items-center justify-center">
+                    <h2 className="hidden text-center w-[4rem] max-w-[4rem] mx-4 text-green-500 font-medium md:flex items-center justify-center">
                       <Translate>{match.teamOne.name}</Translate>
                     </h2>
                   </div>
@@ -130,10 +130,10 @@ export default function MatchesList({ selectedTab }) {
                         src={match.teamTwo.image}
                         alt={match.teamTwo.name}
                         loading="lazy"
-                        className="w-12 h-12"
+                        className="w-12 h-12  min-w-12 min-h-12 object-contain"
                       />
                     </div>
-                    <h2 className="hidden md:flex items-center justify-center text-green-500 font-medium ">
+                    <h2 className="hidden md:flex items-center w-[4rem] max-w-[4rem] mx-4 justify-center text-green-500 font-medium ">
                       <Translate>{match.teamTwo.name}</Translate>
                     </h2>
                   </div>
@@ -185,7 +185,7 @@ export default function MatchesList({ selectedTab }) {
                   </span>
                 </div>
                 <div className="  md:flex items-center gap-2 hidden">
-                  <span className="flex items-center gap-2">
+                  <span className="flex items-center gap-2 w-[1rem] max-w-min">
                     <MapPin className="md:w-4 md:h-4 w-3 h-3" />
                     <Translate>{match.stadium}</Translate>
                   </span>

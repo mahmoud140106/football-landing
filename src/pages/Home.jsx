@@ -198,7 +198,7 @@ export default function Home() {
                           <img
                             src={match.teamOne.image}
                             alt={match.teamOne.name}
-                            className="w-12 h-12  md:mr-2"
+                            className="w-12 h-12  md:mr-2 min-w-12 min-h-12 object-contain"
                             loading="lazy"
                           />
                           <h2 className="text-center text-green-500 font-medium hidden xl:block">
@@ -239,7 +239,7 @@ export default function Home() {
                             src={match.teamTwo.image}
                             alt={match.teamTwo.name}
                             loading="lazy"
-                            className="w-12 h-12"
+                            className="w-12 h-12 min-w-12 min-h-12 object-contain"
                           />
                         </div>
                         <div className="md:hidden flex justify-center">
