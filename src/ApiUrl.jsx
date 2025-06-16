@@ -3,7 +3,7 @@ import CryptoJS from "crypto-js";
 import Cookies from "js-cookie";
 
 const baseURL = "https://livefootballia.com/";
-const api = axios.create({
+const api = axios.create({  
   baseURL,
   withCredentials: true,
   headers: {
